@@ -119,6 +119,41 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &376454571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 376454572}
+  m_Layer: 5
+  m_Name: BoardDisplay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &376454572
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376454571}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1065590042}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0.75}
+  m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +440,7 @@ RectTransform:
   m_Children:
   - {fileID: 1597573236}
   - {fileID: 1015890102}
+  - {fileID: 376454572}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -583,10 +619,10 @@ MonoBehaviour:
         z: 0.9480506
       Rotation:
         value:
-          x: -0.50262856
-          y: 0.4973572
-          z: -0.49735788
-          w: 0.5026286
+          x: 0.5026286
+          y: -0.4973571
+          z: 0.49735785
+          w: -0.5026285
     - Position:
         x: 1.5
         y: 0
@@ -602,9 +638,9 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0.44829813
-          y: -0.54683524
-          z: 0.5468357
-          w: -0.44829762
+          y: -0.5468352
+          z: 0.54683566
+          w: -0.44829753
     m_MetaData:
     - Mode: 0
       Tension: 0.5
@@ -672,7 +708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleManager
   testDeck: {fileID: 11400000, guid: f4f9f19582d0d394fa41d15dcb5ff716, type: 2}
-  encounter: {fileID: 0}
+  encounter: {fileID: 11400000, guid: 7e22b294ce99025489de408e36ddd25c, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
