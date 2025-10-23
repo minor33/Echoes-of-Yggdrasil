@@ -17,12 +17,12 @@ public class Card
     public string getName() {
         return cardData.name;
     }
-    /*
+    
     public string getPlayAbilityDescription() {
         return cardData.playAbility.getDescription();
     }
     public string getRageAbilityDescription() {
         return cardData.rageAbility.getDescription();
     }
-    */
+    
 }

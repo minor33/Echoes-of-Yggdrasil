@@ -19,7 +19,7 @@ public class CardDisplay : MonoBehaviour
         nameText.text = card.getName();
         energyText.text = $"{card.getEnergy()}";
         rageText.text = $"{card.getRage()}";
-        //playAbilityDescriptionText.text = card.getPlayAbilityDescription();
-        //rageAbilityDescriptionText.text = card.getRageAbilityDescription();
+        playAbilityDescriptionText.text = card.getPlayAbilityDescription();
+        rageAbilityDescriptionText.text = card.getRageAbilityDescription();
     }
 }
