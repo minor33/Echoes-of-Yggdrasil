@@ -19,14 +19,23 @@ public class BattlePlayer {
         }
     }
 
-    public void drawCards(int num) {
-        for(int i = 0; i < num; i++){
+    public void reshuffleDiscard(){
+        deck.AddRange(discard);
+        discard.Clear();
+    }
+
+    public Card drawCard() {
+        if(deck.Count == 0){
+            reshuffleDiscard();
             if(deck.Count == 0){
-                return;
+                Debug.Log("Hand empty");
+                return null;
             }
-            hand.Add(deck[0]);
-            deck.RemoveAt(0);
         }
+        Card drawnCard = deck[0];
+        hand.Add(drawnCard);
+        deck.RemoveAt(0);
+        return drawnCard;
     }
 
     public void debugPrintHand() {
