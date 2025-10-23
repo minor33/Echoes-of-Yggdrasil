@@ -11,15 +11,15 @@ public class CardDisplay : MonoBehaviour
     public TMP_Text playAbilityDescriptionText;
     public TMP_Text rageAbilityDescriptionText;
 
-    void Start() {
-        updateCardDisplay();
-    }
-
     public void updateCardDisplay() {
         nameText.text = card.getName();
         energyText.text = $"{card.getEnergy()}";
         rageText.text = $"{card.getRage()}";
         playAbilityDescriptionText.text = card.getPlayAbilityDescription();
         rageAbilityDescriptionText.text = card.getRageAbilityDescription();
+    }
+
+    void Start() {
+        updateCardDisplay();
     }
 }

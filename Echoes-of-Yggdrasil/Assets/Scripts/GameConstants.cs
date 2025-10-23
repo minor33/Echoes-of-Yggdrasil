@@ -13,3 +13,13 @@ public enum Keyword {
     TARGET,
     DRAW
 }
+
+public enum EnemyAction {
+        ATTACK,
+        LARGE_ATTACK,
+        MASSIVE_ATTACK,
+        BLOCK,
+        LARGE_BLOCK,
+        STATUS,
+        PAUSE
+}

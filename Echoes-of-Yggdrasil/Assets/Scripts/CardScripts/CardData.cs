@@ -3,8 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Card")]
 public class CardData : ScriptableObject
 {
-    public CardType cardType; // Power, skill, attack, etc
-    public CardRarity cardRarity; // Starter, normal , rare? Or another in between
+    public CardType cardType;
+    public CardRarity cardRarity;
     public int energy;
     public int rage;
     //public Image image;

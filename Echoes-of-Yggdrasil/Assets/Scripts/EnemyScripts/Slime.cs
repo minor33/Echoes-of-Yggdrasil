@@ -1,11 +1,10 @@
 using UnityEngine;
+using static EnemyAction;
 
 public class Slime : Enemy
 {
-    public Slime(){
-        health = 10;
-        blockAmount = 6;
-        attackAmount = 4;
-        largeAttackAmount = 12;
+    public Slime() : base() {
+        maxHealth = 10;
+        health = maxHealth;
     }
 }

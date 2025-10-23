@@ -1,15 +1,21 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class BattleManager : MonoBehaviour
 {
-    public GameObject cardPrefab;
+    public TestDeck testDeck;
+    public Encounter encounter;
 
-    public CardData cardData;
+    public HandDisplay handDisplay;
 
-    public Transform cardPos;
+    void Start() {
+        BattlePlayer player = new BattlePlayer();
 
-    void Awake() {
-        GameObject card = Instantiate(cardPrefab, cardPos.position, Quaternion.identity, cardPos);
-        card.GetComponent<CardDisplay>().card = new Card(cardData);
+        for(int i = 0; i < testDeck.cards.Count; i++){
+            player.deck.Add(new Card(testDeck.cards[i]));
+        }
+        player.shuffleDeck();
+
+        player.drawCards(5);
     }
 }
