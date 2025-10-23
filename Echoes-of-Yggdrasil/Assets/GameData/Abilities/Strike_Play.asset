@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ecbd1ab6b6877e4c88ff3fff5fb2c5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2782e37b9ab1f5d40b7fd9c58f3bea81, type: 3}
   m_Name: Strike_Play
-  m_EditorClassIdentifier: Assembly-CSharp::DamageTargetEnemy
-  damage: 6
+  m_EditorClassIdentifier: Assembly-CSharp::Ability
+  keywords:
+  - keyword: 2
+    value: 0
+  - keyword: 0
+    value: 6
