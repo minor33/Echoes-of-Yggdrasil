@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Ability
   keywords:
   - keyword: 2
-    value: 1
+    damage: 0
+    block: 0
+    draw: 0
+    target: 2
   - keyword: 0
-    value: 17
+    damage: 17
+    block: 0
+    draw: 0
+    target: 0

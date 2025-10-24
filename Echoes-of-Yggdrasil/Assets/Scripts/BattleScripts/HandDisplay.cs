@@ -6,12 +6,11 @@ using DG.Tweening;
 public class HandDisplay : MonoBehaviour
 {
     public GameObject cardPrefab;
-    public Transform handTransform;
     public SplineContainer splineContainer;
 
     public List<GameObject> hand;
 
-    public void updateHand() {
+    public void updateDisplay() {
         Spline spline = splineContainer.Spline;
         float spacing = 0.1f;
         float firstPosition = 0.5f - ((hand.Count-1f) * (spacing/2f));
@@ -29,11 +28,11 @@ public class HandDisplay : MonoBehaviour
     }
 
     public void addCard(Card card) {
-        GameObject cardDisplay = Instantiate(cardPrefab, handTransform.position, Quaternion.identity, handTransform);
+        GameObject cardDisplay = Instantiate(cardPrefab, transform.position, Quaternion.identity, transform);
         cardDisplay.GetComponent<CardDisplay>().card = card;
         cardDisplay.transform.localScale = Vector3.zero;
         cardDisplay.transform.DOScale(Vector3.one, 0.25f);
         hand.Add(cardDisplay);
-        updateHand();
+        updateDisplay();
     }
 }

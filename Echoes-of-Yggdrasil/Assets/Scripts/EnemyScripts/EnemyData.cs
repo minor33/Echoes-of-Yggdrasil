@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using EditorAttributes;
 using static EnemyAction;
 
 
@@ -8,8 +9,12 @@ using static EnemyAction;
 public struct ActionPair
 {
     public EnemyAction action;
-    public int value;
-    public int value2;
+   
+    [ShowField(nameof(action), ATTACK)]
+    public int damage;
+
+    [ShowField(nameof(action), DEFEND)]
+    public int defend;
 }
 
 [CreateAssetMenu(menuName = "Enemy")]

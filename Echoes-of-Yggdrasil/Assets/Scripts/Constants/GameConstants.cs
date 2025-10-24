@@ -1,10 +1,22 @@
 using UnityEngine;
 
+
 public static class GameConstants {
+    /*
     public const int CHOOSE = 0;
     public const int RANDOM = 1;
     public const int FRONT = 2;
     public const int SELF = 3;
+    */
+}
+
+
+public enum Target {
+    NONE,
+    CHOOSE,
+    RANDOM,
+    FRONT,
+    SELF
 }
 
 public enum Keyword {
@@ -16,7 +28,7 @@ public enum Keyword {
 
 public enum EnemyAction {
         ATTACK,
-        BLOCK,
+        DEFEND,
         NEG_STATUS,
         POS_STATUS,
         PAUSE

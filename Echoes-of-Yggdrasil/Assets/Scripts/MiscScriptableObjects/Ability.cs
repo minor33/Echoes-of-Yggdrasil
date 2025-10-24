@@ -1,16 +1,28 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using EditorAttributes;
 using static GameConstants;
 using static Keyword;
+using static Target;
 
 
 [Serializable]
 public struct KeywordPair
 {
     public Keyword keyword;
-    [Tooltip("For Target: 0=Choose,1=Random,2=Front,3=Self")]
-    public int value;
+
+    [ShowField(nameof(keyword), DAMAGE)]
+    public int damage;
+
+    [ShowField(nameof(keyword), BLOCK)]
+    public int block;
+
+    [ShowField(nameof(keyword), DRAW)]
+    public int draw;
+
+    [ShowField(nameof(keyword), TARGET)]
+    public Target target;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -22,36 +34,38 @@ public class Ability : ScriptableObject {
             return "Does Nothing";
         }
         string description = "";
-        int target = -1;
+        Target target = NONE;
         foreach (var keywordPair in keywords) {
             Keyword keyword = keywordPair.keyword;
-            int input = keywordPair.value;
             
             switch(keyword) {
                 case TARGET:
-                    target = input;
+                    target = keywordPair.target;
                     break;
 
                 case DAMAGE:
+                    int damage = keywordPair.damage;
                     if (target == CHOOSE) {
-                        description += $"Deal {input} damage. ";
+                        description += $"Deal {damage} damage. ";
                     } else if (target == RANDOM) {
-                        description += $"Deal {input} damage to a random enemy. ";
+                        description += $"Deal {damage} damage to a random enemy. ";
                     } else if (target == FRONT) {
-                        description += $"Deal {input} damage to the front enemy. ";
+                        description += $"Deal {damage} damage to the front enemy. ";
                     } else if (target == SELF) {
-                        description += $"Take {input} self damage. ";
+                        description += $"Take {damage} self damage. ";
                     } else {
                         description += $"ERROR: Damage with {target} not defined";
                     }
                     break;
 
                 case BLOCK:
-                    description += $"Defend {input}. ";
+                    int block = keywordPair.block;
+                    description += $"Defend {block}. ";
                     break;
                 
                 case DRAW:
-                    description += $"Draw {input}. ";
+                    int draw = keywordPair.draw;
+                    description += $"Draw {draw}. ";
                     break;
 
                 default:

@@ -15,10 +15,14 @@ MonoBehaviour:
   maxHealth: 10
   actionPairs:
   - action: 0
-    value: 4
+    damage: 4
+    defend: 0
   - action: 1
-    value: 6
+    damage: 0
+    defend: 6
   - action: 0
-    value: 8
+    damage: 8
+    defend: 0
   - action: 4
-    value: 0
+    damage: 0
+    defend: 0
