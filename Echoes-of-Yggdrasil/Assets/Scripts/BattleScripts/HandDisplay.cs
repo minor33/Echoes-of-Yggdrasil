@@ -10,20 +10,40 @@ public class HandDisplay : MonoBehaviour
 
     public List<GameObject> hand;
 
-    public void updateDisplay() {
+    public void updateCard(int i, float time) {
         Spline spline = splineContainer.Spline;
         float spacing = 0.1f;
         float firstPosition = 0.5f - ((hand.Count-1f) * (spacing/2f));
 
-        for(int i = 0; i < hand.Count; i++){
-            float p = firstPosition + (i*spacing);
-            Vector3 splinePosition = spline.EvaluatePosition(p);
-            Vector3 forward = spline.EvaluateTangent(p);
-            Vector3 up = spline.EvaluateUpVector(p);
-            Quaternion rotation = Quaternion.LookRotation(-up, Vector3.Cross(-up,forward).normalized);
+        float p = firstPosition + (i*spacing);
+        Vector3 splinePosition = spline.EvaluatePosition(p);
+        Vector3 forward = spline.EvaluateTangent(p);
+        Vector3 up = spline.EvaluateUpVector(p);
+        Quaternion rotation = Quaternion.LookRotation(-up, Vector3.Cross(-up,forward).normalized);
 
-            hand[i].transform.DOLocalMove(splinePosition, 0.25f);
-            hand[i].transform.DORotate(rotation.eulerAngles, 0.25f);
+        hand[i].transform.SetSiblingIndex(i);
+        if(time > 0f){
+            hand[i].transform.DOLocalMove(splinePosition, time);
+            hand[i].transform.DORotate(rotation.eulerAngles, time);
+            hand[i].transform.DOScale(cardPrefab.transform.localScale, time);        
+        } else {
+            hand[i].transform.localPosition = splinePosition;
+            hand[i].transform.rotation = rotation;
+            hand[i].transform.localScale = cardPrefab.transform.localScale;
+        }
+
+    }
+
+    public void updateDisplay(float time=0) {
+        for(int i = 0; i < hand.Count; i++){
+            updateCard(i, time);
+        }
+    }
+
+    public void pushRight(int index){
+        for(int i = index+1; i < hand.Count; i++){
+            RectTransform rectTransform = hand[i].GetComponent<RectTransform>();
+            rectTransform.anchoredPosition += new Vector2(0.55f,0);
         }
     }
 
@@ -31,7 +51,6 @@ public class HandDisplay : MonoBehaviour
         GameObject cardDisplay = Instantiate(cardPrefab, transform.position, Quaternion.identity, transform);
         cardDisplay.GetComponent<CardDisplay>().card = card;
         cardDisplay.transform.localScale = Vector3.zero;
-        cardDisplay.transform.DOScale(Vector3.one, 0.15f);
         hand.Add(cardDisplay);
         updateDisplay();
     }

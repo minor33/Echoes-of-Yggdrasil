@@ -21,7 +21,7 @@ public class BattleManager : MonoBehaviour
 
     private async void startPlayerTurn() {
         for(int i = 0; i < 10; i++){
-            await Awaitable.WaitForSecondsAsync(0.4f);
+            await Awaitable.WaitForSecondsAsync(0.05f);
             drawCard();
         }
 
