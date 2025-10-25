@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using static EnemyAction;
 
 public  class Enemy
@@ -22,5 +23,8 @@ public  class Enemy
     }
     public int getMaxHealth() {
         return maxHealth;
+    }
+    public Sprite getSprite() {
+        return enemyData.sprite;
     }
 }

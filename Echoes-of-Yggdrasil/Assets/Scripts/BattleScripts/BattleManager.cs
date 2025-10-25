@@ -1,11 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
     public TestDeck testDeck;
     public Encounter encounter;
     private HandDisplay handDisplay;
+    private BoardDisplay boardDisplay;
+    //public Image background;
     private int battleState;
     private BattlePlayer player;
     public Enemy[] enemies;
@@ -21,6 +24,8 @@ public class BattleManager : MonoBehaviour
             await Awaitable.WaitForSecondsAsync(0.4f);
             drawCard();
         }
+
+        
     }
 
     void Update() {
@@ -39,6 +44,7 @@ public class BattleManager : MonoBehaviour
 
     void Start() {
         handDisplay = FindAnyObjectByType<HandDisplay>(); 
+        boardDisplay = FindAnyObjectByType<BoardDisplay>(); 
         player = new BattlePlayer();
 
         for(int i = 0; i < testDeck.cards.Count; i++){
@@ -46,16 +52,12 @@ public class BattleManager : MonoBehaviour
         }
         player.shuffleDeck();
 
-        enemies = new Enemy[3];
+        //background.sprite = encounter.background;
         for(int i = 0; i < 3; i++){
             if(encounter.enemies[i] != null){
-                enemies[i] = new Enemy(encounter.enemies[i]);
-            } else {
-                enemies[i] = null;
+                boardDisplay.setEnemy(new Enemy(encounter.enemies[i]), i);
             }
         }
-
-
 
         battleState = 0;
     }

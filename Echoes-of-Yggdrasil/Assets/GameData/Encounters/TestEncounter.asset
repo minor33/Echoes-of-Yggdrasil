@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TestEncounter
   m_EditorClassIdentifier: Assembly-CSharp::Encounter
   enemies:
-  - {fileID: 11400000, guid: defb3b6f99116fb4ea336eafc15e6a8d, type: 2}
+  - {fileID: 11400000, guid: e6f85e5e72e1ec048814b4b708320f4c, type: 2}
   - {fileID: 11400000, guid: defb3b6f99116fb4ea336eafc15e6a8d, type: 2}
   - {fileID: 11400000, guid: defb3b6f99116fb4ea336eafc15e6a8d, type: 2}

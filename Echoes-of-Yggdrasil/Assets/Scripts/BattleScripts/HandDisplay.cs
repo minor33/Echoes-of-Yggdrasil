@@ -31,7 +31,7 @@ public class HandDisplay : MonoBehaviour
         GameObject cardDisplay = Instantiate(cardPrefab, transform.position, Quaternion.identity, transform);
         cardDisplay.GetComponent<CardDisplay>().card = card;
         cardDisplay.transform.localScale = Vector3.zero;
-        cardDisplay.transform.DOScale(Vector3.one, 0.25f);
+        cardDisplay.transform.DOScale(Vector3.one, 0.15f);
         hand.Add(cardDisplay);
         updateDisplay();
     }

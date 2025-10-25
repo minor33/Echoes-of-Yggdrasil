@@ -13,10 +13,17 @@ public class EnemyDisplay : MonoBehaviour
     public Image nextAttackImage;
 
     public void updateDisplay() {
-        healthText.text = $"{enemy.getHealth()}/{enemy.getMaxHealth()}";
+        int health = enemy.getHealth();
+        int maxHealth = enemy.getMaxHealth();
+        healthText.text = $"{health}/{maxHealth}";
+        healthBarFill.fillAmount = health / maxHealth;
     }
 
     void Start() {
+        enemyImage.sprite = enemy.getSprite();
+        nextAttackText.enabled = false;
+        nextAttackImage.enabled = false;
+
         updateDisplay();
     }
 }

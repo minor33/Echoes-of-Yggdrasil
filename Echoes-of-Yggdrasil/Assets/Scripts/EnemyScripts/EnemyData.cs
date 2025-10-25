@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using EditorAttributes;
+using UnityEngine.UI;
 using static EnemyAction;
 
 
@@ -21,6 +22,6 @@ public struct ActionPair
 public class EnemyData : ScriptableObject
 {
     public int maxHealth;
-    //public Image image;
+    public Sprite sprite;
     public List<ActionPair> actionPairs; 
 }
