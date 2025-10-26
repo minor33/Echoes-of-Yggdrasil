@@ -12,7 +12,6 @@ public static class GameConstants {
 
 
 public enum Target {
-    NONE,
     CHOOSE,
     RANDOM,
     FRONT,

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
+    public static BattleManager Instance { get; private set; }
+    
     public TestDeck testDeck;
     public Encounter encounter;
     private HandDisplay handDisplay;
@@ -13,6 +15,20 @@ public class BattleManager : MonoBehaviour
     private BattlePlayer player;
     public Enemy[] enemies;
 
+
+    public Enemy getEnemy(int index = 0) {
+        for(int i = 0; i < 3; i++) { 
+            // Change > 0 line
+            if (enemies[(index+i)%3] != null && enemies[(index+i)%3].getHealth() > 0) {
+                return enemies[(index+i)%3];
+            }
+        }
+        return null;
+    }
+
+    public BattlePlayer getPlayer() {
+        return player;
+    }
 
     public void drawCard(){
         Card drawnCard = player.drawCard();
@@ -24,8 +40,6 @@ public class BattleManager : MonoBehaviour
             await Awaitable.WaitForSecondsAsync(0.05f);
             drawCard();
         }
-
-        
     }
 
     void Update() {
@@ -53,12 +67,27 @@ public class BattleManager : MonoBehaviour
         player.shuffleDeck();
 
         //background.sprite = encounter.background;
+        enemies = new Enemy[3];
         for(int i = 0; i < 3; i++){
             if(encounter.enemies[i] != null){
-                boardDisplay.setEnemy(new Enemy(encounter.enemies[i]), i);
+                Enemy newEnemy = new Enemy(encounter.enemies[i]);
+                boardDisplay.setEnemy(newEnemy, i);
+                enemies[i] = newEnemy;
             }
         }
 
         battleState = 0;
+    }
+
+    void Awake() {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

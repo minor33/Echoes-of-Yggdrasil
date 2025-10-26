@@ -28,13 +28,14 @@ public struct KeywordPair
 [CreateAssetMenu(menuName = "Ability")]
 public class Ability : ScriptableObject {
     public List<KeywordPair> keywords;
+    public BattleManager battleManager;
 
     public string getDescription() {
         if (keywords == null) {
             return "Does Nothing";
         }
         string description = "";
-        Target target = NONE;
+        Target target = FRONT;
         foreach (var keywordPair in keywords) {
             Keyword keyword = keywordPair.keyword;
             
@@ -74,5 +75,55 @@ public class Ability : ScriptableObject {
             }
         }
         return description;
+    }
+
+    public void triggerAbility() {
+        battleManager = BattleManager.Instance;
+        Unit target = battleManager.getEnemy();
+        if (target == null) {
+            Debug.LogError("NO ENEMY FOUND AFTER TRIGGERING ABILITY");
+            return;
+        }
+
+        foreach (var keywordPair in keywords) {
+            Keyword keyword = keywordPair.keyword;
+            
+            switch(keyword) {
+                case TARGET:
+                    Target targetType = keywordPair.target;
+                    if (targetType == CHOOSE) {
+                        // TODO: Pretend it's not choose for now LMAO
+                        Debug.LogError("THIS TARGETTING DOES NOT EXIST YET");
+                        target = battleManager.getEnemy();
+                    } else if (targetType == RANDOM) {
+                        // TODO: lol make this random later
+                        Debug.LogError("THIS TARGETTING DOES NOT EXIST YET");
+                        target = battleManager.getEnemy();
+                    } else if (targetType == FRONT) {
+                        target = battleManager.getEnemy();
+                    } else if (targetType == SELF) {
+                        target = battleManager.getPlayer();
+                    }
+                    break;
+
+                case DAMAGE:
+                    int damage = keywordPair.damage;
+                    target.damage(damage);
+                    break;
+
+                case BLOCK:
+                    int block = keywordPair.block;
+                    Debug.LogError("DOES NOT EXIST YET");
+                    break;
+                
+                case DRAW:
+                    int draw = keywordPair.draw;
+                    Debug.LogError("DOES NOT EXIST YET");
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 }

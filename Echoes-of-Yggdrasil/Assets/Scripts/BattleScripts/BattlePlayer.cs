@@ -1,12 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class BattlePlayer {
+public class BattlePlayer : Unit {
     public List<Card> hand;
     public List<Card> deck;
     public List<Card> discard;
-    public int maxHealth;
-    public int health;
+
+    public Card getCard(int index) {
+        return hand[index];
+    }
 
     public void shuffleDeck()
     {
@@ -46,6 +48,10 @@ public class BattlePlayer {
             message += $"{hand[i].getName()}, ";
         }
         Debug.Log(message);
+    }
+
+    public override void die() {
+        Debug.Log("You died");
     }
 
     public BattlePlayer() {

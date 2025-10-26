@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using static EnemyAction;
 
-public  class Enemy
-{
+public class Enemy : Unit {
     EnemyData enemyData;
 
-    public int maxHealth;
-    public int health;
     public int currentAction;
 
     public Enemy(EnemyData enemyData) {
@@ -26,5 +23,10 @@ public  class Enemy
     }
     public Sprite getSprite() {
         return enemyData.sprite;
+    }
+
+    public override void die() {
+        return;
+        //To do??
     }
 }

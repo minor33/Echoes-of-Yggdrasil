@@ -26,4 +26,9 @@ public class EnemyDisplay : MonoBehaviour
 
         updateDisplay();
     }
+
+    // Could be optimized
+    void Update() {
+        updateDisplay();
+    }
 }

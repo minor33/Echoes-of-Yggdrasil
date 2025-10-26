@@ -10,6 +10,7 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private HandDisplay handDisplay;
     private Canvas primaryCanvas;
     private CanvasGroup canvasGroup;
+    private BattleManager battleManager;
 
     private bool dragging;
     private int siblingIndex;
@@ -22,7 +23,12 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         dragging = false;
         canvasGroup.blocksRaycasts = true;
         handDisplay.updateDisplay();
-    } 
+
+        // Play Card:
+        BattlePlayer battlePlayer = battleManager.getPlayer();
+        battlePlayer.getCard(siblingIndex).getPlayAbility().triggerAbility();
+    }
+
     public void OnDrag(PointerEventData eventData){
         rectTransform.anchoredPosition += eventData.delta / primaryCanvas.scaleFactor;
     }
@@ -51,5 +57,6 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         rectTransform = GetComponent<RectTransform>();
         primaryCanvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponentInParent<CanvasGroup>();
+        battleManager = FindAnyObjectByType<BattleManager>();
     }
 }
