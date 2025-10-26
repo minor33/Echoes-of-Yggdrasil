@@ -15,6 +15,8 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private bool dragging;
     private int siblingIndex;
 
+    private const float PLAY_HEIGHT = 1.8f;
+
     public void OnPointerDown(PointerEventData eventData){
         canvasGroup.blocksRaycasts = false;
         dragging = true; 
@@ -23,12 +25,17 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         dragging = false;
         canvasGroup.blocksRaycasts = true;
 
-        
-
         // Play Card:
-        BattlePlayer battlePlayer = BattlePlayer.Instance;
-        battlePlayer.getCard(siblingIndex).getPlayAbility().triggerAbility();
-        battlePlayer.removeCard(siblingIndex);
+        if(rectTransform.anchoredPosition.y > PLAY_HEIGHT){
+            BattlePlayer battlePlayer = BattlePlayer.Instance;
+            Ability ability = battlePlayer.getCard(siblingIndex).getPlayAbility();
+            if(ability.hasChoose()){
+                // Some nonsense
+            } else {
+                ability.triggerAbility();
+                battlePlayer.removeCard(siblingIndex);
+            }
+        }
 
         handDisplay.updateDisplay();
     }

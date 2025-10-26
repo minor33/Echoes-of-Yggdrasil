@@ -31,6 +31,17 @@ public class Ability : ScriptableObject {
     private BattleManager battleManager;
     private BoardDisplay boardDisplay;
 
+    public bool hasChoose() {
+        foreach (var keywordPair in keywords){
+            if(keywordPair.keyword == TARGET){
+                if(keywordPair.target == CHOOSE){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public string getDescription() {
         if (keywords == null) {
             return "Does Nothing";
