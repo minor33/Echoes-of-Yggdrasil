@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public abstract class Unit {
-    public int maxHealth;
-    public int health;
+public abstract class Unit : MonoBehaviour {
+    protected int maxHealth;
+    protected int health;
 
     public void damage(int damage) {
         health -= damage;

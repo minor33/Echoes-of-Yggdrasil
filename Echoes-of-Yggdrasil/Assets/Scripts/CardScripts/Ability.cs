@@ -28,7 +28,8 @@ public struct KeywordPair
 [CreateAssetMenu(menuName = "Ability")]
 public class Ability : ScriptableObject {
     public List<KeywordPair> keywords;
-    public BattleManager battleManager;
+    private BattleManager battleManager;
+    private BoardDisplay boardDisplay;
 
     public string getDescription() {
         if (keywords == null) {
@@ -79,8 +80,9 @@ public class Ability : ScriptableObject {
 
     public void triggerAbility() {
         battleManager = BattleManager.Instance;
-        Unit target = battleManager.getEnemy();
-        if (target == null) {
+        boardDisplay = BoardDisplay.Instance;
+        Unit unit = boardDisplay.getEnemy();
+        if (unit == null) {
             Debug.LogError("NO ENEMY FOUND AFTER TRIGGERING ABILITY");
             return;
         }
@@ -94,21 +96,21 @@ public class Ability : ScriptableObject {
                     if (targetType == CHOOSE) {
                         // TODO: Pretend it's not choose for now LMAO
                         Debug.LogError("THIS TARGETTING DOES NOT EXIST YET");
-                        target = battleManager.getEnemy();
+                        unit = boardDisplay.getEnemy();
                     } else if (targetType == RANDOM) {
                         // TODO: lol make this random later
                         Debug.LogError("THIS TARGETTING DOES NOT EXIST YET");
-                        target = battleManager.getEnemy();
+                        unit = boardDisplay.getEnemy();
                     } else if (targetType == FRONT) {
-                        target = battleManager.getEnemy();
+                        unit = boardDisplay.getEnemy();
                     } else if (targetType == SELF) {
-                        target = battleManager.getPlayer();
+                        unit = BattlePlayer.Instance;
                     }
                     break;
 
                 case DAMAGE:
                     int damage = keywordPair.damage;
-                    target.damage(damage);
+                    unit.damage(damage);
                     break;
 
                 case BLOCK:

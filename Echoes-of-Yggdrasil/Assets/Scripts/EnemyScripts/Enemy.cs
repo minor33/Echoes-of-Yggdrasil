@@ -1,18 +1,40 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using TMPro;
 using static EnemyAction;
 
 public class Enemy : Unit {
-    EnemyData enemyData;
+    public EnemyData enemyData;
 
-    public int currentAction;
+    private int currentAction;
 
-    public Enemy(EnemyData enemyData) {
-        this.enemyData = enemyData;
+    public Image enemyImage;
+    public TMP_Text healthText;
+    public TMP_Text nextAttackText;
+    public Image healthBarFill;
+    public Image nextAttackImage;
+
+    public void updateDisplay() {
+        healthText.text = $"{health}/{maxHealth}";
+        healthBarFill.fillAmount = (float)health / (float)maxHealth;
+    }
+
+    void Start() {
         maxHealth = enemyData.maxHealth;
         health = maxHealth;
         currentAction = Random.Range(0, enemyData.actionPairs.Count);
+
+        enemyImage.sprite = enemyData.sprite;
+        nextAttackText.enabled = false;
+        nextAttackImage.enabled = false;
+
+        updateDisplay();
+    }
+
+    // Could be optimized
+    void Update() {
+        updateDisplay();
     }
 
     public int getHealth() {
@@ -21,12 +43,8 @@ public class Enemy : Unit {
     public int getMaxHealth() {
         return maxHealth;
     }
-    public Sprite getSprite() {
-        return enemyData.sprite;
-    }
 
     public override void die() {
-        return;
-        //To do??
+        Destroy(gameObject);
     }
 }

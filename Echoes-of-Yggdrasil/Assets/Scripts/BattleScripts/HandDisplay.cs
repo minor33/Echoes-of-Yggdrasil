@@ -5,9 +5,10 @@ using DG.Tweening;
 
 public class HandDisplay : MonoBehaviour
 {
+    public static HandDisplay Instance { get; private set; }
+
     public GameObject cardPrefab;
     public SplineContainer splineContainer;
-
     public List<GameObject> hand;
 
     public void updateCard(int i, float time) {
@@ -53,5 +54,21 @@ public class HandDisplay : MonoBehaviour
         cardDisplay.transform.localScale = Vector3.zero;
         hand.Add(cardDisplay);
         updateDisplay();
+    }
+
+    public void removeCard(int index){
+        Destroy(hand[index]);
+        hand.RemoveAt(index);
+    }
+
+    void Awake() {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

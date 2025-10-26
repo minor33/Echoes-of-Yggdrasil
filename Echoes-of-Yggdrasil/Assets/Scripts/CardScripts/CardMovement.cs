@@ -22,11 +22,15 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void OnPointerUp(PointerEventData eventData){
         dragging = false;
         canvasGroup.blocksRaycasts = true;
-        handDisplay.updateDisplay();
+
+        
 
         // Play Card:
-        BattlePlayer battlePlayer = battleManager.getPlayer();
+        BattlePlayer battlePlayer = BattlePlayer.Instance;
         battlePlayer.getCard(siblingIndex).getPlayAbility().triggerAbility();
+        battlePlayer.removeCard(siblingIndex);
+
+        handDisplay.updateDisplay();
     }
 
     public void OnDrag(PointerEventData eventData){
@@ -35,7 +39,7 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnPointerEnter(PointerEventData eventData){
         if(!dragging){
-            rectTransform.localScale = rectTransform.localScale * 1.33f;
+            rectTransform.localScale = rectTransform.localScale * 1.4f;
             rectTransform.rotation = Quaternion.identity;
             Vector3 newPosition = rectTransform.localPosition;
             newPosition.y = 0.666f;
@@ -53,10 +57,10 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
 
     void Awake() {
-        handDisplay = FindAnyObjectByType<HandDisplay>(); 
+        handDisplay = HandDisplay.Instance;
+        battleManager = BattleManager.Instance;
         rectTransform = GetComponent<RectTransform>();
         primaryCanvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponentInParent<CanvasGroup>();
-        battleManager = FindAnyObjectByType<BattleManager>();
     }
 }

@@ -10,35 +10,14 @@ public class BattleManager : MonoBehaviour
     public Encounter encounter;
     private HandDisplay handDisplay;
     private BoardDisplay boardDisplay;
+    private BattlePlayer player;
     //public Image background;
     private int battleState;
-    private BattlePlayer player;
-    public Enemy[] enemies;
-
-
-    public Enemy getEnemy(int index = 0) {
-        for(int i = 0; i < 3; i++) { 
-            // Change > 0 line
-            if (enemies[(index+i)%3] != null && enemies[(index+i)%3].getHealth() > 0) {
-                return enemies[(index+i)%3];
-            }
-        }
-        return null;
-    }
-
-    public BattlePlayer getPlayer() {
-        return player;
-    }
-
-    public void drawCard(){
-        Card drawnCard = player.drawCard();
-        handDisplay.addCard(drawnCard);
-    }
 
     private async void startPlayerTurn() {
         for(int i = 0; i < 10; i++){
             await Awaitable.WaitForSecondsAsync(0.05f);
-            drawCard();
+            player.drawCard();
         }
     }
 
@@ -57,22 +36,18 @@ public class BattleManager : MonoBehaviour
 
 
     void Start() {
-        handDisplay = FindAnyObjectByType<HandDisplay>(); 
-        boardDisplay = FindAnyObjectByType<BoardDisplay>(); 
-        player = new BattlePlayer();
+        handDisplay = HandDisplay.Instance;
+        boardDisplay = BoardDisplay.Instance;
+        player = BattlePlayer.Instance;
 
         for(int i = 0; i < testDeck.cards.Count; i++){
             player.deck.Add(new Card(testDeck.cards[i]));
         }
         player.shuffleDeck();
 
-        //background.sprite = encounter.background;
-        enemies = new Enemy[3];
         for(int i = 0; i < 3; i++){
             if(encounter.enemies[i] != null){
-                Enemy newEnemy = new Enemy(encounter.enemies[i]);
-                boardDisplay.setEnemy(newEnemy, i);
-                enemies[i] = newEnemy;
+                boardDisplay.setEnemy(encounter.enemies[i], i);
             }
         }
 
@@ -83,7 +58,6 @@ public class BattleManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {

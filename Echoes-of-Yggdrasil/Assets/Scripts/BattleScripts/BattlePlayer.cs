@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class BattlePlayer : Unit {
+    public static BattlePlayer Instance { get; private set; }
+
     public List<Card> hand;
     public List<Card> deck;
     public List<Card> discard;
@@ -28,18 +30,23 @@ public class BattlePlayer : Unit {
         discard.Clear();
     }
 
-    public Card drawCard() {
+    public void drawCard() {
         if(deck.Count == 0){
             reshuffleDiscard();
             if(deck.Count == 0){
                 Debug.Log("Hand empty");
-                return null;
+                return;
             }
         }
         Card drawnCard = deck[0];
         hand.Add(drawnCard);
+        HandDisplay.Instance.addCard(drawnCard);
         deck.RemoveAt(0);
-        return drawnCard;
+    }
+
+    public void removeCard(int index){
+        hand.RemoveAt(index);
+        HandDisplay.Instance.removeCard(index);
     }
 
     public void debugPrintHand() {
@@ -54,12 +61,23 @@ public class BattlePlayer : Unit {
         Debug.Log("You died");
     }
 
-    public BattlePlayer() {
+    public void Start() {
         hand = new List<Card>();
         deck = new List<Card>();
         discard = new List<Card>();
 
         maxHealth = 100;
         health = maxHealth;
+    }
+
+    void Awake() {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
