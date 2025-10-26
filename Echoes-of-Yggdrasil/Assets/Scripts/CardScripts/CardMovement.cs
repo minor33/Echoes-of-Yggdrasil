@@ -12,10 +12,12 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private CanvasGroup canvasGroup;
     private BattleManager battleManager;
 
+    public Image cardGlow;
+
     private bool dragging;
     private int siblingIndex;
 
-    private const float PLAY_HEIGHT = 1.8f;
+    private const float PLAY_HEIGHT = 1.75f;
 
     public void OnPointerDown(PointerEventData eventData){
         canvasGroup.blocksRaycasts = false;
@@ -42,6 +44,11 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnDrag(PointerEventData eventData){
         rectTransform.anchoredPosition += eventData.delta / primaryCanvas.scaleFactor;
+        if(rectTransform.anchoredPosition.y > PLAY_HEIGHT){
+            cardGlow.enabled = true;
+        } else {
+            cardGlow.enabled = false;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData){
@@ -69,5 +76,6 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         rectTransform = GetComponent<RectTransform>();
         primaryCanvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponentInParent<CanvasGroup>();
+        cardGlow.enabled = false;
     }
 }
