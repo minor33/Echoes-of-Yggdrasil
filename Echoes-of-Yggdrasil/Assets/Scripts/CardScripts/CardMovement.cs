@@ -21,6 +21,7 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public Color chooseGlowColor;
 
     private bool dragging;
+    private int glowPulse;
     private int siblingIndex;
 
     private const float PLAY_HEIGHT = 1.75f;
@@ -52,9 +53,9 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
 
     public void OnDrag(PointerEventData eventData){
+        Debug.Log(cardGlow.color.a);
         rectTransform.anchoredPosition += eventData.delta / primaryCanvas.scaleFactor;
         if(rectTransform.anchoredPosition.y > PLAY_HEIGHT){
-            
             if(hasChoose){
                 Vector2 overlapSize = cardCollider.bounds.size; 
                 Collider2D[] overlaps = Physics2D.OverlapBoxAll(transform.position, overlapSize, 0f, targetableLayer);
@@ -91,6 +92,14 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
     }
 
+    void Update() {
+        if(cardGlow.enabled){
+            glowPulse = (glowPulse+1)%350;
+            Color tempColor = cardGlow.color;
+            tempColor.a = (float)(glowPulse+500) / 1000;
+            cardGlow.color = tempColor;
+        }
+    }
 
     void Awake() {
         handDisplay = HandDisplay.Instance;
@@ -102,6 +111,7 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     void Start() {
         cardGlow.enabled = false;
+        glowPulse = 0;
         siblingIndex = transform.GetSiblingIndex();
         Ability ability = BattlePlayer.Instance.getCard(siblingIndex).getPlayAbility();
         if(ability.hasChoose()){
