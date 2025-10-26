@@ -44,7 +44,8 @@ public class HandDisplay : MonoBehaviour
     public void pushRight(int index){
         for(int i = index+1; i < hand.Count; i++){
             RectTransform rectTransform = hand[i].GetComponent<RectTransform>();
-            rectTransform.anchoredPosition += new Vector2(0.55f,0);
+            //rectTransform.anchoredPosition += new Vector2(0.55f,0);
+            rectTransform.anchoredPosition += new Vector2(0.4f,0);
         }
     }
 

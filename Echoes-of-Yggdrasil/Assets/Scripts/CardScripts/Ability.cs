@@ -89,7 +89,7 @@ public class Ability : ScriptableObject {
         return description;
     }
 
-    public void triggerAbility() {
+    public void triggerAbility(Enemy chosenEnemy=null) {
         battleManager = BattleManager.Instance;
         boardDisplay = BoardDisplay.Instance;
         Unit unit = boardDisplay.getEnemy();
@@ -105,9 +105,7 @@ public class Ability : ScriptableObject {
                 case TARGET:
                     Target targetType = keywordPair.target;
                     if (targetType == CHOOSE) {
-                        // TODO: Pretend it's not choose for now LMAO
-                        Debug.LogError("THIS TARGETTING DOES NOT EXIST YET");
-                        unit = boardDisplay.getEnemy();
+                        unit = chosenEnemy;
                     } else if (targetType == RANDOM) {
                         // TODO: lol make this random later
                         Debug.LogError("THIS TARGETTING DOES NOT EXIST YET");
