@@ -14,26 +14,24 @@ public class BattleManager : MonoBehaviour
     //public Image background;
     private int battleState;
 
-    private async void startPlayerTurn() {
-        for(int i = 0; i < 5; i++){
-            await Awaitable.WaitForSecondsAsync(0.05f);
-            player.drawCard();
-        }
+    public void progressBattleState(){
+        battleState = (battleState+1)%4;
     }
 
     void Update() {
         if(battleState == 0){
-            startPlayerTurn();
+            player.startTurn();
+            boardManager.displayActions();
             battleState = 1;
         }
         // battleState=1 until player ends turn
         if(battleState == 2){
             // Start enemy turn
             battleState = 3;
+            boardManager.executeActions();
         }
         // battleState=3 until enemy turn finishes
     }
-
 
     void Start() {
         handDisplay = HandDisplay.Instance;

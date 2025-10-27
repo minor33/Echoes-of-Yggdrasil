@@ -5,7 +5,6 @@ public static class GameConstants {
     
 }
 
-
 public enum Target {
     CHOOSE,
     RANDOM,
@@ -23,7 +22,5 @@ public enum Keyword {
 public enum EnemyAction {
         ATTACK,
         DEFEND,
-        NEG_STATUS,
-        POS_STATUS,
         PAUSE
 }

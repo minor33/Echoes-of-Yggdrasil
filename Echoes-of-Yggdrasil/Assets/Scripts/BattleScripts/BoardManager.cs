@@ -9,6 +9,23 @@ public class BoardManager : MonoBehaviour
     private GameObject[] enemies;
     public Transform[] boardSlots;
 
+    public void executeActions() {
+        for(int i = 0; i < 3; i++){
+            if(enemies[i] != null){
+                enemies[i].GetComponent<Enemy>().executeAction();
+            }
+        }
+        BattleManager.Instance.progressBattleState();
+    }
+
+    public void displayActions() {
+        for(int i = 0; i < 3; i++){
+            if(enemies[i] != null){
+                enemies[i].GetComponent<Enemy>().displayAction();
+            }
+        }
+    }
+
     public Enemy getFrontEnemy() {
         for(int i = 0; i < 3; i++){
             if(enemies[i] != null){
@@ -19,20 +36,17 @@ public class BoardManager : MonoBehaviour
     }
 
     public Enemy getRandomEnemy(){
-        int numEnemies = 0;
+        List<Enemy> activeEnemies = new List<Enemy>();
         for(int i = 0; i < 3; i++){
             if(enemies[i] != null){
-                numEnemies++;
+                activeEnemies.Add(enemies[i].GetComponent<Enemy>());
             }
         }
-        if(numEnemies == 0){
+        if(activeEnemies.Count == 0){
             return null;
         }
-        int index = Random.Range(0,numEnemies);
-        while(enemies[index] == null){
-            index++;
-        }
-        return enemies[index].GetComponent<Enemy>();
+        int index = Random.Range(0,activeEnemies.Count);
+        return activeEnemies[index].GetComponent<Enemy>();
     }
 
     public Enemy getEnemy(int index) {

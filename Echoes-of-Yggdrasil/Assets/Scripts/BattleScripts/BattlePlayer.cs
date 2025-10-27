@@ -27,6 +27,10 @@ public class BattlePlayer : Unit {
         return hand[index];
     }
 
+    public int getEnergy(){
+        return energy;
+    }
+
     public void shuffleDeck()
     {
         int n = deck.Count;
@@ -43,6 +47,13 @@ public class BattlePlayer : Unit {
     public void reshuffleDiscard(){
         deck.AddRange(discard);
         discard.Clear();
+    }
+
+    public void discardHand(){
+        for(int i = hand.Count-1; i >= 0; i--){
+            discard.Add(hand[i]);
+            removeCard(i);
+        }
     }
 
     public void drawCard() {
@@ -64,6 +75,7 @@ public class BattlePlayer : Unit {
 
     public void playCard(int index, Enemy targetEnemy = null) {
         Card playedCard = hand[index];
+        energy -= playedCard.getEnergy();
         removeCard(index);
         playedCard.play(targetEnemy);
         addCardToRageQueue(playedCard);
@@ -80,14 +92,6 @@ public class BattlePlayer : Unit {
     public void removeCard(int index){
         hand.RemoveAt(index);
         HandDisplay.Instance.removeCard(index);
-    }
-
-    public void debugPrintHand() {
-        string message = "Hand: ";
-        for(int i = 0; i < hand.Count; i++){
-            message += $"{hand[i].getName()}, ";
-        }
-        Debug.Log(message);
     }
 
     public override void die() {
@@ -113,6 +117,18 @@ public class BattlePlayer : Unit {
             RageQueueDisplay.Instance.clear();
         }
 
+    }
+
+    public void startTurn(){
+        energy = maxEnergy;
+        for(int i = 0; i < 5; i++){
+            drawCard();
+        }
+    }
+
+    public void endTurn(){
+        discardHand();
+        BattleManager.Instance.progressBattleState();
     }
 
     void Update() {

@@ -12,7 +12,7 @@ public struct ActionPair
     public EnemyAction action;
    
     [ShowField(nameof(action), ATTACK)]
-    public int damage;
+    public int attack;
 
     [ShowField(nameof(action), DEFEND)]
     public int defend;

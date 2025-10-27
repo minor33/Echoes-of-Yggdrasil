@@ -26,10 +26,20 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private const float PLAY_HEIGHT = 1.65f;
 
     public void OnPointerDown(PointerEventData eventData){
+        if(dragging){
+            return;
+        }
+        Card card = BattlePlayer.Instance.getCard(siblingIndex);
+        if(card.getEnergy() > BattlePlayer.Instance.getEnergy()){
+            return;
+        }
         canvasGroup.blocksRaycasts = false;
         dragging = true; 
     }
     public void OnPointerUp(PointerEventData eventData){
+        if(!dragging){
+            return;
+        }
         if(rectTransform.anchoredPosition.y > PLAY_HEIGHT){
             Card card = BattlePlayer.Instance.getCard(siblingIndex);
             if(hasChoose){
@@ -48,6 +58,9 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
 
     public void OnDrag(PointerEventData eventData){
+        if(!dragging){
+            return;
+        }
         rectTransform.anchoredPosition += eventData.delta / primaryCanvas.scaleFactor;
         if(rectTransform.anchoredPosition.y > PLAY_HEIGHT){
             if(hasChoose){

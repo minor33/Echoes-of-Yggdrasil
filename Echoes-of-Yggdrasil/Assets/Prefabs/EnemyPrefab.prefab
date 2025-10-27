@@ -161,9 +161,12 @@ MonoBehaviour:
   enemyData: {fileID: 0}
   enemyImage: {fileID: 4541566682186479536}
   healthText: {fileID: 7398691563030574340}
-  nextAttackText: {fileID: 3455284039965556083}
+  nextActionText: {fileID: 3455284039965556083}
   healthBarFill: {fileID: 6436764408503712361}
-  nextAttackImage: {fileID: 636729269804398581}
+  nextActionImage: {fileID: 636729269804398581}
+  attackActionSprite: {fileID: 21300000, guid: d31e0f15092fcfb47bd6e1a8defa5cbc, type: 3}
+  defendActionSprite: {fileID: 21300000, guid: 0b7014c211fd2a24db3b8c55e59fc1b4, type: 3}
+  pauseActionSprite: {fileID: 21300000, guid: 9c6e337c7ef38b0478f6a52f8854a69a, type: 3}
 --- !u!1 &3190144687244493159
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +356,7 @@ GameObject:
   - component: {fileID: 3918909412223449563}
   - component: {fileID: 636729269804398581}
   m_Layer: 0
-  m_Name: NextAttackImage
+  m_Name: NextActionImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -428,7 +431,7 @@ GameObject:
   - component: {fileID: 4400783557786298682}
   - component: {fileID: 3455284039965556083}
   m_Layer: 0
-  m_Name: NextAttackText
+  m_Name: NextActionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -490,8 +493,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190184
+  m_fontColor: {r: 0.408805, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -562,7 +565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3936758021215239456}
   m_Layer: 0
-  m_Name: NextAttack
+  m_Name: NextAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
