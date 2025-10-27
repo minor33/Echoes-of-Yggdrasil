@@ -8,9 +8,15 @@ public class BattlePlayer : Unit {
 
     public TMP_Text healthText;
     public Image healthBarFill;
+    public TMP_Text deckText;
+    public TMP_Text discardText;
+    public TMP_Text energyText;
+    public TMP_Text rageText;
 
     public int rage;
     public int maxRage;
+    public int energy;
+    public int maxEnergy;
 
     public List<Card> hand;
     public List<Card> deck;
@@ -58,15 +64,15 @@ public class BattlePlayer : Unit {
 
     public void playCard(int index, Enemy targetEnemy = null) {
         Card playedCard = hand[index];
-        playedCard.play(targetEnemy);
-        addCardToRageQueue(index);
         removeCard(index);
+        playedCard.play(targetEnemy);
+        addCardToRageQueue(playedCard);
+        discard.Add(playedCard);
         BattlePlayer.Instance.checkRage();
     }
 
-    public void addCardToRageQueue(int index) {
+    public void addCardToRageQueue(Card playedCard) {
         // TODO: Push and shit and max stuff
-        Card playedCard = hand[index];
         rageQueue.Add(playedCard);
         RageQueueDisplay.Instance.addCard(playedCard);
     }
@@ -91,6 +97,10 @@ public class BattlePlayer : Unit {
     public void updateDisplay() {
         healthText.text = $"{health}/{maxHealth}";
         healthBarFill.fillAmount = (float)health / (float)maxHealth;
+        deckText.text = $"{deck.Count}";
+        discardText.text = $"{discard.Count}";
+        energyText.text = $"{energy} / {maxEnergy}";
+        rageText.text = $"{rage} / {maxRage}";
     }
 
     public void checkRage() {
@@ -120,6 +130,9 @@ public class BattlePlayer : Unit {
 
         maxRage = 10;
         rage = 0;
+
+        maxEnergy = 3;
+        energy = 3;
     }
 
     void Awake() {

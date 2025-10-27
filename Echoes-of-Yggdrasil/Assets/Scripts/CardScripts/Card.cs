@@ -11,7 +11,6 @@ public class Card
     public void play(Enemy targetEnemy = null) {
         // Energy
         BattlePlayer.Instance.rage += this.getRage();
-        Debug.Log(BattlePlayer.Instance.rage);
         getPlayAbility().trigger(targetEnemy);
     }
 
