@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -13,8 +14,6 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private BattleManager battleManager;
     private bool hasChoose;
 
-    public BoxCollider2D cardCollider;
-    public LayerMask targetableLayer;
     public Image cardGlow;
 
     public Color basicGlowColor;
@@ -31,17 +30,13 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         dragging = true; 
     }
     public void OnPointerUp(PointerEventData eventData){
-        dragging = false;
-        canvasGroup.blocksRaycasts = true;
-
         if(rectTransform.anchoredPosition.y > PLAY_HEIGHT){
             Ability ability = BattlePlayer.Instance.getCard(siblingIndex).getPlayAbility();
             if(hasChoose){
-                Vector2 overlapSize = cardCollider.bounds.size; 
-                Collider2D[] overlaps = Physics2D.OverlapBoxAll(transform.position, overlapSize, 0f, targetableLayer);
-                if(overlaps.Length > 0){
-                    Enemy target = overlaps[0].gameObject.GetComponent<Enemy>();
-                    ability.triggerAbility(target);
+                GameObject targetObject = eventData.pointerCurrentRaycast.gameObject;
+                if(targetObject != null){
+                    Enemy targetEnemy = targetObject.GetComponentInParent<Enemy>();
+                    ability.triggerAbility(targetEnemy);
                     BattlePlayer.Instance.removeCard(siblingIndex);
                 }
             } else {
@@ -49,17 +44,17 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 BattlePlayer.Instance.removeCard(siblingIndex);
             }
         }
+        dragging = false;
+        canvasGroup.blocksRaycasts = true;
         handDisplay.updateDisplay();
     }
 
     public void OnDrag(PointerEventData eventData){
-        Debug.Log(cardGlow.color.a);
         rectTransform.anchoredPosition += eventData.delta / primaryCanvas.scaleFactor;
         if(rectTransform.anchoredPosition.y > PLAY_HEIGHT){
             if(hasChoose){
-                Vector2 overlapSize = cardCollider.bounds.size; 
-                Collider2D[] overlaps = Physics2D.OverlapBoxAll(transform.position, overlapSize, 0f, targetableLayer);
-                if(overlaps.Length > 0){
+                GameObject target = eventData.pointerCurrentRaycast.gameObject;
+                if(target != null){
                     cardGlow.enabled = true;
                 } else {
                     cardGlow.enabled = false;
