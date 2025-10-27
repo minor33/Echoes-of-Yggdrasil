@@ -8,6 +8,17 @@ public class Card
         this.cardData = cardData;
     }
 
+    public void play(Enemy targetEnemy = null) {
+        // Energy
+        BattlePlayer.Instance.rage += this.getRage();
+        Debug.Log(BattlePlayer.Instance.rage);
+        getPlayAbility().trigger(targetEnemy);
+    }
+
+    public void triggerRage() {
+        getRageAbility().trigger();
+    }
+
     public int getEnergy() {
         return cardData.energy;
     }

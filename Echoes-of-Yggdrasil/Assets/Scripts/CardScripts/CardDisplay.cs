@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class CardDisplay : MonoBehaviour
 {
@@ -11,15 +12,20 @@ public class CardDisplay : MonoBehaviour
     public TMP_Text playAbilityDescriptionText;
     public TMP_Text rageAbilityDescriptionText;
 
+    public Image cardGlow; 
+
     public void updateDisplay() {
         nameText.text = card.getName();
         energyText.text = $"{card.getEnergy()}";
         rageText.text = $"{card.getRage()}";
-        playAbilityDescriptionText.text = card.getPlayAbilityDescription();
+        if (playAbilityDescriptionText != null) {
+            playAbilityDescriptionText.text = card.getPlayAbilityDescription();
+        }
         rageAbilityDescriptionText.text = card.getRageAbilityDescription();
     }
 
     void Start() {
+        cardGlow.enabled = false;
         updateDisplay();
     }
 }

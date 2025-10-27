@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a564c4f51dc49549950262bc80ddbfc, type: 3}
   m_Name: Bear
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  maxHealth: 20
+  maxHealth: 5000
   sprite: {fileID: 3214657056391854489, guid: b19f839e4ac0796409fe0fd5cbe243a1, type: 3}
   actionPairs:
   - action: 4

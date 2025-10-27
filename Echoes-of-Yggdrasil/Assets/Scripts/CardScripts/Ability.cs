@@ -90,7 +90,7 @@ public class Ability : ScriptableObject {
         return description;
     }
 
-    public void triggerAbility(Enemy chosenEnemy=null) {
+    public void trigger(Enemy chosenEnemy=null) {
         battleManager = BattleManager.Instance;
         boardManager = BoardManager.Instance;
         player = BattlePlayer.Instance;
