@@ -122,7 +122,7 @@ public class Ability : ScriptableObject {
                     break;
 
                 case BLOCK:
-                    Debug.LogError("DOES NOT EXIST YET");
+                    player.gainBlock(keywordPair.block);
                     break;
                 
                 case DRAW:

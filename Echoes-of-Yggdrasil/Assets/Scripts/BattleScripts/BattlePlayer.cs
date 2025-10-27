@@ -6,8 +6,6 @@ using TMPro;
 public class BattlePlayer : Unit {
     public static BattlePlayer Instance { get; private set; }
 
-    public TMP_Text healthText;
-    public Image healthBarFill;
     public TMP_Text deckText;
     public TMP_Text discardText;
     public TMP_Text energyText;
@@ -99,8 +97,7 @@ public class BattlePlayer : Unit {
     }
 
     public void updateDisplay() {
-        healthText.text = $"{health}/{maxHealth}";
-        healthBarFill.fillAmount = (float)health / (float)maxHealth;
+        updateHealthbar();
         deckText.text = $"{deck.Count}";
         discardText.text = $"{discard.Count}";
         energyText.text = $"{energy} / {maxEnergy}";
@@ -121,6 +118,7 @@ public class BattlePlayer : Unit {
 
     public void startTurn(){
         energy = maxEnergy;
+        block = 0;
         for(int i = 0; i < 5; i++){
             drawCard();
         }

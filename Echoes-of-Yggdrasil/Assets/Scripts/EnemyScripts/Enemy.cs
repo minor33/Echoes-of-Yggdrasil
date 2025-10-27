@@ -10,9 +10,7 @@ public class Enemy : Unit {
     private int currentAction;
 
     public Image enemyImage;
-    public TMP_Text healthText;
     public TMP_Text nextActionText;
-    public Image healthBarFill;
     public Image nextActionImage;
 
     public Sprite attackActionSprite;
@@ -26,6 +24,7 @@ public class Enemy : Unit {
                 BattlePlayer.Instance.damage(actionPair.attack);
                 break;
             case DEFEND:
+                gainBlock(actionPair.defend);
                 break;
             case PAUSE:
                 break;
@@ -57,7 +56,6 @@ public class Enemy : Unit {
                 nextActionText.text = $"{actionPair.defend}";
                 break;
             case PAUSE:
-
                 nextActionImage.sprite = pauseActionSprite;
                 nextActionImage.transform.localPosition = new Vector3(0,0,0);
                 break;
@@ -68,8 +66,7 @@ public class Enemy : Unit {
     }
 
     public void updateDisplay() {
-        healthText.text = $"{health}/{maxHealth}";
-        healthBarFill.fillAmount = (float)health / (float)maxHealth;
+        updateHealthbar();
     }
 
     void Start() {
