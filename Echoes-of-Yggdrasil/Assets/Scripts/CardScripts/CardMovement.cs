@@ -23,7 +23,7 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private int glowPulse;
     private int siblingIndex;
 
-    private const float PLAY_HEIGHT = 1.75f;
+    private const float PLAY_HEIGHT = 1.65f;
 
     public void OnPointerDown(PointerEventData eventData){
         canvasGroup.blocksRaycasts = false;

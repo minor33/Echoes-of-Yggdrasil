@@ -15,7 +15,7 @@ public class BattleManager : MonoBehaviour
     private int battleState;
 
     private async void startPlayerTurn() {
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 5; i++){
             await Awaitable.WaitForSecondsAsync(0.05f);
             player.drawCard();
         }

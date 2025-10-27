@@ -1,8 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using TMPro;
 
 public class BattlePlayer : Unit {
     public static BattlePlayer Instance { get; private set; }
+
+    public TMP_Text healthText;
+    public Image healthBarFill;
 
     public List<Card> hand;
     public List<Card> deck;
@@ -64,7 +69,16 @@ public class BattlePlayer : Unit {
         Debug.Log("You died");
     }
 
-    public void Start() {
+    public void updateDisplay() {
+        healthText.text = $"{health}/{maxHealth}";
+        healthBarFill.fillAmount = (float)health / (float)maxHealth;
+    }
+
+    void Update() {
+        updateDisplay();
+    }
+
+    void Start() {
         hand = new List<Card>();
         deck = new List<Card>();
         discard = new List<Card>();
