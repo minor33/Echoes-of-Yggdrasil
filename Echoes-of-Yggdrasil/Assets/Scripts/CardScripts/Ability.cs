@@ -29,7 +29,8 @@ public struct KeywordPair
 public class Ability : ScriptableObject {
     public List<KeywordPair> keywords;
     private BattleManager battleManager;
-    private BoardDisplay boardDisplay;
+    private BoardManager boardManager;
+    private BattlePlayer player;
 
     public bool hasChoose() {
         foreach (var keywordPair in keywords){
@@ -91,8 +92,9 @@ public class Ability : ScriptableObject {
 
     public void triggerAbility(Enemy chosenEnemy=null) {
         battleManager = BattleManager.Instance;
-        boardDisplay = BoardDisplay.Instance;
-        Unit unit = boardDisplay.getEnemy();
+        boardManager = BoardManager.Instance;
+        player = BattlePlayer.Instance;
+        Unit unit = boardManager.getFrontEnemy();
         if (unit == null) {
             Debug.LogError("NO ENEMY FOUND AFTER TRIGGERING ABILITY");
             return;
@@ -107,29 +109,26 @@ public class Ability : ScriptableObject {
                     if (targetType == CHOOSE) {
                         unit = chosenEnemy;
                     } else if (targetType == RANDOM) {
-                        // TODO: lol make this random later
-                        Debug.LogError("THIS TARGETTING DOES NOT EXIST YET");
-                        unit = boardDisplay.getEnemy();
+                        unit = boardManager.getRandomEnemy();
                     } else if (targetType == FRONT) {
-                        unit = boardDisplay.getEnemy();
+                        unit = boardManager.getFrontEnemy();
                     } else if (targetType == SELF) {
-                        unit = BattlePlayer.Instance;
+                        unit = player;
                     }
                     break;
 
                 case DAMAGE:
-                    int damage = keywordPair.damage;
-                    unit.damage(damage);
+                    unit.damage(keywordPair.damage);
                     break;
 
                 case BLOCK:
-                    int block = keywordPair.block;
                     Debug.LogError("DOES NOT EXIST YET");
                     break;
                 
                 case DRAW:
-                    int draw = keywordPair.draw;
-                    Debug.LogError("DOES NOT EXIST YET");
+                    for(int i = 0; i < keywordPair.draw; i++){
+                        player.drawCard();
+                    }
                     break;
 
                 default:

@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 376454572}
   - component: {fileID: 376454573}
   m_Layer: 5
-  m_Name: BoardDisplay
+  m_Name: BoardManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,9 +167,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 376454571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9742565223a18a489a7aeb93c8b6d5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 79278dfcc475b49408de844356a55406, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BoardDisplay
+  m_EditorClassIdentifier: Assembly-CSharp::BoardManager
   enemyPrefab: {fileID: 1504140025423473537, guid: ef078792f17d7a54194f47b33fa2be55, type: 3}
   boardSlots:
   - {fileID: 1216434506}

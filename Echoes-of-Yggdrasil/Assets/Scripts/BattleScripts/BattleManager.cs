@@ -9,7 +9,7 @@ public class BattleManager : MonoBehaviour
     public TestDeck testDeck;
     public Encounter encounter;
     private HandDisplay handDisplay;
-    private BoardDisplay boardDisplay;
+    private BoardManager boardManager;
     private BattlePlayer player;
     //public Image background;
     private int battleState;
@@ -37,7 +37,7 @@ public class BattleManager : MonoBehaviour
 
     void Start() {
         handDisplay = HandDisplay.Instance;
-        boardDisplay = BoardDisplay.Instance;
+        boardManager = BoardManager.Instance;
         player = BattlePlayer.Instance;
 
         for(int i = 0; i < testDeck.cards.Count; i++){
@@ -47,7 +47,7 @@ public class BattleManager : MonoBehaviour
 
         for(int i = 0; i < 3; i++){
             if(encounter.enemies[i] != null){
-                boardDisplay.setEnemy(encounter.enemies[i], i);
+                boardManager.setEnemy(encounter.enemies[i], i);
             }
         }
 

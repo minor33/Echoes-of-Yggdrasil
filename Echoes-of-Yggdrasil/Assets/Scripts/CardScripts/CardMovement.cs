@@ -35,13 +35,13 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             if(hasChoose){
                 GameObject targetObject = eventData.pointerCurrentRaycast.gameObject;
                 if(targetObject != null){
+                    BattlePlayer.Instance.removeCard(siblingIndex);
                     Enemy targetEnemy = targetObject.GetComponentInParent<Enemy>();
                     ability.triggerAbility(targetEnemy);
-                    BattlePlayer.Instance.removeCard(siblingIndex);
                 }
             } else {
-                ability.triggerAbility();
                 BattlePlayer.Instance.removeCard(siblingIndex);
+                ability.triggerAbility();
             }
         }
         dragging = false;

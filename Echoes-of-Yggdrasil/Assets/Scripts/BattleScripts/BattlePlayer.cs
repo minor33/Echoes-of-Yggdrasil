@@ -31,6 +31,9 @@ public class BattlePlayer : Unit {
     }
 
     public void drawCard() {
+        if(hand.Count == 10){
+            return;
+        }
         if(deck.Count == 0){
             reshuffleDiscard();
             if(deck.Count == 0){
