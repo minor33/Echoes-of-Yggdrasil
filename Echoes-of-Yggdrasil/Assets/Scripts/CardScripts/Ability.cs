@@ -74,7 +74,7 @@ public class Ability : ScriptableObject {
 
                 case BLOCK:
                     int block = keywordPair.block;
-                    description += $"Defend {block}. ";
+                    description += $"Block {block}. ";
                     break;
                 
                 case DRAW:
@@ -94,7 +94,7 @@ public class Ability : ScriptableObject {
         battleManager = BattleManager.Instance;
         boardManager = BoardManager.Instance;
         player = BattlePlayer.Instance;
-        Unit unit = boardManager.getFrontEnemy();
+        Unit unit = boardManager.getFrontEnemy(); // Should this just be null?
         if (unit == null) {
             Debug.LogError("NO ENEMY FOUND AFTER TRIGGERING ABILITY");
             return;
@@ -126,9 +126,7 @@ public class Ability : ScriptableObject {
                     break;
                 
                 case DRAW:
-                    for(int i = 0; i < keywordPair.draw; i++){
-                        player.drawCard();
-                    }
+                    player.drawCards(keywordPair.draw);
                     break;
 
                 default:

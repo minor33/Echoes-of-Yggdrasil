@@ -20,13 +20,16 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public Color chooseGlowColor;
 
     private bool dragging;
+    private bool hovering;
+    public bool expanded;
+
     private int glowPulse;
     private int siblingIndex;
 
     private const float PLAY_HEIGHT = 1.65f;
 
     public void OnPointerDown(PointerEventData eventData){
-        if(dragging){
+        if(handDisplay.isBusy() || dragging || !expanded){
             return;
         }
         Card card = BattlePlayer.Instance.getCard(siblingIndex);
@@ -36,6 +39,7 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         canvasGroup.blocksRaycasts = false;
         dragging = true; 
     }
+
     public void OnPointerUp(PointerEventData eventData){
         if(!dragging){
             return;
@@ -53,6 +57,7 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
         }
         dragging = false;
+        hovering = false;
         canvasGroup.blocksRaycasts = true;
         handDisplay.updateDisplay();
     }
@@ -61,7 +66,9 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if(!dragging){
             return;
         }
+
         rectTransform.anchoredPosition += eventData.delta / primaryCanvas.scaleFactor;
+
         if(rectTransform.anchoredPosition.y > PLAY_HEIGHT){
             if(hasChoose){
                 GameObject target = eventData.pointerCurrentRaycast.gameObject;
@@ -79,26 +86,51 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
 
     public void OnPointerEnter(PointerEventData eventData){
-        if(!dragging){
-            //rectTransform.localScale = rectTransform.localScale * 1.4f;
-            rectTransform.localScale = rectTransform.localScale * 1.2f;
-            rectTransform.rotation = Quaternion.identity;
-            Vector3 newPosition = rectTransform.localPosition;
-            //newPosition.y = 0.666f;
-            newPosition.y = 0.49f;
-            rectTransform.localPosition = newPosition;
-            siblingIndex = transform.GetSiblingIndex();
-            transform.SetAsLastSibling();
-            handDisplay.pushRight(siblingIndex);
-        }
+        hovering = true;
     }
     public void OnPointerExit(PointerEventData eventData){
+        /*
+        if(siblingIndex == 0){
+            Debug.Log("Pointer exit");
+        }
+        */
         if(!dragging){
-            handDisplay.updateDisplay(0);
+            hovering = false;
+            if(!handDisplay.isBusy()){
+                if(expanded){
+                    expanded = false;
+                    handDisplay.updateDisplay(0);
+                }
+            }
         }
     }
 
     void Update() {
+        /*
+        if(siblingIndex == 0){
+            Debug.Log($"Dragging: {dragging}, Hovering: {hovering}, Expanded: {expanded}, HandBusy: {handDisplay.isBusy()}");
+        }
+        */
+        if(hovering){
+            if(!handDisplay.isBusy()){
+                if(!expanded){
+                    expanded = true;
+                    rectTransform.localScale = rectTransform.localScale * 1.2f;
+                    rectTransform.rotation = Quaternion.identity;
+                    Vector3 newPosition = rectTransform.localPosition;
+                    newPosition.y = 0.49f;
+                    rectTransform.localPosition = newPosition;
+                    siblingIndex = transform.GetSiblingIndex();
+                    transform.SetAsLastSibling();
+                    handDisplay.pushRight(siblingIndex);
+                }                
+            } else {
+                if(expanded){
+                    expanded = false;
+                }
+            }
+        }
+
         if(cardGlow.enabled){
             glowPulse = (glowPulse+1)%350;
             Color tempColor = cardGlow.color;

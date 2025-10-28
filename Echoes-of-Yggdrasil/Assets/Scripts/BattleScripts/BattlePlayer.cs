@@ -54,21 +54,27 @@ public class BattlePlayer : Unit {
         }
     }
 
-    public void drawCard() {
-        if(hand.Count == 10){
-            return;
-        }
-        if(deck.Count == 0){
-            reshuffleDiscard();
-            if(deck.Count == 0){
-                Debug.Log("Hand empty");
+    public async void drawCards(int numCards) {
+        for(int i = 0; i < numCards; i++){
+            if(hand.Count == 10){
                 return;
             }
+            if(deck.Count == 0){
+                reshuffleDiscard();
+                if(deck.Count == 0){
+                    Debug.Log("Hand empty");
+                    return;
+                }
+            }
+            Card drawnCard = deck[0];
+            hand.Add(drawnCard);
+            HandDisplay.Instance.addCard(drawnCard);
+            deck.RemoveAt(0);
+            if(i < numCards-1){
+                await Awaitable.WaitForSecondsAsync(0.2f);
+            }
         }
-        Card drawnCard = deck[0];
-        hand.Add(drawnCard);
-        HandDisplay.Instance.addCard(drawnCard);
-        deck.RemoveAt(0);
+
     }
 
     public void playCard(int index, Enemy targetEnemy = null) {
@@ -119,9 +125,7 @@ public class BattlePlayer : Unit {
     public void startTurn(){
         energy = maxEnergy;
         block = 0;
-        for(int i = 0; i < 5; i++){
-            drawCard();
-        }
+        drawCards(5);
     }
 
     public void endTurn(){

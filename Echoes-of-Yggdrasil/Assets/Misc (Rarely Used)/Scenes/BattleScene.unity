@@ -1631,6 +1631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HandDisplay
   cardPrefab: {fileID: 6092415883608943416, guid: 8b09c0aafafc2dd45888f6a49c798fc3, type: 3}
   splineContainer: {fileID: 1348642676}
+  spawnLoc: {fileID: 915251604}
   hand: []
 --- !u!225 &1015890104
 CanvasGroup:

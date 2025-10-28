@@ -9,7 +9,14 @@ public class HandDisplay : MonoBehaviour
 
     public GameObject cardPrefab;
     public SplineContainer splineContainer;
+    public Transform spawnLoc;
     public List<GameObject> hand;
+
+    private bool busy;
+
+    public bool isBusy(){
+        return busy;
+    }
 
     public void updateCard(int i, float time) {
         Spline spline = splineContainer.Spline;
@@ -32,12 +39,16 @@ public class HandDisplay : MonoBehaviour
             hand[i].transform.rotation = rotation;
             hand[i].transform.localScale = cardPrefab.transform.localScale;
         }
-
     }
 
-    public void updateDisplay(float time=0) {
+    public async void updateDisplay(float time=0.2f) {
         for(int i = 0; i < hand.Count; i++){
             updateCard(i, time);
+        }
+        if(time > 0){
+            busy = true;
+            await Awaitable.WaitForSecondsAsync(time);
+            busy = false;
         }
     }
 
@@ -53,6 +64,7 @@ public class HandDisplay : MonoBehaviour
         GameObject cardDisplay = Instantiate(cardPrefab, transform.position, Quaternion.identity, transform);
         cardDisplay.GetComponent<CardDisplay>().card = card;
         cardDisplay.transform.localScale = Vector3.zero;
+        cardDisplay.transform.position = spawnLoc.position;
         hand.Add(cardDisplay);
         updateDisplay();
     }
