@@ -20,7 +20,10 @@ public class HandDisplay : MonoBehaviour
 
     public void updateCard(int i, float time) {
         Spline spline = splineContainer.Spline;
-        float spacing = 0.1f;
+        float spacing = 0.2f;
+        if(hand.Count > 5){
+            spacing = 1f / (float)hand.Count;
+        }
         float firstPosition = 0.5f - ((hand.Count-1f) * (spacing/2f));
 
         float p = firstPosition + (i*spacing);
@@ -47,16 +50,20 @@ public class HandDisplay : MonoBehaviour
         }
         if(time > 0){
             busy = true;
-            await Awaitable.WaitForSecondsAsync(time);
+            await Awaitable.WaitForSecondsAsync(time+0.001f);
             busy = false;
         }
     }
 
     public void pushRight(int index){
+        float dist = 0.1f;
+        if(hand.Count > 5){
+            dist = (hand.Count * 0.06f)-0.2f;
+        }
         for(int i = index+1; i < hand.Count; i++){
+            //dist = 0.4f;
             RectTransform rectTransform = hand[i].GetComponent<RectTransform>();
-            //rectTransform.anchoredPosition += new Vector2(0.55f,0);
-            rectTransform.anchoredPosition += new Vector2(0.4f,0);
+            rectTransform.anchoredPosition += new Vector2(dist,0);
         }
     }
 

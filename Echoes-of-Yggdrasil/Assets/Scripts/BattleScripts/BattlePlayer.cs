@@ -16,10 +16,16 @@ public class BattlePlayer : Unit {
     public int energy;
     public int maxEnergy;
 
+    private bool drawingCards;
+
     public List<Card> hand;
     public List<Card> deck;
     public List<Card> discard;
     public List<Card> rageQueue;
+
+    public bool isDrawing(){
+        return drawingCards;
+    }
 
     public Card getCard(int index) {
         return hand[index];
@@ -55,6 +61,7 @@ public class BattlePlayer : Unit {
     }
 
     public async void drawCards(int numCards) {
+        drawingCards = true;
         for(int i = 0; i < numCards; i++){
             if(hand.Count == 10){
                 return;
@@ -71,10 +78,10 @@ public class BattlePlayer : Unit {
             HandDisplay.Instance.addCard(drawnCard);
             deck.RemoveAt(0);
             if(i < numCards-1){
-                await Awaitable.WaitForSecondsAsync(0.2f);
+                await Awaitable.WaitForSecondsAsync(0.202f);
             }
         }
-
+        drawingCards = false;
     }
 
     public void playCard(int index, Enemy targetEnemy = null) {
@@ -138,6 +145,7 @@ public class BattlePlayer : Unit {
     }
 
     void Start() {
+        drawingCards = false;
         hand = new List<Card>();
         deck = new List<Card>();
         discard = new List<Card>();

@@ -108,11 +108,11 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     void Update() {
         /*
         if(siblingIndex == 0){
-            Debug.Log($"Dragging: {dragging}, Hovering: {hovering}, Expanded: {expanded}, HandBusy: {handDisplay.isBusy()}");
+            Debug.Log($"Dragging: {dragging}, Hovering: {hovering}, Expanded: {expanded}, HandBusy: {handDisplay.isBusy()}, DrawingCards: {BattlePlayer.Instance.isDrawing()}");
         }
         */
         if(hovering){
-            if(!handDisplay.isBusy()){
+            if(!handDisplay.isBusy() && !BattlePlayer.Instance.isDrawing()){
                 if(!expanded){
                     expanded = true;
                     rectTransform.localScale = rectTransform.localScale * 1.2f;
