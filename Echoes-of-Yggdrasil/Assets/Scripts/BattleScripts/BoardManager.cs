@@ -9,10 +9,12 @@ public class BoardManager : MonoBehaviour
     private GameObject[] enemies;
     public Transform[] boardSlots;
 
-    public void executeActions() {
+    public async void executeActions() {
+        await Awaitable.WaitForSecondsAsync(0.15f);
         for(int i = 0; i < 3; i++){
             if(enemies[i] != null){
                 enemies[i].GetComponent<Enemy>().executeAction();
+                await Awaitable.WaitForSecondsAsync(0.35f);
             }
         }
         BattleManager.Instance.progressBattleState();

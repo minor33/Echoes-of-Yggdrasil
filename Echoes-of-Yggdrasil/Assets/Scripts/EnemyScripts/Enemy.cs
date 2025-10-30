@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 using static EnemyAction;
 
 public class Enemy : Unit {
@@ -17,11 +18,16 @@ public class Enemy : Unit {
     public Sprite defendActionSprite;
     public Sprite pauseActionSprite;
 
-    public void executeAction(){
+    public async void executeAction(){
         ActionPair actionPair = enemyData.actionPairs[currentAction];
         switch (actionPair.action) {
             case ATTACK:
                 BattlePlayer.Instance.damage(actionPair.attack);
+                Vector3 originalPosition = transform.localPosition;
+                Vector3 newPosition = originalPosition + new Vector3(0, -0.5f, 0);
+                transform.DOLocalMove(newPosition, 0.12f);
+                await Awaitable.WaitForSecondsAsync(0.15f);
+                transform.DOLocalMove(originalPosition, 0.20f);
                 break;
             case DEFEND:
                 gainBlock(actionPair.defend);

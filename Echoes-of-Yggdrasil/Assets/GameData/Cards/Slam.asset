@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardType: 0
   cardRarity: 2
-  energy: 2
+  energy: 0
   rage: 2
   playAbility: {fileID: 11400000, guid: 914880ebb9c785d4da2cf1d0d9d9e5b7, type: 2}
   rageAbility: {fileID: 11400000, guid: 4d395fc7332d39d4a9a1b299b139c553, type: 2}
