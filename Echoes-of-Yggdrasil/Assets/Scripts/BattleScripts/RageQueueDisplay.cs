@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class RageQueueDisplay : MonoBehaviour
 {
@@ -20,6 +21,11 @@ public class RageQueueDisplay : MonoBehaviour
         for(int i = 0; i < rageQueue.Count; i++){
             updateCard(i);
         }
+    }
+
+    public void popDisplay(int i) {
+        Vector3 newScale = rageQueue[i].transform.localScale * 1.1f;
+        rageQueue[i].transform.DOScale(newScale, 0.14f);
     }
 
     public void addCard(Card card) {

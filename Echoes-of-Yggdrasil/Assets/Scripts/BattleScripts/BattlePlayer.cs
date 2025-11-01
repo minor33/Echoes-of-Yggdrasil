@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using EditorAttributes;
 
 public class BattlePlayer : Unit {
     public static BattlePlayer Instance { get; private set; }
@@ -22,6 +23,11 @@ public class BattlePlayer : Unit {
     public List<Card> deck;
     public List<Card> discard;
     public List<Card> rageQueue;
+
+    [Button]
+    public void GoCrazyGoWild(){
+        rage++;
+    }
 
     public bool isDrawing(){
         return drawingCards;
@@ -117,14 +123,17 @@ public class BattlePlayer : Unit {
         rageText.text = $"{rage} / {maxRage}";
     }
 
-    public void checkRage() {
+    public async void checkRage() {
         if (rage >= maxRage) {
-            foreach (Card card in rageQueue) {
-                card.triggerRage();
+            while(rageQueue.Count > 0) {
+                await Awaitable.WaitForSecondsAsync(0.6f);
+                RageQueueDisplay.Instance.popDisplay(0);
+                await Awaitable.WaitForSecondsAsync(0.2f);
+                rageQueue[0].triggerRage();
+                rageQueue.RemoveAt(0);
+                RageQueueDisplay.Instance.removeCard(0);
             }
             rage = 0;
-            rageQueue.Clear();
-            RageQueueDisplay.Instance.clear();
         }
 
     }
