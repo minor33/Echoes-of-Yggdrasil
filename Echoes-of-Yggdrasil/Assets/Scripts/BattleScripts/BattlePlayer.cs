@@ -18,6 +18,7 @@ public class BattlePlayer : Unit {
     public int maxEnergy;
 
     private bool drawingCards;
+    private bool playerTurn;
 
     public List<Card> hand;
     public List<Card> deck;
@@ -26,7 +27,17 @@ public class BattlePlayer : Unit {
 
     [Button]
     public void GoCrazyGoWild(){
-        rage++;
+        rage = maxRage;
+        checkRage();
+    }
+
+    [Button]
+    public void DrinkARedBull(){
+        energy = maxEnergy;
+    }
+
+    public bool isPlayerTurn(){
+        return playerTurn;
     }
 
     public bool isDrawing(){
@@ -70,6 +81,9 @@ public class BattlePlayer : Unit {
         drawingCards = true;
         for(int i = 0; i < numCards; i++){
             if(hand.Count == 10){
+                return;
+            }
+            if(!playerTurn){
                 return;
             }
             if(deck.Count == 0){
@@ -125,6 +139,7 @@ public class BattlePlayer : Unit {
 
     public async void checkRage() {
         if (rage >= maxRage) {
+            playerTurn = false;
             while(rageQueue.Count > 0) {
                 await Awaitable.WaitForSecondsAsync(0.6f);
                 RageQueueDisplay.Instance.popDisplay(0);
@@ -134,19 +149,26 @@ public class BattlePlayer : Unit {
                 RageQueueDisplay.Instance.removeCard(0);
             }
             rage = 0;
+            playerTurn = true;
         }
 
     }
 
     public void startTurn(){
+        playerTurn = true;
         energy = maxEnergy;
         block = 0;
         drawCards(5);
+        BoardManager.Instance.displayActions();
     }
 
     public void endTurn(){
+        if(!playerTurn){
+            return;
+        }
+        playerTurn = false;
         discardHand();
-        BattleManager.Instance.progressBattleState();
+        BoardManager.Instance.executeActions();
     }
 
     void Update() {

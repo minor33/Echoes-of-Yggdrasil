@@ -17,7 +17,7 @@ public class BoardManager : MonoBehaviour
                 await Awaitable.WaitForSecondsAsync(0.35f);
             }
         }
-        BattleManager.Instance.progressBattleState();
+        BattlePlayer.Instance.startTurn();
     }
 
     public void displayActions() {

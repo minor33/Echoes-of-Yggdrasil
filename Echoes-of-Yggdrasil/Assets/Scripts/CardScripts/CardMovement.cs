@@ -29,7 +29,7 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private const float PLAY_HEIGHT = 1.65f;
 
     public void OnPointerDown(PointerEventData eventData){
-        if(handDisplay.isBusy() || dragging || !expanded){
+        if(handDisplay.isBusy() || dragging || !expanded || !BattlePlayer.Instance.isPlayerTurn()){
             return;
         }
         Card card = BattlePlayer.Instance.getCard(siblingIndex);
@@ -106,11 +106,11 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
 
     void Update() {
-        /*
+        
         if(siblingIndex == 0){
             Debug.Log($"Dragging: {dragging}, Hovering: {hovering}, Expanded: {expanded}, HandBusy: {handDisplay.isBusy()}, DrawingCards: {BattlePlayer.Instance.isDrawing()}");
         }
-        */
+        
         if(hovering){
             if(!handDisplay.isBusy() && !BattlePlayer.Instance.isDrawing()){
                 if(!expanded){

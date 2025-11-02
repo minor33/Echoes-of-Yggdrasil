@@ -12,25 +12,20 @@ public class BattleManager : MonoBehaviour
     private BoardManager boardManager;
     private BattlePlayer player;
     //public Image background;
-    private int battleState;
 
-    public void progressBattleState(){
-        battleState = (battleState+1)%4;
+    public Button endTurnButton;
+    
+    private async void delayedStart(){
+        await Awaitable.WaitForSecondsAsync(0.01f); // Gives enemies time to load their data
+        player.startTurn();
     }
 
     void Update() {
-        if(battleState == 0){
-            player.startTurn();
-            boardManager.displayActions();
-            battleState = 1;
+        if(player.isPlayerTurn()){
+            endTurnButton.interactable = true;
+        } else {
+            endTurnButton.interactable = false;
         }
-        // battleState=1 until player ends turn
-        if(battleState == 2){
-            // Start enemy turn
-            battleState = 3;
-            boardManager.executeActions();
-        }
-        // battleState=3 until enemy turn finishes
     }
 
     void Start() {
@@ -49,7 +44,7 @@ public class BattleManager : MonoBehaviour
             }
         }
 
-        battleState = 0;
+        delayedStart(); // avoids making Start() async
     }
 
     void Awake() {

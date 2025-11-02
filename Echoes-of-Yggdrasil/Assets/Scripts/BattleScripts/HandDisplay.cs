@@ -34,9 +34,9 @@ public class HandDisplay : MonoBehaviour
 
         hand[i].transform.SetSiblingIndex(i);
         if(time > 0f){
-            hand[i].transform.DOLocalMove(splinePosition, time);
-            hand[i].transform.DORotate(rotation.eulerAngles, time);
-            hand[i].transform.DOScale(cardPrefab.transform.localScale, time);        
+            hand[i].transform.DOLocalMove(splinePosition, time).SetLink(hand[i]);
+            hand[i].transform.DORotate(rotation.eulerAngles, time).SetLink(hand[i]);
+            hand[i].transform.DOScale(cardPrefab.transform.localScale, time).SetLink(hand[i]);        
         } else {
             hand[i].transform.localPosition = splinePosition;
             hand[i].transform.rotation = rotation;
