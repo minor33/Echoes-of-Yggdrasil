@@ -10,7 +10,8 @@ public class RageQueueDisplay : MonoBehaviour
     public List<GameObject> rageQueue;
 
     public void updateCard(int i) {
-        float spacing = 6f;
+        int maxRageQueue = BattlePlayer.Instance.getMaxRageQueue();
+        float spacing = 80f/maxRageQueue;
         float firstPosition = 0f;
 
         rageQueue[i].transform.localPosition = new Vector3(i*spacing + firstPosition, 0f, 0f);
@@ -29,6 +30,7 @@ public class RageQueueDisplay : MonoBehaviour
     }
 
     public void addCard(Card card) {
+        int maxRageQueue = BattlePlayer.Instance.getMaxRageQueue();
         GameObject cardDisplay = Instantiate(rageCardPrefab, transform.position, Quaternion.identity, transform);
         cardDisplay.GetComponent<CardDisplay>().card = card;
         // cardDisplay.transform.localScale = Vector3.zero;

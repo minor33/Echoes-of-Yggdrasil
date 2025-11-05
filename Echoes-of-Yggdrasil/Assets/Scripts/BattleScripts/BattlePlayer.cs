@@ -16,6 +16,7 @@ public class BattlePlayer : Unit {
     public int maxRage;
     public int energy;
     public int maxEnergy;
+    public int maxRageQueue;
 
     private bool drawingCards;
     private bool playerTurn;
@@ -33,7 +34,7 @@ public class BattlePlayer : Unit {
 
     [Button]
     public void DrinkARedBull(){
-        energy = maxEnergy;
+        energy = 50;
     }
 
     public bool isPlayerTurn(){
@@ -50,6 +51,10 @@ public class BattlePlayer : Unit {
 
     public int getEnergy(){
         return energy;
+    }
+
+    public int getMaxRageQueue() {
+        return maxRageQueue;
     }
 
     public void shuffleDeck()
@@ -115,7 +120,10 @@ public class BattlePlayer : Unit {
     }
 
     public void addCardToRageQueue(Card playedCard) {
-        // TODO: Push and shit and max stuff
+        if (rageQueue.Count >= maxRageQueue) {
+            // Stable goes here
+            removeRageQueue(0);
+        }
         rageQueue.Add(playedCard);
         RageQueueDisplay.Instance.addCard(playedCard);
     }
@@ -123,6 +131,11 @@ public class BattlePlayer : Unit {
     public void removeCard(int index){
         hand.RemoveAt(index);
         HandDisplay.Instance.removeCard(index);
+    }
+
+    public void removeRageQueue(int index) {
+        rageQueue.RemoveAt(index);
+        RageQueueDisplay.Instance.removeCard(index);
     }
 
     public override void die() {
@@ -190,6 +203,8 @@ public class BattlePlayer : Unit {
 
         maxEnergy = 3;
         energy = 3;
+
+        maxRageQueue = 10;
     }
 
     void Awake() {
