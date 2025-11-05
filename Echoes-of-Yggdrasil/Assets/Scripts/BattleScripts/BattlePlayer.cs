@@ -86,9 +86,11 @@ public class BattlePlayer : Unit {
         drawingCards = true;
         for(int i = 0; i < numCards; i++){
             if(hand.Count == 10){
+                drawingCards = false;
                 return;
             }
             if(!playerTurn){
+                drawingCards = false;
                 return;
             }
             if(deck.Count == 0){
