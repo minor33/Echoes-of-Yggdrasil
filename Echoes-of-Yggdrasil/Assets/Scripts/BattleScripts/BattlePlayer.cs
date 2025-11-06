@@ -171,20 +171,32 @@ public class BattlePlayer : Unit {
     public async void checkRage() {
         if (rage >= maxRage) {
             playerTurn = false;
+            float speedMultipler = 1.0f;
             while(rageQueue.Count > 0) {
-                await Awaitable.WaitForSecondsAsync(0.6f);
+                
+                await Awaitable.WaitForSecondsAsync(0.6f/speedMultipler);
                 int oldInvoke = invoke;
                 invoke = 0;
 
                 for (int i = 0; i < oldInvoke+1; i++) {
                     if (i > 0) {
-                        RageQueueDisplay.Instance.resetDisplay(0);
-                        await Awaitable.WaitForSecondsAsync(0.05f);
+                        RageQueueDisplay.Instance.resetDisplay(0, speedMultipler);
+                        await Awaitable.WaitForSecondsAsync(0.05f/speedMultipler);
                     }
 
-                    RageQueueDisplay.Instance.popDisplay(0, 1.1f + 0.05f*i);
-                    await Awaitable.WaitForSecondsAsync(0.2f);
+                    float sizeMuliplier = 1.00f + .02f*i;
+                    if (sizeMuliplier > 2f) {
+                        sizeMuliplier = 2f;
+                    }
+
+                    RageQueueDisplay.Instance.popDisplay(0, 1.1f*sizeMuliplier, speedMultipler);
+                    await Awaitable.WaitForSecondsAsync(0.2f/speedMultipler);
                     rageQueue[0].triggerRage();
+
+                    speedMultipler += 0.02f;
+                    if (speedMultipler > 10f) {
+                        speedMultipler = 10f;
+                    }
                 }
                 
                 rageQueue.RemoveAt(0);

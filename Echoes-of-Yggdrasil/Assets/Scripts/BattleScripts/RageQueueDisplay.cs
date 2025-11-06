@@ -47,15 +47,15 @@ public class RageQueueDisplay : MonoBehaviour
         }
     }
 
-    public void popDisplay(int i, float scale) {
+    public void popDisplay(int i, float scale, float speedMultipler=1) {
         Vector3 newScale = rageQueue[i].transform.localScale * scale;
-        rageQueue[i].transform.DOScale(newScale, 0.14f);
+        rageQueue[i].transform.DOScale(newScale, 0.14f/speedMultipler);
     }
 
     // Resets popDisplay
-    public void resetDisplay(int i) {
+    public void resetDisplay(int i, float speedMultipler=1) {
         Vector3 newScale = new Vector3(baseScale, baseScale, baseScale);
-        rageQueue[i].transform.DOScale(newScale, 0.02f);
+        rageQueue[i].transform.DOScale(newScale, 0.02f/speedMultipler);
     }
 
     public void addCard(Card card) {
