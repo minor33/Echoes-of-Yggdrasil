@@ -11,6 +11,8 @@ public class RageQueueDisplay : MonoBehaviour
     public List<GameObject> rageQueue;
     public List<GameObject> emptySpaces;
 
+    public float baseScale;
+
     public float getCardSpacing() {
         int maxRageQueue = BattlePlayer.Instance.getMaxRageQueue();
         return 80f/maxRageQueue;
@@ -26,7 +28,7 @@ public class RageQueueDisplay : MonoBehaviour
                 float spacing = getCardSpacing();
 
                 emptySpaces[i].transform.localPosition = new Vector3(i*spacing, 0f, -1f);
-                emptySpaces[i].transform.localScale = new Vector3(2f, 2f, 2f);
+                emptySpaces[i].transform.localScale = new Vector3(baseScale, baseScale, baseScale);
             }
         }
     }
@@ -35,7 +37,7 @@ public class RageQueueDisplay : MonoBehaviour
         float spacing = getCardSpacing();
 
         rageQueue[i].transform.localPosition = new Vector3(i*spacing, 0f, 0f);
-        rageQueue[i].transform.localScale = new Vector3(2f, 2f, 2f);
+        rageQueue[i].transform.localScale = new Vector3(baseScale, baseScale, baseScale);
     }
 
     public void updateDisplay() {
@@ -45,9 +47,15 @@ public class RageQueueDisplay : MonoBehaviour
         }
     }
 
-    public void popDisplay(int i) {
-        Vector3 newScale = rageQueue[i].transform.localScale * 1.1f;
+    public void popDisplay(int i, float scale) {
+        Vector3 newScale = rageQueue[i].transform.localScale * scale;
         rageQueue[i].transform.DOScale(newScale, 0.14f);
+    }
+
+    // Resets popDisplay
+    public void resetDisplay(int i) {
+        Vector3 newScale = new Vector3(baseScale, baseScale, baseScale);
+        rageQueue[i].transform.DOScale(newScale, 0.02f);
     }
 
     public void addCard(Card card) {
@@ -81,6 +89,7 @@ public class RageQueueDisplay : MonoBehaviour
         {
             Destroy(gameObject);
         } 
+        baseScale = 2f;
     }
 
     void Start() {

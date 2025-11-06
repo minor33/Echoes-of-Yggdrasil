@@ -23,6 +23,9 @@ public struct KeywordPair
 
     [ShowField(nameof(keyword), TARGET)]
     public Target target;
+
+    [ShowField(nameof(keyword), INVOKE)]
+    public int invoke;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -82,6 +85,11 @@ public class Ability : ScriptableObject {
                     description += $"Draw {draw}. ";
                     break;
 
+                case INVOKE:
+                    int invoke = keywordPair.invoke;
+                    description += $"Invoke {invoke}. ";
+                    break;
+
                 default:
                     description += $"ERROR: {keyword} not defined";
                     break;
@@ -127,6 +135,10 @@ public class Ability : ScriptableObject {
                 
                 case DRAW:
                     player.drawCards(keywordPair.draw);
+                    break;
+
+                case INVOKE:
+                    player.addInvoke(keywordPair.invoke);
                     break;
 
                 default:

@@ -18,6 +18,8 @@ public class BattlePlayer : Unit {
     public int maxEnergy;
     public int maxRageQueue;
 
+    public int invoke;
+
     private bool drawingCards;
     private bool playerTurn;
 
@@ -35,6 +37,11 @@ public class BattlePlayer : Unit {
     [Button]
     public void DrinkARedBull(){
         energy = 50;
+    }
+
+    [Button]
+    public void DRAAAAAAW(){
+        drawCards(10);
     }
 
     [Button]
@@ -60,6 +67,10 @@ public class BattlePlayer : Unit {
 
     public int getMaxRageQueue() {
         return maxRageQueue;
+    }
+
+    public void addInvoke(int i) {
+        invoke += i;
     }
 
     public void shuffleDeck()
@@ -162,9 +173,20 @@ public class BattlePlayer : Unit {
             playerTurn = false;
             while(rageQueue.Count > 0) {
                 await Awaitable.WaitForSecondsAsync(0.6f);
-                RageQueueDisplay.Instance.popDisplay(0);
-                await Awaitable.WaitForSecondsAsync(0.2f);
-                rageQueue[0].triggerRage();
+                int oldInvoke = invoke;
+                invoke = 0;
+
+                for (int i = 0; i < oldInvoke+1; i++) {
+                    if (i > 0) {
+                        RageQueueDisplay.Instance.resetDisplay(0);
+                        await Awaitable.WaitForSecondsAsync(0.05f);
+                    }
+
+                    RageQueueDisplay.Instance.popDisplay(0, 1.1f + 0.05f*i);
+                    await Awaitable.WaitForSecondsAsync(0.2f);
+                    rageQueue[0].triggerRage();
+                }
+                
                 rageQueue.RemoveAt(0);
                 RageQueueDisplay.Instance.removeCard(0);
             }
@@ -222,5 +244,7 @@ public class BattlePlayer : Unit {
         energy = 3;
 
         maxRageQueue = 10;
+
+        invoke = 0;
     }
 }

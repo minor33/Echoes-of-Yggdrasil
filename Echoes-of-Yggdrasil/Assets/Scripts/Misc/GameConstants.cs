@@ -16,11 +16,12 @@ public enum Keyword {
     DAMAGE,
     BLOCK,
     TARGET,
-    DRAW
+    DRAW,
+    INVOKE
 }
 
 public enum EnemyAction {
-        ATTACK,
-        DEFEND,
-        PAUSE
+    ATTACK,
+    DEFEND,
+    PAUSE
 }
