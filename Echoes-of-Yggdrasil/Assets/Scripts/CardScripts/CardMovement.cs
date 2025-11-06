@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using static GameConstants;
 
 public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -107,7 +108,7 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     void Update() {
         
-        if(siblingIndex == 0){
+        if(siblingIndex == 0 && DEBUG){
             Debug.Log($"Dragging: {dragging}, Hovering: {hovering}, Expanded: {expanded}, HandBusy: {handDisplay.isBusy()}, DrawingCards: {BattlePlayer.Instance.isDrawing()}");
         }
         

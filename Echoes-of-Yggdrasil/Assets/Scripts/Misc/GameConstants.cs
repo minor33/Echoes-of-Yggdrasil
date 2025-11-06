@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 public static class GameConstants {
-    
+    public const bool DEBUG = true;
 }
 
 public enum Target {

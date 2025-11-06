@@ -37,6 +37,11 @@ public class BattlePlayer : Unit {
         energy = 50;
     }
 
+    [Button]
+    public void UpdateDisplays() {
+        RageQueueDisplay.Instance.updateDisplay();
+    }
+
     public bool isPlayerTurn(){
         return playerTurn;
     }
@@ -165,6 +170,7 @@ public class BattlePlayer : Unit {
             }
             rage = 0;
             playerTurn = true;
+            RageQueueDisplay.Instance.updateDisplay();
         }
 
     }
@@ -190,7 +196,16 @@ public class BattlePlayer : Unit {
         updateDisplay();
     }
 
-    void Start() {
+    void Awake() {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         drawingCards = false;
         hand = new List<Card>();
         deck = new List<Card>();
@@ -207,16 +222,5 @@ public class BattlePlayer : Unit {
         energy = 3;
 
         maxRageQueue = 10;
-    }
-
-    void Awake() {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 }

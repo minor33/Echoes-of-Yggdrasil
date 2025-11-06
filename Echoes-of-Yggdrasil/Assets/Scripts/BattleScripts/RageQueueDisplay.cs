@@ -7,18 +7,39 @@ public class RageQueueDisplay : MonoBehaviour
     public static RageQueueDisplay Instance { get; private set; }
 
     public GameObject rageCardPrefab;
+    public GameObject emptyCardPrefab;
     public List<GameObject> rageQueue;
+    public List<GameObject> emptySpaces;
+
+    public float getCardSpacing() {
+        int maxRageQueue = BattlePlayer.Instance.getMaxRageQueue();
+        return 80f/maxRageQueue;
+    }
+
+    public void updateEmpties() {
+        int maxRageQueue = BattlePlayer.Instance.getMaxRageQueue();
+        for (int i = 0; i < 20; i++) {
+            Destroy(emptySpaces[i]);
+            if (i >= rageQueue.Count && i < maxRageQueue) {
+                emptySpaces[i] = Instantiate(emptyCardPrefab, transform.position, Quaternion.identity, transform);
+
+                float spacing = getCardSpacing();
+
+                emptySpaces[i].transform.localPosition = new Vector3(i*spacing, 0f, -1f);
+                emptySpaces[i].transform.localScale = new Vector3(2f, 2f, 2f);
+            }
+        }
+    }
 
     public void updateCard(int i) {
-        int maxRageQueue = BattlePlayer.Instance.getMaxRageQueue();
-        float spacing = 80f/maxRageQueue;
-        float firstPosition = 0f;
+        float spacing = getCardSpacing();
 
-        rageQueue[i].transform.localPosition = new Vector3(i*spacing + firstPosition, 0f, 0f);
+        rageQueue[i].transform.localPosition = new Vector3(i*spacing, 0f, 0f);
         rageQueue[i].transform.localScale = new Vector3(2f, 2f, 2f);
     }
 
     public void updateDisplay() {
+        updateEmpties();
         for(int i = 0; i < rageQueue.Count; i++){
             updateCard(i);
         }
@@ -59,6 +80,14 @@ public class RageQueueDisplay : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        } 
+    }
+
+    void Start() {
+        for (int i = 0; i < 20; i++) {
+            GameObject emptySpace = Instantiate(emptyCardPrefab, transform.position, Quaternion.identity, transform);
+            emptySpaces.Add(emptySpace);
         }
+        updateDisplay();
     }
 }
