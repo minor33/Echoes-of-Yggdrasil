@@ -29,6 +29,9 @@ public struct KeywordPair
 
     [ShowField(nameof(keyword), DUPLICATE)]
     public int duplicate;
+
+    [ShowField(nameof(keyword), ANGRIER)]
+    public int angrier;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -111,8 +114,13 @@ public class Ability : ScriptableObject {
                     description += $"Stable.";
                     break;
 
+                case ANGRIER:
+                    int angrier = keywordPair.angrier;
+                    description += $"Angrier {angrier}. ";
+                    break;
+
                 default:
-                    description += $"ERROR: {nameof(keyword)} not defined";
+                    description += $"ERROR: {keyword} not defined";
                     break;
             }
         }
@@ -147,7 +155,11 @@ public class Ability : ScriptableObject {
                     break;
 
                 case DAMAGE:
-                    unit.damage(keywordPair.damage);
+                    int angrier = BattlePlayer.Instance.getAngrier();
+                    if (DEBUG) {
+                        Debug.Log($"Doing {keywordPair.damage} damage to {unit} with {angrier} stacks of angrier for {keywordPair.damage+angrier} total damage");
+                    }
+                    unit.damage(keywordPair.damage + angrier);
                     break;
 
                 case BLOCK:
@@ -165,16 +177,20 @@ public class Ability : ScriptableObject {
                 case DUPLICATE:
                     player.addDuplicate(keywordPair.duplicate);
                     break;
+                
+                case ANGRIER:
+                    player.addAngrier(keywordPair.angrier);
+                    break;
 
                 // To be filled in with keywords which have no effect on play/trigger
                 case STABLE:
                     if (DEBUG) {
-                        Debug.Log($"{nameof(keyword)} intentionally has no function in trigger");
+                        Debug.Log($"{keyword} intentionally has no function in trigger");
                     }
                     break;
 
                 default:
-                    Debug.LogError($"{nameof(keyword)} NOT DEFINED IN TRIGGER FUNCTION");
+                    Debug.LogError($"{keyword} NOT DEFINED IN TRIGGER FUNCTION");
                     break;
             }
         }

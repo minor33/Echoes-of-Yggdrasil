@@ -107,8 +107,7 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
 
     void Update() {
-        
-        if(siblingIndex == 0 && DEBUG){
+        if(siblingIndex == 0 && XCESSIVEDEBUG){
             Debug.Log($"Dragging: {dragging}, Hovering: {hovering}, Expanded: {expanded}, HandBusy: {handDisplay.isBusy()}, DrawingCards: {BattlePlayer.Instance.isDrawing()}");
         }
         

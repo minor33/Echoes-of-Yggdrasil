@@ -22,6 +22,7 @@ public class BattlePlayer : Unit {
 
     public int invoke;
     public int duplicate;
+    public int angrier;
 
     private bool drawingCards;
     private bool playerTurn;
@@ -68,6 +69,10 @@ public class BattlePlayer : Unit {
         return energy;
     }
 
+    public int getAngrier() {
+        return angrier;
+    }
+
     public int getMaxRageQueue() {
         return maxRageQueue;
     }
@@ -80,6 +85,12 @@ public class BattlePlayer : Unit {
     // Additional cards added to rage queue
     public void addDuplicate(int d) {
         duplicate += d;
+    }
+
+    // Additional damage on rage queue cards
+    // This should probably change to a general damage modifier so it can go negative too
+    public void addAngrier(int a) {
+        angrier += a;
     }
 
     public void shuffleDeck()
@@ -234,6 +245,7 @@ public class BattlePlayer : Unit {
                 RageQueueDisplay.Instance.removeCard(0);
             }
             rage = 0;
+            angrier = 0;
             playerTurn = true;
             RageQueueDisplay.Instance.updateDisplay();
         }
@@ -290,5 +302,6 @@ public class BattlePlayer : Unit {
 
         invoke = 0;
         duplicate = 0;
+        angrier = 0;
     }
 }

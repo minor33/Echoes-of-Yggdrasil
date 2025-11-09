@@ -2,7 +2,8 @@ using UnityEngine;
 
 
 public static class GameConstants {
-    public const bool DEBUG = true;
+    public const bool DEBUG = true; // For nice debugs that don't make that console unreadable
+    public const bool XCESSIVEDEBUG = false; // For debugs that print every frame cause fuck those
 }
 
 public enum Target {
@@ -21,7 +22,8 @@ public enum Keyword {
     DUPLICATE,  // Intended for play abilities, will probably add duplicate to the the next card played if used in a rage effect.
     INVOKE,     // Intended for rage abilities, will probably add invoke to the first card tirggered in the rage queue if in a play effect. 
     STABLE,     // Intended for rage abilities, will not work outside of them. 
-    NULL        // Empty keyword for misc. use
+    NULL,       // Empty keyword for misc. use
+    ANGRIER,    // Intended for rage abilities, will probably give all damage + damage until the next rage queue goes off if in a play effect.
 }
 
 public enum EnemyAction {
