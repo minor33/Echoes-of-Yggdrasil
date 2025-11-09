@@ -49,6 +49,15 @@ public class Ability : ScriptableObject {
         return false;
     }
 
+    public bool hasKeyword(Keyword keyword) {
+        foreach (var keywordPair in keywords){
+            if(keywordPair.keyword == keyword) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public string getDescription() {
         if (keywords == null) {
             return "Does Nothing";
@@ -96,6 +105,10 @@ public class Ability : ScriptableObject {
                 case DUPLICATE:
                     int duplicate = keywordPair.duplicate;
                     description += $"Duplicate {duplicate}. ";
+                    break;
+
+                case STABLE:
+                    description += $"Stable.";
                     break;
 
                 default:
@@ -154,7 +167,7 @@ public class Ability : ScriptableObject {
                     break;
 
                 // To be filled in with keywords which have no effect on play/trigger
-                case NULL:
+                case STABLE:
                     if (DEBUG) {
                         Debug.Log($"{nameof(keyword)} intentionally has no function in trigger");
                     }

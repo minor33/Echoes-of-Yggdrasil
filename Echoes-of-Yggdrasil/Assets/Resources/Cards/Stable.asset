@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 069ce8a578ace254ba3d457c9e26bbbd, type: 3}
-  m_Name: Strike
+  m_Name: Stable
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardType: 0
   cardRarity: 0
-  energy: 1
-  rage: 1
-  playAbility: {fileID: 11400000, guid: 2b33228a7f4861845af39dc4aaef2835, type: 2}
-  rageAbility: {fileID: 11400000, guid: f6d3d5654bc58d34fab53d12e237e0b4, type: 2}
+  energy: 0
+  rage: 0
+  playAbility: {fileID: 0}
+  rageAbility: {fileID: 0}

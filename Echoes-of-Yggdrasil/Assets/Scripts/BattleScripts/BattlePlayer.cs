@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 using EditorAttributes;
+using static Keyword;
+using static GameConstants;
 
 public class BattlePlayer : Unit {
     public static BattlePlayer Instance { get; private set; }
@@ -150,17 +152,32 @@ public class BattlePlayer : Unit {
     }
 
     public void addCardToRageQueue(Card playedCard) {
+        bool space = true;
         if (rageQueue.Count >= maxRageQueue) {
-            // Stable goes here
-            removeRageQueue(0);
+            space = removeFrontRageQueue();
         }
-        rageQueue.Add(playedCard);
-        RageQueueDisplay.Instance.addCard(playedCard);
+        if (space) {
+            rageQueue.Add(playedCard);
+            RageQueueDisplay.Instance.addCard(playedCard);
+        }
     }
 
     public void removeCard(int index){
         hand.RemoveAt(index);
         HandDisplay.Instance.removeCard(index);
+    }
+
+    public bool removeFrontRageQueue() {
+        for (int i = 0; i < rageQueue.Count; i++) {
+            if (!rageQueue[i].getRageAbility().hasKeyword(STABLE)) {
+                removeRageQueue(i);
+                return true;
+            }   
+        }
+        if (DEBUG) {
+            Debug.Log("All cards are stable, removing none.");
+        }
+        return false;
     }
 
     public void removeRageQueue(int index) {
@@ -184,6 +201,8 @@ public class BattlePlayer : Unit {
         if (rage >= maxRage) {
             playerTurn = false;
             float speedMultipler = 1.0f;
+            // Invoke will overflow into the next rage queue without this
+            invoke = 0;
             while(rageQueue.Count > 0) {
                 
                 await Awaitable.WaitForSecondsAsync(0.6f/speedMultipler);

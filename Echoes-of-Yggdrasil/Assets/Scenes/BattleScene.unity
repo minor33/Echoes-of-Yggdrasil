@@ -610,6 +610,7 @@ MonoBehaviour:
   emptyCardPrefab: {fileID: 6092415883608943416, guid: c89eda08c7045af4e92f02b7c2038df9, type: 3}
   rageQueue: []
   emptySpaces: []
+  baseScale: 0
 --- !u!4 &436738072
 Transform:
   m_ObjectHideFlags: 0
@@ -2290,6 +2291,8 @@ MonoBehaviour:
   energy: 0
   maxEnergy: 0
   maxRageQueue: 0
+  invoke: 0
+  duplicate: 0
 --- !u!1 &1487431388
 GameObject:
   m_ObjectHideFlags: 0
