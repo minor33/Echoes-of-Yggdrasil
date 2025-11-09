@@ -26,6 +26,9 @@ public struct KeywordPair
 
     [ShowField(nameof(keyword), INVOKE)]
     public int invoke;
+
+    [ShowField(nameof(keyword), DUPLICATE)]
+    public int duplicate;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -84,14 +87,19 @@ public class Ability : ScriptableObject {
                     int draw = keywordPair.draw;
                     description += $"Draw {draw}. ";
                     break;
-
+                
                 case INVOKE:
                     int invoke = keywordPair.invoke;
                     description += $"Invoke {invoke}. ";
                     break;
 
+                case DUPLICATE:
+                    int duplicate = keywordPair.duplicate;
+                    description += $"Duplicate {duplicate}. ";
+                    break;
+
                 default:
-                    description += $"ERROR: {keyword} not defined";
+                    description += $"ERROR: {nameof(keyword)} not defined";
                     break;
             }
         }
@@ -102,7 +110,7 @@ public class Ability : ScriptableObject {
         battleManager = BattleManager.Instance;
         boardManager = BoardManager.Instance;
         player = BattlePlayer.Instance;
-        Unit unit = boardManager.getFrontEnemy(); // Should this just be null?
+        Unit unit = boardManager.getFrontEnemy(); // Should this just be null?  -  No, default is front enemy to not crash everything
         if (unit == null) {
             Debug.LogError("NO ENEMY FOUND AFTER TRIGGERING ABILITY");
             return;
@@ -141,7 +149,19 @@ public class Ability : ScriptableObject {
                     player.addInvoke(keywordPair.invoke);
                     break;
 
+                case DUPLICATE:
+                    player.addDuplicate(keywordPair.duplicate);
+                    break;
+
+                // To be filled in with keywords which have no effect on play/trigger
+                case NULL:
+                    if (DEBUG) {
+                        Debug.Log($"{nameof(keyword)} intentionally has no function in trigger");
+                    }
+                    break;
+
                 default:
+                    Debug.LogError($"{nameof(keyword)} NOT DEFINED IN TRIGGER FUNCTION");
                     break;
             }
         }

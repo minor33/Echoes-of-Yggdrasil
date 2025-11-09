@@ -19,6 +19,7 @@ public class BattlePlayer : Unit {
     public int maxRageQueue;
 
     public int invoke;
+    public int duplicate;
 
     private bool drawingCards;
     private bool playerTurn;
@@ -69,8 +70,14 @@ public class BattlePlayer : Unit {
         return maxRageQueue;
     }
 
+    // Additional rage card triggers
     public void addInvoke(int i) {
         invoke += i;
+    }
+
+    // Additional cards added to rage queue
+    public void addDuplicate(int d) {
+        duplicate += d;
     }
 
     public void shuffleDeck()
@@ -132,7 +139,12 @@ public class BattlePlayer : Unit {
         energy -= playedCard.getEnergy();
         removeCard(index);
         playedCard.play(targetEnemy);
-        addCardToRageQueue(playedCard);
+        
+        for (int i = 0; i < 1+duplicate; i++) {
+            addCardToRageQueue(playedCard);
+        } 
+        duplicate = 0;
+        
         discard.Add(playedCard);
         BattlePlayer.Instance.checkRage();
     }
@@ -258,5 +270,6 @@ public class BattlePlayer : Unit {
         maxRageQueue = 10;
 
         invoke = 0;
+        duplicate = 0;
     }
 }

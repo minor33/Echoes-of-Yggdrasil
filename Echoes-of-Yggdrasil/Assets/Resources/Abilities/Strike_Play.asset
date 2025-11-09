@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2782e37b9ab1f5d40b7fd9c58f3bea81, type: 3}
+  m_Script: {fileID: 11500000, guid: 248ab1a37beaef644bf39a5a2f59f817, type: 3}
   m_Name: Strike_Play
   m_EditorClassIdentifier: Assembly-CSharp::Ability
   keywords:
@@ -18,8 +18,12 @@ MonoBehaviour:
     block: 0
     draw: 0
     target: 0
+    invoke: 0
+    duplicate: 0
   - keyword: 0
     damage: 6
     block: 0
     draw: 0
     target: 0
+    invoke: 0
+    duplicate: 0

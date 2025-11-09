@@ -17,7 +17,12 @@ public enum Keyword {
     BLOCK,
     TARGET,
     DRAW,
-    INVOKE
+    // Intended for Play Only (may have catasprophic or weird effects if used in the other)
+    DUPLICATE,
+    // Intended for Rage Only (may have catasprophic or weird effects if used in the other)
+    INVOKE,
+    // Blank Keyword
+    NULL
 }
 
 public enum EnemyAction {
