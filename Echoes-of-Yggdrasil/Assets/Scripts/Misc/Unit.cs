@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using static GameConstants;
 
 public abstract class Unit : MonoBehaviour {
     protected int maxHealth;
@@ -14,6 +15,12 @@ public abstract class Unit : MonoBehaviour {
     public TMP_Text blockText;
 
     public void damage(int damage) {
+        if (damage < 0) {
+            if (DEBUG) {
+                Debug.Log("Negative amount of damage done, leaving.");
+            }
+            return;
+        }
         block -= damage;
         if(block < 0){
             health += block;

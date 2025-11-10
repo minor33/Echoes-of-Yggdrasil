@@ -32,6 +32,9 @@ public struct KeywordPair
 
     [ShowField(nameof(keyword), ANGRIER)]
     public int angrier;
+
+    [ShowField(nameof(keyword), CALM_DOWN)]
+    public int calm_down;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -119,6 +122,11 @@ public class Ability : ScriptableObject {
                     description += $"Angrier {angrier}. ";
                     break;
 
+                case CALM_DOWN:
+                    int calm_down = keywordPair.calm_down;
+                    description += $"Calm Down {calm_down}. ";
+                    break;
+
                 default:
                     description += $"ERROR: {keyword} not defined";
                     break;
@@ -155,11 +163,11 @@ public class Ability : ScriptableObject {
                     break;
 
                 case DAMAGE:
-                    int angrier = BattlePlayer.Instance.getAngrier();
+                    int rageAdjustment = BattlePlayer.Instance.getRageAdjustment();
                     if (DEBUG) {
-                        Debug.Log($"Doing {keywordPair.damage} damage to {unit} with {angrier} stacks of angrier for {keywordPair.damage+angrier} total damage");
+                        Debug.Log($"Doing {keywordPair.damage} damage to {unit} with a rage adjustment of {rageAdjustment} for {keywordPair.damage+rageAdjustment} total damage");
                     }
-                    unit.damage(keywordPair.damage + angrier);
+                    unit.damage(keywordPair.damage + rageAdjustment);
                     break;
 
                 case BLOCK:
@@ -179,7 +187,11 @@ public class Ability : ScriptableObject {
                     break;
                 
                 case ANGRIER:
-                    player.addAngrier(keywordPair.angrier);
+                    player.addRageAdjustment(keywordPair.angrier);
+                    break;
+
+                case CALM_DOWN:
+                    player.addRageAdjustment(-keywordPair.calm_down);
                     break;
 
                 // To be filled in with keywords which have no effect on play/trigger
