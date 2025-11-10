@@ -35,6 +35,9 @@ public struct KeywordPair
 
     [ShowField(nameof(keyword), CALM_DOWN)]
     public int calm_down;
+
+    [ShowField(nameof(keyword), SKIP)]
+    public int skip;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -127,6 +130,11 @@ public class Ability : ScriptableObject {
                     description += $"Calm Down {calm_down}. ";
                     break;
 
+                case SKIP:
+                    int skip = keywordPair.skip;
+                    description += $"Skip {skip}. ";
+                    break;
+
                 default:
                     description += $"ERROR: {keyword} not defined";
                     break;
@@ -192,6 +200,10 @@ public class Ability : ScriptableObject {
 
                 case CALM_DOWN:
                     player.addRageAdjustment(-keywordPair.calm_down);
+                    break;
+
+                case SKIP:
+                    player.addSkip(keywordPair.skip);
                     break;
 
                 // To be filled in with keywords which have no effect on play/trigger

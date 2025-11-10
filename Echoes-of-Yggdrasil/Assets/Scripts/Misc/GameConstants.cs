@@ -24,7 +24,8 @@ public enum Keyword {
     STABLE,     // Intended for rage abilities, will not work outside of them. 
     NULL,       // Empty keyword for misc. use
     ANGRIER,    // Intended for rage abilities, will probably give all damage + damage until the next rage queue goes off if in a play effect.
-    CALM_DOWN   // Intended for rage abilities, will probably give all damage - damage until the next rage queue goes off if in a play effect.
+    CALM_DOWN,  // Intended for rage abilities, will probably give all damage - damage until the next rage queue goes off if in a play effect.
+    SKIP,       // Intended for rage abilities, will probably skip the first X cards triggered in the rage queue if in a play effect.
 }
 
 public enum EnemyAction {

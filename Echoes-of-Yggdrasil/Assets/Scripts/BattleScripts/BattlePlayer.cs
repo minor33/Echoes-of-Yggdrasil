@@ -23,6 +23,7 @@ public class BattlePlayer : Unit {
     public int invoke;
     public int duplicate;
     public int rageAdjustment;
+    public int skip;
 
     private bool drawingCards;
     private bool playerTurn;
@@ -91,6 +92,12 @@ public class BattlePlayer : Unit {
     // This should probably change to a general damage modifier so it can go negative too
     public void addRageAdjustment(int r) {
         rageAdjustment += r;
+    }
+
+    // Gives the next X cards in the rage queue -1 trigger
+    // IMPORTANT INTERACTION: Invoke 5 Skip 1 gives the next cards 5 total triggers, and the card after its normal 1
+    public void addSkip(int s) {
+        skip += s;
     }
 
     public void shuffleDeck()
@@ -217,10 +224,19 @@ public class BattlePlayer : Unit {
             while(rageQueue.Count > 0) {
                 
                 await Awaitable.WaitForSecondsAsync(0.6f/speedMultipler);
-                int oldInvoke = invoke;
+                int triggers = invoke+1;
+                if (skip > 0) {
+                    triggers -= 1;
+                }
+                if (DEBUG) {
+                    Debug.Log($"{rageQueue[0]} is triggering {triggers} time(s) in the rage queue with {invoke} invoke and {skip} skip");
+                }
+                if (skip > 0) {
+                    skip --;
+                }
                 invoke = 0;
-
-                for (int i = 0; i < oldInvoke+1; i++) {
+                
+                for (int i = 0; i < triggers; i++) {
                     if (i > 0) {
                         RageQueueDisplay.Instance.resetDisplay(0, speedMultipler);
                         await Awaitable.WaitForSecondsAsync(0.05f/speedMultipler);
@@ -239,6 +255,12 @@ public class BattlePlayer : Unit {
                     if (speedMultipler > 10f) {
                         speedMultipler = 10f;
                     }
+                }
+
+                // Skip animation: Could be different? 
+                if (triggers <= 0) {
+                    RageQueueDisplay.Instance.popDisplay(0, 0.8f);
+                    await Awaitable.WaitForSecondsAsync(0.2f);
                 }
                 
                 rageQueue.RemoveAt(0);
