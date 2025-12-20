@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 248ab1a37beaef644bf39a5a2f59f817, type: 3}
-  m_Name: Skip3
+  m_Name: Retain2
   m_EditorClassIdentifier: Assembly-CSharp::Ability
   keywords:
-  - keyword: 10
-    damage: 0
+  - keyword: 0
+    damage: 15
     block: 0
     draw: 0
     target: 0
@@ -22,4 +22,16 @@ MonoBehaviour:
     duplicate: 0
     angrier: 0
     calm_down: 0
-    skip: 3
+    skip: 0
+    retain: 0
+  - keyword: 11
+    damage: 15
+    block: 0
+    draw: 0
+    target: 0
+    invoke: 0
+    duplicate: 0
+    angrier: 0
+    calm_down: 0
+    skip: 0
+    retain: 2

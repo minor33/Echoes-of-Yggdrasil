@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 248ab1a37beaef644bf39a5a2f59f817, type: 3}
   m_Name: Invoke3Skip2
   m_EditorClassIdentifier: Assembly-CSharp::Ability
-  keywords: []
+  keywords:
+  - keyword: 5
+    damage: 0
+    block: 0
+    draw: 0
+    target: 0
+    invoke: 3
+    duplicate: 0
+    angrier: 0
+    calm_down: 0
+    skip: 0
+  - keyword: 10
+    damage: 0
+    block: 0
+    draw: 0
+    target: 0
+    invoke: 0
+    duplicate: 0
+    angrier: 0
+    calm_down: 0
+    skip: 2

@@ -38,6 +38,9 @@ public struct KeywordPair
 
     [ShowField(nameof(keyword), SKIP)]
     public int skip;
+
+    [ShowField(nameof(keyword), RETAIN)]
+    public int retain;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -65,6 +68,16 @@ public class Ability : ScriptableObject {
             }
         }
         return false;
+    }
+
+    public int getRetain() {
+        foreach (var keywordPair in keywords){
+            if(keywordPair.keyword == RETAIN) {
+                return keywordPair.retain;
+            }
+        }
+        // Keyword RETAIN does not exist
+        return 0;
     }
 
     public string getDescription() {
@@ -133,6 +146,13 @@ public class Ability : ScriptableObject {
                 case SKIP:
                     int skip = keywordPair.skip;
                     description += $"Skip {skip}. ";
+                    break;
+
+                case RETAIN:
+                    // So, the description doesn't update as the retain gets updated. That def needs to happen. 
+                    // Or a different display that shows it
+                    int retain = keywordPair.retain;
+                    description += $"Retain {retain}. ";
                     break;
 
                 default:
@@ -208,6 +228,7 @@ public class Ability : ScriptableObject {
 
                 // To be filled in with keywords which have no effect on play/trigger
                 case STABLE:
+                case RETAIN:
                     if (DEBUG) {
                         Debug.Log($"{keyword} intentionally has no function in trigger");
                     }

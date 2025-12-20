@@ -32,6 +32,7 @@ public class BattlePlayer : Unit {
     public List<Card> deck;
     public List<Card> discard;
     public List<Card> rageQueue;
+    public List<int>  rageQueueRetain;
 
     [Button]
     public void GoCrazyGoWild(){
@@ -177,6 +178,7 @@ public class BattlePlayer : Unit {
         if (space) {
             rageQueue.Add(playedCard);
             RageQueueDisplay.Instance.addCard(playedCard);
+            rageQueueRetain.Add(playedCard.getRageAbility().getRetain());
         }
     }
 
@@ -200,6 +202,7 @@ public class BattlePlayer : Unit {
 
     public void removeRageQueue(int index) {
         rageQueue.RemoveAt(index);
+        rageQueueRetain.RemoveAt(index);
         RageQueueDisplay.Instance.removeCard(index);
     }
 
@@ -219,12 +222,15 @@ public class BattlePlayer : Unit {
         if (rage >= maxRage) {
             playerTurn = false;
             float speedMultipler = 1.0f;
+            int trigger_card = 0;
             // Invoke will overflow into the next rage queue without this
             invoke = 0;
-            while(rageQueue.Count > 0) {
+            while(rageQueue.Count > trigger_card) {
                 
                 await Awaitable.WaitForSecondsAsync(0.6f/speedMultipler);
+                Card card = rageQueue[trigger_card];
                 int triggers = invoke+1;
+
                 if (skip > 0) {
                     triggers -= 1;
                 }
@@ -235,7 +241,6 @@ public class BattlePlayer : Unit {
                     skip --;
                 }
                 invoke = 0;
-                
                 for (int i = 0; i < triggers; i++) {
                     if (i > 0) {
                         RageQueueDisplay.Instance.resetDisplay(0, speedMultipler);
@@ -247,9 +252,9 @@ public class BattlePlayer : Unit {
                         sizeMuliplier = 2f;
                     }
 
-                    RageQueueDisplay.Instance.popDisplay(0, 1.1f*sizeMuliplier, speedMultipler);
+                    RageQueueDisplay.Instance.popDisplay(trigger_card, 1.1f*sizeMuliplier, speedMultipler);
                     await Awaitable.WaitForSecondsAsync(0.2f/speedMultipler);
-                    rageQueue[0].triggerRage();
+                    card.triggerRage();
 
                     speedMultipler += 0.02f;
                     if (speedMultipler > 10f) {
@@ -257,14 +262,21 @@ public class BattlePlayer : Unit {
                     }
                 }
 
-                // Skip animation: Could be different? 
+                // SKIP animation: Could be different? 
                 if (triggers <= 0) {
-                    RageQueueDisplay.Instance.popDisplay(0, 0.8f);
+                    RageQueueDisplay.Instance.popDisplay(trigger_card, 0.8f);
                     await Awaitable.WaitForSecondsAsync(0.2f);
                 }
-                
-                rageQueue.RemoveAt(0);
-                RageQueueDisplay.Instance.removeCard(0);
+                if (rageQueueRetain[trigger_card] > 0) {
+                    if (DEBUG) {
+                        Debug.Log($"Retaining {card} with {rageQueueRetain[trigger_card]} retain");
+                    }
+                    RageQueueDisplay.Instance.resetDisplay(trigger_card, speedMultipler);
+                    rageQueueRetain[trigger_card] --;
+                    trigger_card += 1;
+                } else {
+                    removeRageQueue(trigger_card);
+                }
             }
             rage = 0;
             rageAdjustment = 0;
@@ -310,6 +322,7 @@ public class BattlePlayer : Unit {
         deck = new List<Card>();
         discard = new List<Card>();
         rageQueue = new List<Card>();
+        rageQueueRetain = new List<int>();
 
         maxHealth = 100;
         health = maxHealth;
