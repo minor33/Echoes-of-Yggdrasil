@@ -15,10 +15,10 @@ public class DeityDisplay : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData){
         if(selected){
-            MainMenu.Instance.unselectDeity(deity);
+            MainMenuManager.Instance.unselectDeity(deity);
             selected = false;
         } else {
-            selected = MainMenu.Instance.selectDeity(deity);
+            selected = MainMenuManager.Instance.selectDeity(deity);
         }
     }
 

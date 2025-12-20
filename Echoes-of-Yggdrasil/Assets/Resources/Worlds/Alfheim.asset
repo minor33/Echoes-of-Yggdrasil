@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8caaa7bf2ca64c84584893d10d00c3e2, type: 3}
+  m_Name: Alfheim
+  m_EditorClassIdentifier: Assembly-CSharp::World
+  worldTier: 1
+  encounters:
+  - {fileID: 11400000, guid: 7e22b294ce99025489de408e36ddd25c, type: 2}
+  events:
+  - {fileID: 11400000, guid: e440d3629f1d2ab439f61d529b8fbe1d, type: 2}
+  worldCards: []
+  bossEncounter: {fileID: 11400000, guid: 7e22b294ce99025489de408e36ddd25c, type: 2}
+  color: {r: 0.72066563, g: 0.754717, b: 0.5055179, a: 0}

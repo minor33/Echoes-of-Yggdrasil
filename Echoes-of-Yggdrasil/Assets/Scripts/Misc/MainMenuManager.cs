@@ -3,9 +3,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
-public class MainMenu : MonoBehaviour
+public class MainMenuManager : MonoBehaviour
 {
-    public static MainMenu Instance { get; private set; }
+    public static MainMenuManager Instance { get; private set; }
 
     [SerializeField] private GameObject homeUI;
     [SerializeField] private GameObject deitySelectUI;
@@ -61,7 +61,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void startNewRun(){
-        SceneManager.LoadScene("BattleScene");
+        SceneManager.LoadScene("CampaignScene");
     }
 
     void Start() {

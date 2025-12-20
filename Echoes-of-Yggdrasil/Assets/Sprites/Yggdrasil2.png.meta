@@ -1,0 +1,1196 @@
+fileFormatVersion: 2
+guid: 9ce467d0f5d21af4f8d4126ee59249b7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1468895099471618889
+    second: Yggdrasil2_0
+  - first:
+      213: -2591201201296424291
+    second: Yggdrasil2_1
+  - first:
+      213: -5485795380862650836
+    second: Yggdrasil2_2
+  - first:
+      213: -6543862298282496134
+    second: Yggdrasil2_3
+  - first:
+      213: -1108548509461201582
+    second: Yggdrasil2_4
+  - first:
+      213: -2260575703513440856
+    second: Yggdrasil2_5
+  - first:
+      213: 1522216060716354692
+    second: Yggdrasil2_6
+  - first:
+      213: 2755153362715003817
+    second: Yggdrasil2_7
+  - first:
+      213: -6109177953065077826
+    second: Yggdrasil2_8
+  - first:
+      213: -2190667816817057274
+    second: Yggdrasil2_9
+  - first:
+      213: -4667888521373848114
+    second: Yggdrasil2_10
+  - first:
+      213: -5195164256540075807
+    second: Yggdrasil2_11
+  - first:
+      213: -6604109252734469119
+    second: Yggdrasil2_12
+  - first:
+      213: 5569194825120468373
+    second: Yggdrasil2_13
+  - first:
+      213: 5792822504076523405
+    second: Yggdrasil2_14
+  - first:
+      213: 8642779237932812232
+    second: Yggdrasil2_15
+  - first:
+      213: 4259237954406371914
+    second: Yggdrasil2_16
+  - first:
+      213: 3329896297205947195
+    second: Yggdrasil2_17
+  - first:
+      213: 7735163434184967144
+    second: Yggdrasil2_18
+  - first:
+      213: -2978350830513197568
+    second: Yggdrasil2_19
+  - first:
+      213: -4681965307030068049
+    second: Yggdrasil2_20
+  - first:
+      213: -3651207576742897131
+    second: Yggdrasil2_21
+  - first:
+      213: -5591138952499328584
+    second: Yggdrasil2_22
+  - first:
+      213: -2492744743378648169
+    second: Yggdrasil2_23
+  - first:
+      213: 8066229509680085728
+    second: Yggdrasil2_24
+  - first:
+      213: -8916044379178222585
+    second: Yggdrasil2_25
+  - first:
+      213: 1458143442057226871
+    second: Yggdrasil2_26
+  - first:
+      213: 4666073943091655255
+    second: Yggdrasil2_27
+  - first:
+      213: 7303005085851029566
+    second: Yggdrasil2_28
+  - first:
+      213: -7983892016452548055
+    second: Yggdrasil2_29
+  - first:
+      213: 24640877264727720
+    second: Yggdrasil2_30
+  - first:
+      213: -6820679269265042095
+    second: Yggdrasil2_31
+  - first:
+      213: -5999283053500435095
+    second: Yggdrasil2_32
+  - first:
+      213: 5398528248875284940
+    second: Yggdrasil2_33
+  - first:
+      213: 5623400203695782317
+    second: Yggdrasil2_34
+  - first:
+      213: -5994527672815573287
+    second: Yggdrasil2_35
+  - first:
+      213: 3750313885770420053
+    second: Yggdrasil2_36
+  - first:
+      213: 3929700563937011776
+    second: Yggdrasil2_37
+  - first:
+      213: 3693090476764980774
+    second: Yggdrasil2_38
+  - first:
+      213: -4812025413976690037
+    second: Yggdrasil2_39
+  - first:
+      213: -6064580167308640682
+    second: Yggdrasil2_40
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Yggdrasil2_0
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 1674
+        width: 64
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bc9ea780bf6d9be0800000000000000
+      internalID: -1468895099471618889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_1
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 1609
+        width: 156
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9249277c343a0cd0800000000000000
+      internalID: -2591201201296424291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_2
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 1687
+        width: 33
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c26f3358a2a8ed3b0800000000000000
+      internalID: -5485795380862650836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_3
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 1642
+        width: 82
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7feccb19e78f25a0800000000000000
+      internalID: -6543862298282496134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_4
+      rect:
+        serializedVersion: 2
+        x: 1027
+        y: 1672
+        width: 73
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25db6450105ad90f0800000000000000
+      internalID: -1108548509461201582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_5
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 1605
+        width: 76
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8add33cef52d0a0e0800000000000000
+      internalID: -2260575703513440856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_6
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 1559
+        width: 131
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48c8462317fff1510800000000000000
+      internalID: 1522216060716354692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_7
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 1544
+        width: 233
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9abc95ec2654c3620800000000000000
+      internalID: 2755153362715003817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_8
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 1607
+        width: 49
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb378edf407d73ba0800000000000000
+      internalID: -6109177953065077826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_9
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 1544
+        width: 230
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6022dbd2a3f2991e0800000000000000
+      internalID: -2190667816817057274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_10
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 1559
+        width: 134
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecd63601f14583fb0800000000000000
+      internalID: -4667888521373848114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_11
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 1606
+        width: 77
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e85f1342a117e7b0800000000000000
+      internalID: -5195164256540075807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_12
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 1564
+        width: 113
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10c34ecef9d7954a0800000000000000
+      internalID: -6604109252734469119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_13
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 1521
+        width: 104
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59dcf34cf21c94d40800000000000000
+      internalID: 5569194825120468373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_14
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 1584
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d87be52306d346050800000000000000
+      internalID: 5792822504076523405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_15
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 1543
+        width: 33
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c74b1dece151f770800000000000000
+      internalID: 8642779237932812232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_16
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 1566
+        width: 110
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a42d0466a5adb1b30800000000000000
+      internalID: 4259237954406371914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_17
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 362
+        width: 1376
+        height: 1192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3b59dd2a0b263e20800000000000000
+      internalID: 3329896297205947195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_18
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 1534
+        width: 47
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e38f262922d85b60800000000000000
+      internalID: 7735163434184967144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_19
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 1506
+        width: 60
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00e65ca13b5caa6d0800000000000000
+      internalID: -2978350830513197568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_20
+      rect:
+        serializedVersion: 2
+        x: 1103
+        y: 1535
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa425cffb51560fb0800000000000000
+      internalID: -4681965307030068049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_21
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 981
+        width: 83
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51a560bcd0e445dc0800000000000000
+      internalID: -3651207576742897131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_22
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 1137
+        width: 124
+        height: 211
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b98d6eeeb84862b0800000000000000
+      internalID: -5591138952499328584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_23
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 1078
+        width: 156
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 793813fecddf76dd0800000000000000
+      internalID: -2492744743378648169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_24
+      rect:
+        serializedVersion: 2
+        x: 1518
+        y: 1080
+        width: 153
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ea3149900101ff60800000000000000
+      internalID: 8066229509680085728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_25
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 981
+        width: 85
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70cb67950e8d34480800000000000000
+      internalID: -8916044379178222585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_26
+      rect:
+        serializedVersion: 2
+        x: 1635
+        y: 1140
+        width: 34
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77ae2672cbd5c3410800000000000000
+      internalID: 1458143442057226871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_27
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 950
+        width: 47
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7523fa1878931c040800000000000000
+      internalID: 4666073943091655255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_28
+      rect:
+        serializedVersion: 2
+        x: 1659
+        y: 948
+        width: 50
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e30950fbe6c795560800000000000000
+      internalID: 7303005085851029566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_29
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 830
+        width: 134
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92ac442f284833190800000000000000
+      internalID: -7983892016452548055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_30
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 742
+        width: 69
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ae61505fba875000800000000000000
+      internalID: 24640877264727720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_31
+      rect:
+        serializedVersion: 2
+        x: 1575
+        y: 828
+        width: 134
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 155169497541851a0800000000000000
+      internalID: -6820679269265042095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_32
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 742
+        width: 68
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 965f51139d34ebca0800000000000000
+      internalID: -5999283053500435095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_33
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 287
+        width: 145
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc97f18f6dc6bea40800000000000000
+      internalID: 5398528248875284940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_34
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 350
+        width: 48
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da97523f0b45a0e40800000000000000
+      internalID: 5623400203695782317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_35
+      rect:
+        serializedVersion: 2
+        x: 706
+        y: 238
+        width: 182
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d6249987d82fcca0800000000000000
+      internalID: -5994527672815573287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_36
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 259
+        width: 139
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55f8f8deb9acb0430800000000000000
+      internalID: 3750313885770420053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_37
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 220
+        width: 137
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0482e1ba7d9198630800000000000000
+      internalID: 3929700563937011776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_38
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 238
+        width: 236
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62664f6c83e704330800000000000000
+      internalID: 3693090476764980774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_39
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 287
+        width: 148
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8274c59160483db0800000000000000
+      internalID: -4812025413976690037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yggdrasil2_40
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 350
+        width: 50
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65e70b7287846dba0800000000000000
+      internalID: -6064580167308640682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Yggdrasil2_0: -1468895099471618889
+      Yggdrasil2_1: -2591201201296424291
+      Yggdrasil2_10: -4667888521373848114
+      Yggdrasil2_11: -5195164256540075807
+      Yggdrasil2_12: -6604109252734469119
+      Yggdrasil2_13: 5569194825120468373
+      Yggdrasil2_14: 5792822504076523405
+      Yggdrasil2_15: 8642779237932812232
+      Yggdrasil2_16: 4259237954406371914
+      Yggdrasil2_17: 3329896297205947195
+      Yggdrasil2_18: 7735163434184967144
+      Yggdrasil2_19: -2978350830513197568
+      Yggdrasil2_2: -5485795380862650836
+      Yggdrasil2_20: -4681965307030068049
+      Yggdrasil2_21: -3651207576742897131
+      Yggdrasil2_22: -5591138952499328584
+      Yggdrasil2_23: -2492744743378648169
+      Yggdrasil2_24: 8066229509680085728
+      Yggdrasil2_25: -8916044379178222585
+      Yggdrasil2_26: 1458143442057226871
+      Yggdrasil2_27: 4666073943091655255
+      Yggdrasil2_28: 7303005085851029566
+      Yggdrasil2_29: -7983892016452548055
+      Yggdrasil2_3: -6543862298282496134
+      Yggdrasil2_30: 24640877264727720
+      Yggdrasil2_31: -6820679269265042095
+      Yggdrasil2_32: -5999283053500435095
+      Yggdrasil2_33: 5398528248875284940
+      Yggdrasil2_34: 5623400203695782317
+      Yggdrasil2_35: -5994527672815573287
+      Yggdrasil2_36: 3750313885770420053
+      Yggdrasil2_37: 3929700563937011776
+      Yggdrasil2_38: 3693090476764980774
+      Yggdrasil2_39: -4812025413976690037
+      Yggdrasil2_4: -1108548509461201582
+      Yggdrasil2_40: -6064580167308640682
+      Yggdrasil2_5: -2260575703513440856
+      Yggdrasil2_6: 1522216060716354692
+      Yggdrasil2_7: 2755153362715003817
+      Yggdrasil2_8: -6109177953065077826
+      Yggdrasil2_9: -2190667816817057274
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
