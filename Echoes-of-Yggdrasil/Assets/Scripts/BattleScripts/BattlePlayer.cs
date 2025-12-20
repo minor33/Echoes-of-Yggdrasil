@@ -161,9 +161,11 @@ public class BattlePlayer : Unit {
         removeCard(index);
         playedCard.play(targetEnemy);
         
-        for (int i = 0; i < 1+duplicate; i++) {
-            addCardToRageQueue(playedCard);
-        } 
+        if (!playedCard.getPlayAbility().hasKeyword(TACTICAL)) {
+            for (int i = 0; i < 1+duplicate; i++) {
+                addCardToRageQueue(playedCard);
+            }
+        }
         duplicate = 0;
         
         discard.Add(playedCard);

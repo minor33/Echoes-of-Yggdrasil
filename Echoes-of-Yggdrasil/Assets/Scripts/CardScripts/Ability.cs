@@ -155,6 +155,10 @@ public class Ability : ScriptableObject {
                     description += $"Retain {retain}. ";
                     break;
 
+                case TACTICAL:
+                    description += "Tactical.";
+                    break;
+
                 default:
                     description += $"ERROR: {keyword} not defined";
                     break;
@@ -229,6 +233,7 @@ public class Ability : ScriptableObject {
                 // To be filled in with keywords which have no effect on play/trigger
                 case STABLE:
                 case RETAIN:
+                case TACTICAL:
                     if (DEBUG) {
                         Debug.Log($"{keyword} intentionally has no function in trigger");
                     }
