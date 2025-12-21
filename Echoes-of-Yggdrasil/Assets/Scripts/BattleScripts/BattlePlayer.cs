@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
@@ -155,11 +156,15 @@ public class BattlePlayer : Unit {
         drawingCards = false;
     }
 
-    public void playCard(int index, Enemy targetEnemy = null) {
+    public async void playCard(int index, Enemy targetEnemy = null) {
         Card playedCard = hand[index];
         energy -= playedCard.getEnergy();
         removeCard(index);
         playedCard.play(targetEnemy);
+
+        while (!playerTurn) {
+            await Awaitable.WaitForSecondsAsync(0.1f);
+        }
         
         if (!playedCard.getPlayAbility().hasKeyword(TACTICAL)) {
             for (int i = 0; i < 1+duplicate; i++) {
@@ -286,6 +291,59 @@ public class BattlePlayer : Unit {
             RageQueueDisplay.Instance.updateDisplay();
         }
 
+    }
+
+    public void swap(int index1, int index2) {
+        if (index1 <= -1 || index2 <= -1 || index1 >= rageQueue.Count || index2 >= rageQueue.Count) {
+            Debug.LogError($"Indicies given to swap invalid: {index1} and {index2}");
+            return;
+        }
+        Debug.Log($"Swapping Cards in Rage Queue: {index1} and {index2}");
+        var temp = rageQueue[index1];
+        var tempRetain = rageQueueRetain[index1];
+        rageQueue[index1] = rageQueue[index2];
+        rageQueueRetain[index1] = rageQueueRetain[index2];
+        rageQueue[index2] = temp;
+        rageQueueRetain[index2] = tempRetain;
+        RageQueueDisplay.Instance.swap(index1, index2);
+    }
+
+    public async void swapRageCard(int swaps) {
+        playerTurn = false;
+        var display = RageQueueDisplay.Instance;
+        display.selecting = true;
+
+        for (int _ = 0; _ < swaps; _++) {
+            Debug.Log("Swapping");
+            
+            while (true) {
+                if (display.selectedCards.Count >= 2) {
+                    var indices = (Index1: -1, Index2: -1);
+                    var oneFound = false;
+                    for (int i = 0; i < display.rageQueue.Count; i++) {
+                        RageCardInteraction card = display.rageQueue[i].GetComponent<RageCardInteraction>();
+                        if (card == display.selectedCards[0].GetComponent<RageCardInteraction>() ||
+                            card == display.selectedCards[1].GetComponent<RageCardInteraction>()) {
+                            if (!oneFound) {
+                                indices.Index1 = i;
+                                oneFound = true;
+                            } else {
+                                indices.Index2 = i;
+                            }
+                        }
+                    }
+                    swap(indices.Index1, indices.Index2);
+                    display.deselectAll();
+                    break;
+                }
+                await Awaitable.WaitForSecondsAsync(.1f);
+            }
+            display.updateDisplay();
+            Debug.Log("Done Swapping");
+        }
+        
+        display.selecting = false;
+        playerTurn = true;
     }
 
     public void startTurn(){

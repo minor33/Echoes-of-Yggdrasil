@@ -10,8 +10,10 @@ public class RageQueueDisplay : MonoBehaviour
     public GameObject emptyCardPrefab;
     public List<GameObject> rageQueue;
     public List<GameObject> emptySpaces;
+    public List<RageCardInteraction> selectedCards;
 
     public float baseScale;
+    public bool selecting;
 
     public float getCardSpacing() {
         int maxRageQueue = BattlePlayer.Instance.getMaxRageQueue();
@@ -70,6 +72,18 @@ public class RageQueueDisplay : MonoBehaviour
     public void removeCard(int index){
         Destroy(rageQueue[index]);
         rageQueue.RemoveAt(index);
+    }
+
+    public void swap(int index1, int index2) {
+        var temp = rageQueue[index1];
+        rageQueue[index1] = rageQueue[index2];
+        rageQueue[index2] = temp;
+    }
+
+    public void deselectAll() {
+        while (selectedCards.Count > 0) {
+            selectedCards[0].deselect();
+        }
     }
 
     public void clear() {

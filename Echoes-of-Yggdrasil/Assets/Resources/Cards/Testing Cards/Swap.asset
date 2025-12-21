@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 069ce8a578ace254ba3d457c9e26bbbd, type: 3}
-  m_Name: TacticalTest
+  m_Name: Swap
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardType: 0
   cardRarity: 0
   energy: 0
   rage: 0
-  playAbility: {fileID: 11400000, guid: 61be506fc06c11040b897b847a92337e, type: 2}
-  rageAbility: {fileID: 11400000, guid: 1bc739baa4665da4ebdff45568406c39, type: 2}
+  playAbility: {fileID: 11400000, guid: c1c366b136a2f1443ae077d52b0b3051, type: 2}
+  rageAbility: {fileID: 11400000, guid: 5ba9e498f1b10594d8672d09fac3d369, type: 2}

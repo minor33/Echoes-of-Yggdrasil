@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using EditorAttributes;
 using static GameConstants;
 using static Keyword;
@@ -41,6 +42,9 @@ public struct KeywordPair
 
     [ShowField(nameof(keyword), RETAIN)]
     public int retain;
+
+    [ShowField(nameof(keyword), SWAP)]
+    public int swap;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -159,6 +163,11 @@ public class Ability : ScriptableObject {
                     description += "Tactical.";
                     break;
 
+                case SWAP: 
+                    int swap = keywordPair.swap;
+                    description += $"Swap {swap}.";
+                    break;
+
                 default:
                     description += $"ERROR: {keyword} not defined";
                     break;
@@ -228,6 +237,10 @@ public class Ability : ScriptableObject {
 
                 case SKIP:
                     player.addSkip(keywordPair.skip);
+                    break;
+
+                case SWAP:
+                    player.swapRageCard(keywordPair.swap);
                     break;
 
                 // To be filled in with keywords which have no effect on play/trigger

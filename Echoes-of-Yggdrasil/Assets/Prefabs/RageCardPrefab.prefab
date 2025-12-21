@@ -581,7 +581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.0717566, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -608,6 +608,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6072759335550424565}
   - component: {fileID: 6403327932228499004}
+  - component: {fileID: 3094934898040988673}
   - component: {fileID: 5968661971403711850}
   m_Layer: 0
   m_Name: RageCardPrefab
@@ -654,6 +655,19 @@ MonoBehaviour:
   playAbilityDescriptionText: {fileID: 0}
   rageAbilityDescriptionText: {fileID: 5534597356357596067}
   cardGlow: {fileID: 2322675607104108201}
+--- !u!114 &3094934898040988673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6092415883608943416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be4c3daca8b9ba4087a7424976463d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RageCardInteraction
+  cardGlow: {fileID: 2322675607104108201}
 --- !u!61 &5968661971403711850
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -661,7 +675,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6092415883608943416}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
