@@ -36,6 +36,7 @@ public class BattlePlayer : Unit {
     public List<int> rageQueueRetain;  // Retain could be moved into CardDisplay. Would be convient when working on the retain HUD
     public List<RageCardInteraction> selectedCards;
     public bool selectingRageCards;
+    public GameObject rageCardPrefab;
 
     [Button]
     public void GoCrazyGoWild(){
@@ -196,7 +197,8 @@ public class BattlePlayer : Unit {
         }
         if (space) {
             // CardDisplay needs to be created in RageQueueDisplay but then stored in BattlePlayer
-            GameObject cardDisplay = RageQueueDisplay.Instance.createCard();
+            RageQueueDisplay display = RageQueueDisplay.Instance;
+            GameObject cardDisplay = Instantiate(rageCardPrefab, display.transform.position, Quaternion.identity, display.transform);
             cardDisplay.GetComponent<CardDisplay>().card = playedCard;
             // cardDisplay.transform.localScale = Vector3.zero;
             rageQueue.Add(cardDisplay);

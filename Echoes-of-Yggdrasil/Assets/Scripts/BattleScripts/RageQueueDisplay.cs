@@ -12,8 +12,6 @@ public class RageQueueDisplay : MonoBehaviour
 
     public float baseScale;
 
-    public GameObject rageCardPrefab;
-
     public float getCardSpacing() {
         int maxRageQueue = BattlePlayer.Instance.getMaxRageQueue();
         return 80f/maxRageQueue;
@@ -59,15 +57,15 @@ public class RageQueueDisplay : MonoBehaviour
         rageQueue[i].transform.DOScale(newScale, 0.02f/speedMultipler);
     }
 
+    // These can be removed later once we're sure they're not being accidentally used
     public void addCard(Card card) {
         Debug.LogError("RageQueueDisplay addCard is no longer in use");
     }
 
-    public GameObject createCard() {
-        return Instantiate(rageCardPrefab, transform.position, Quaternion.identity, transform);
+    public void createCard() {
+        Debug.LogError("RageQueueDisplay createCard is no longer in use");
     }
     
-    // These can be removed later once we're sure they're not being accidentally used
     public void removeCard(int index){
         Debug.LogError("RageQueueDisplay removeCard is no longer in use");
     }
