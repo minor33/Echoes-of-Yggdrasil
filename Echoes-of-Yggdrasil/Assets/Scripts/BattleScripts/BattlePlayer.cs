@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -16,15 +17,16 @@ public class BattlePlayer : Unit {
     public TMP_Text rageText;
 
     public int rage;
-    public int maxRage;
-    public int energy;
-    public int maxEnergy;
-    public int maxRageQueue;
+    private int maxRage;
+    private int energy;
+    private int maxEnergy;
+    private int maxRageQueue;
 
-    public int invoke;
-    public int duplicate;
-    public int rageAdjustment;
-    public int skip;
+    private int invoke;
+    private int duplicate;
+    private int rageAdjustment;
+    private int skip;
+    private int expand;
 
     private bool drawingCards;
     private bool playerTurn;
@@ -97,10 +99,23 @@ public class BattlePlayer : Unit {
         duplicate += d;
     }
 
+    // Adds additonal space in the rage queue temporarily
+    public void addExpand(int e) {
+        expand += e;
+        addMaxRageQueue(e);
+    }
+
     // Additional damage on rage queue cards
     // This should probably change to a general damage modifier so it can go negative too
     public void addRageAdjustment(int r) {
         rageAdjustment += r;
+    }
+
+    public void addMaxRageQueue(int increase) {
+        maxRageQueue += increase;
+        // Only spot that the largest queue size is defined, except in RageQueueDisplay
+        maxRageQueue = Math.Max(Math.Min(maxRageQueue, 20), 0);
+        RageQueueDisplay.Instance.updateDisplay();
     }
 
     // Gives the next X cards in the rage queue -1 trigger
@@ -121,7 +136,7 @@ public class BattlePlayer : Unit {
         while (n > 1)
         {
             n--;
-            int k = Random.Range(0, n + 1);
+            int k = UnityEngine.Random.Range(0, n + 1);
             Card value = deck[k];
             deck[k] = deck[n];
             deck[n] = value;
@@ -328,8 +343,11 @@ public class BattlePlayer : Unit {
             }
             rage = 0;
             rageAdjustment = 0;
-            playerTurn = true;
+            maxRageQueue -= expand;
+            expand = 0;
             RageQueueDisplay.Instance.updateDisplay();
+            playerTurn = true;
+            
         }
 
     }

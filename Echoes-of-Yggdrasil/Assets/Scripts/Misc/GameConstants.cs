@@ -28,9 +28,10 @@ public enum Keyword {
     SKIP,       // Intended for rage abilities, will probably skip the first X cards triggered in the rage queue if in a play effect.
     RETAIN,     // Intended for rage abilities, will probably do nothing in play abilities
     TACTICAL,   // Intended for play abillites, will probably do nothing in rage abilities
-    SWAP,       // Intended for play abilities, FOR THE LOVE OF GOD DON'T USE THIS IN A RAGE ABILITY EVERYTHING WILL EXPLODE
+    SWAP,       // Intended for play abilities, FOR THE LOVE OF GOD DON'T USE THIS IN A RAGE ABILITY EVERYTHING WILL EXPLODE (probably)
     STARTER,    // Intended for rage abiliites, will probably do nothing in play abilities
-    FINISHER,   // Intended for rage abiliites, will probably do nothing in play abilities
+    FINISHER,   // Intended for rage abilities, will probably do nothing in play abilities
+    EXPAND,     // Intended for play abilities, will appear to do nothing in the rage ability and then immediately lose the expand
 }
 
 public enum EnemyAction {

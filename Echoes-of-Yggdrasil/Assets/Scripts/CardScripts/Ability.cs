@@ -51,6 +51,9 @@ public struct KeywordPair
 
     [ShowField(nameof(keyword), FINISHER)]
     public int finisher;
+
+    [ShowField(nameof(keyword), EXPAND)]
+    public int expand;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -205,6 +208,11 @@ public class Ability : ScriptableObject {
                     description += $"Starter {finisher}.";
                     break;
 
+                case EXPAND:
+                    int expand = keywordPair.expand;
+                    description += $"Expand {expand}.";
+                    break;
+
                 default:
                     description += $"ERROR: {keyword} not defined";
                     break;
@@ -278,6 +286,10 @@ public class Ability : ScriptableObject {
 
                 case SWAP:
                     player.swapRageCard(keywordPair.swap);
+                    break;
+
+                case EXPAND:
+                    player.addExpand(keywordPair.expand);
                     break;
 
                 // To be filled in with keywords which have no effect on play/trigger
