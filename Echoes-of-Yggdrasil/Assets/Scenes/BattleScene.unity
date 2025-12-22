@@ -607,10 +607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RageQueueDisplay
   emptyCardPrefab: {fileID: 6092415883608943416, guid: c89eda08c7045af4e92f02b7c2038df9, type: 3}
-  selectedCards: []
   baseScale: 0
-  selecting: 0
-  rageCardPrefab: {fileID: 6092415883608943416, guid: d7cb32a1257f2204da7ab38e6861ff2f, type: 3}
 --- !u!4 &436738072
 Transform:
   m_ObjectHideFlags: 0
@@ -2297,6 +2294,9 @@ MonoBehaviour:
   skip: 0
   rageQueue: []
   rageQueueRetain: 
+  selectedCards: []
+  selectingRageCards: 0
+  rageCardPrefab: {fileID: 6092415883608943416, guid: d7cb32a1257f2204da7ab38e6861ff2f, type: 3}
 --- !u!1 &1487431388
 GameObject:
   m_ObjectHideFlags: 0
