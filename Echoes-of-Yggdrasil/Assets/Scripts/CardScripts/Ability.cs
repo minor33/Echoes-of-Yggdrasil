@@ -45,6 +45,12 @@ public struct KeywordPair
 
     [ShowField(nameof(keyword), SWAP)]
     public int swap;
+
+    [ShowField(nameof(keyword), STARTER)]
+    public int starter;
+
+    [ShowField(nameof(keyword), FINISHER)]
+    public int finisher;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -74,6 +80,7 @@ public class Ability : ScriptableObject {
         return false;
     }
 
+    // I really wish there was a way to generalize these getters, I should look into it because there might
     public int getRetain() {
         foreach (var keywordPair in keywords){
             if(keywordPair.keyword == RETAIN) {
@@ -81,6 +88,26 @@ public class Ability : ScriptableObject {
             }
         }
         // Keyword RETAIN does not exist
+        return 0;
+    }
+
+    public int getStarter() {
+        foreach (var keywordPair in keywords){
+            if(keywordPair.keyword == STARTER) {
+                return keywordPair.starter;
+            }
+        }
+        // Keyword STARTER does not exist
+        return 0;
+    }
+
+    public int getFinisher() {
+        foreach (var keywordPair in keywords){
+            if(keywordPair.keyword == FINISHER) {
+                return keywordPair.finisher;
+            }
+        }
+        // Keyword FINISHER does not exist
         return 0;
     }
 
@@ -168,6 +195,16 @@ public class Ability : ScriptableObject {
                     description += $"Swap {swap}.";
                     break;
 
+                case STARTER:
+                    int starter = keywordPair.starter;
+                    description += $"Starter {starter}.";
+                    break;
+
+                case FINISHER:
+                    int finisher = keywordPair.finisher;
+                    description += $"Starter {finisher}.";
+                    break;
+
                 default:
                     description += $"ERROR: {keyword} not defined";
                     break;
@@ -247,6 +284,8 @@ public class Ability : ScriptableObject {
                 case STABLE:
                 case RETAIN:
                 case TACTICAL:
+                case STARTER:
+                case FINISHER:
                     if (DEBUG) {
                         Debug.Log($"{keyword} intentionally has no function in trigger");
                     }

@@ -29,6 +29,8 @@ public enum Keyword {
     RETAIN,     // Intended for rage abilities, will probably do nothing in play abilities
     TACTICAL,   // Intended for play abillites, will probably do nothing in rage abilities
     SWAP,       // Intended for play abilities, FOR THE LOVE OF GOD DON'T USE THIS IN A RAGE ABILITY EVERYTHING WILL EXPLODE
+    STARTER,    // Intended for rage abiliites, will probably do nothing in play abilities
+    FINISHER,   // Intended for rage abiliites, will probably do nothing in play abilities
 }
 
 public enum EnemyAction {

@@ -229,21 +229,40 @@ public class BattlePlayer : Unit {
         if (rage >= maxRage) {
             playerTurn = false;
             float speedMultipler = 1.0f;
-            int trigger_card = 0;
+            int triggerCard = 0;
+            int totalCardTriggers = 0;
             // Invoke will overflow into the next rage queue without this
             invoke = 0;
-            while(rageQueue.Count > trigger_card) {
+            
+            while(rageQueue.Count > triggerCard) {
                 
                 await Awaitable.WaitForSecondsAsync(0.6f/speedMultipler);
-                Card card = rageQueue[trigger_card];
+                Card card = rageQueue[triggerCard];
+                // INVOKE
                 int triggers = invoke+1;
+                int starter = 0;
+                int finisher = 0;
 
+                // SKIP
                 if (skip > 0) {
                     triggers -= 1;
                 }
-                if (DEBUG) {
-                    Debug.Log($"{rageQueue[0]} is triggering {triggers} time(s) in the rage queue with {invoke} invoke and {skip} skip");
+                // STARTER
+                if (totalCardTriggers == 0) {
+                    starter = card.getRageAbility().getStarter();
+                    triggers += starter*triggers;
                 }
+
+                // FINISHER: Should only ever be equal, and never less than
+                if (rageQueue.Count <= triggerCard+1) {
+                    finisher = card.getRageAbility().getFinisher();
+                    triggers += finisher*triggers;
+                }
+
+                if (DEBUG) {
+                    Debug.Log($"{rageQueue[triggerCard]} is triggering {triggers} time(s) in the rage queue with: {invoke} - invoke | {skip} - skip | {starter} - starter | {finisher} - finisher");
+                }
+
                 if (skip > 0) {
                     skip --;
                 }
@@ -259,7 +278,7 @@ public class BattlePlayer : Unit {
                         sizeMuliplier = 2f;
                     }
 
-                    RageQueueDisplay.Instance.popDisplay(trigger_card, 1.1f*sizeMuliplier, speedMultipler);
+                    RageQueueDisplay.Instance.popDisplay(triggerCard, 1.1f*sizeMuliplier, speedMultipler);
                     await Awaitable.WaitForSecondsAsync(0.2f/speedMultipler);
                     card.triggerRage();
 
@@ -268,21 +287,25 @@ public class BattlePlayer : Unit {
                         speedMultipler = 10f;
                     }
                 }
+                
 
                 // SKIP animation: Could be different? 
                 if (triggers <= 0) {
-                    RageQueueDisplay.Instance.popDisplay(trigger_card, 0.8f);
+                    RageQueueDisplay.Instance.popDisplay(triggerCard, 0.8f);
                     await Awaitable.WaitForSecondsAsync(0.2f);
-                }
-                if (rageQueueRetain[trigger_card] > 0) {
-                    if (DEBUG) {
-                        Debug.Log($"Retaining {card} with {rageQueueRetain[trigger_card]} retain");
-                    }
-                    RageQueueDisplay.Instance.resetDisplay(trigger_card, speedMultipler);
-                    rageQueueRetain[trigger_card] --;
-                    trigger_card += 1;
                 } else {
-                    removeRageQueue(trigger_card);
+                    totalCardTriggers ++;
+                }
+                
+                if (rageQueueRetain[triggerCard] > 0) {
+                    if (DEBUG) {
+                        Debug.Log($"Retaining {card} with {rageQueueRetain[triggerCard]} retain");
+                    }
+                    RageQueueDisplay.Instance.resetDisplay(triggerCard, speedMultipler);
+                    rageQueueRetain[triggerCard] --;
+                    triggerCard += 1;
+                } else {
+                    removeRageQueue(triggerCard);
                 }
             }
             rage = 0;
