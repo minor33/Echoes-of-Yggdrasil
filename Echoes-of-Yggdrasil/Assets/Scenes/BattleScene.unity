@@ -606,11 +606,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 124894773ec7c2140a47c9c5a84f3fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RageQueueDisplay
-  rageCardPrefab: {fileID: 6092415883608943416, guid: d7cb32a1257f2204da7ab38e6861ff2f, type: 3}
   emptyCardPrefab: {fileID: 6092415883608943416, guid: c89eda08c7045af4e92f02b7c2038df9, type: 3}
-  rageQueue: []
-  emptySpaces: []
+  selectedCards: []
   baseScale: 0
+  selecting: 0
+  rageCardPrefab: {fileID: 6092415883608943416, guid: d7cb32a1257f2204da7ab38e6861ff2f, type: 3}
 --- !u!4 &436738072
 Transform:
   m_ObjectHideFlags: 0
@@ -2293,6 +2293,10 @@ MonoBehaviour:
   maxRageQueue: 0
   invoke: 0
   duplicate: 0
+  rageAdjustment: 0
+  skip: 0
+  rageQueue: []
+  rageQueueRetain: 
 --- !u!1 &1487431388
 GameObject:
   m_ObjectHideFlags: 0

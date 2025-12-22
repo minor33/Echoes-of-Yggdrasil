@@ -32,8 +32,8 @@ public class BattlePlayer : Unit {
     public List<Card> hand;
     public List<Card> deck;
     public List<Card> discard;
-    public List<Card> rageQueue;
-    public List<int>  rageQueueRetain;
+    public List<GameObject> rageQueue;
+    public List<int>  rageQueueRetain;  // Retain could be moved into CardDisplay. Would be convient when working on the retain HUD
 
     [Button]
     public void GoCrazyGoWild(){
@@ -78,6 +78,10 @@ public class BattlePlayer : Unit {
 
     public int getMaxRageQueue() {
         return maxRageQueue;
+    }
+
+    public Card getRageCard(int index) {
+        return rageQueue[index].GetComponent<CardDisplay>().card;
     }
 
     // Additional rage card triggers
@@ -183,9 +187,13 @@ public class BattlePlayer : Unit {
             space = removeFrontRageQueue();
         }
         if (space) {
-            rageQueue.Add(playedCard);
-            RageQueueDisplay.Instance.addCard(playedCard);
+            // CardDisplay needs to be created in RageQueueDisplay but then stored in BattlePlayer
+            GameObject cardDisplay = RageQueueDisplay.Instance.createCard();
+            cardDisplay.GetComponent<CardDisplay>().card = playedCard;
+            // cardDisplay.transform.localScale = Vector3.zero;
+            rageQueue.Add(cardDisplay);
             rageQueueRetain.Add(playedCard.getRageAbility().getRetain());
+            RageQueueDisplay.Instance.updateDisplay();
         }
     }
 
@@ -196,7 +204,7 @@ public class BattlePlayer : Unit {
 
     public bool removeFrontRageQueue() {
         for (int i = 0; i < rageQueue.Count; i++) {
-            if (!rageQueue[i].getRageAbility().hasKeyword(STABLE)) {
+            if (!getRageCard(i).getRageAbility().hasKeyword(STABLE)) {
                 removeRageQueue(i);
                 return true;
             }   
@@ -208,9 +216,9 @@ public class BattlePlayer : Unit {
     }
 
     public void removeRageQueue(int index) {
+        Destroy(rageQueue[index]);
         rageQueue.RemoveAt(index);
         rageQueueRetain.RemoveAt(index);
-        RageQueueDisplay.Instance.removeCard(index);
     }
 
     public override void die() {
@@ -237,7 +245,7 @@ public class BattlePlayer : Unit {
             while(rageQueue.Count > triggerCard) {
                 
                 await Awaitable.WaitForSecondsAsync(0.6f/speedMultipler);
-                Card card = rageQueue[triggerCard];
+                Card card = getRageCard(triggerCard);
                 // INVOKE
                 int triggers = invoke+1;
                 int starter = 0;
@@ -260,7 +268,7 @@ public class BattlePlayer : Unit {
                 }
 
                 if (DEBUG) {
-                    Debug.Log($"{rageQueue[triggerCard]} is triggering {triggers} time(s) in the rage queue with: {invoke} - invoke | {skip} - skip | {starter} - starter | {finisher} - finisher");
+                    Debug.Log($"{card} is triggering {triggers} time(s) in the rage queue with: {invoke} - invoke | {skip} - skip | {starter} - starter | {finisher} - finisher");
                 }
 
                 if (skip > 0) {
@@ -328,7 +336,6 @@ public class BattlePlayer : Unit {
         rageQueueRetain[index1] = rageQueueRetain[index2];
         rageQueue[index2] = temp;
         rageQueueRetain[index2] = tempRetain;
-        RageQueueDisplay.Instance.swap(index1, index2);
     }
 
     public async void swapRageCard(int swaps) {
@@ -348,8 +355,8 @@ public class BattlePlayer : Unit {
                 if (display.selectedCards.Count >= 2) {
                     var indices = (Index1: -1, Index2: -1);
                     var oneFound = false;
-                    for (int i = 0; i < display.rageQueue.Count; i++) {
-                        RageCardInteraction card = display.rageQueue[i].GetComponent<RageCardInteraction>();
+                    for (int i = 0; i < rageQueue.Count; i++) {
+                        RageCardInteraction card = rageQueue[i].GetComponent<RageCardInteraction>();
                         if (card == display.selectedCards[0].GetComponent<RageCardInteraction>() ||
                             card == display.selectedCards[1].GetComponent<RageCardInteraction>()) {
                             if (!oneFound) {
@@ -409,7 +416,7 @@ public class BattlePlayer : Unit {
         hand = new List<Card>();
         deck = new List<Card>();
         discard = new List<Card>();
-        rageQueue = new List<Card>();
+        rageQueue = new List<GameObject>();
         rageQueueRetain = new List<int>();
 
         maxHealth = 100;

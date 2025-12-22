@@ -6,14 +6,15 @@ public class RageQueueDisplay : MonoBehaviour
 {
     public static RageQueueDisplay Instance { get; private set; }
 
-    public GameObject rageCardPrefab;
     public GameObject emptyCardPrefab;
-    public List<GameObject> rageQueue;
-    public List<GameObject> emptySpaces;
-    public List<RageCardInteraction> selectedCards;
+    private List<GameObject> rageQueue; // Direct copy of rageQueue from BattlePlayer, this is not real
+    private List<GameObject> emptySpaces;
+    public List<RageCardInteraction> selectedCards; // This is also going to move?
 
     public float baseScale;
     public bool selecting;
+
+    public GameObject rageCardPrefab;
 
     public float getCardSpacing() {
         int maxRageQueue = BattlePlayer.Instance.getMaxRageQueue();
@@ -61,23 +62,19 @@ public class RageQueueDisplay : MonoBehaviour
     }
 
     public void addCard(Card card) {
-        int maxRageQueue = BattlePlayer.Instance.getMaxRageQueue();
-        GameObject cardDisplay = Instantiate(rageCardPrefab, transform.position, Quaternion.identity, transform);
-        cardDisplay.GetComponent<CardDisplay>().card = card;
-        // cardDisplay.transform.localScale = Vector3.zero;
-        rageQueue.Add(cardDisplay);
-        updateDisplay();
+        Debug.LogError("RageQueueDisplay addCard is no longer in use");
+    }
+
+    public GameObject createCard() {
+        return Instantiate(rageCardPrefab, transform.position, Quaternion.identity, transform);
     }
 
     public void removeCard(int index){
-        Destroy(rageQueue[index]);
-        rageQueue.RemoveAt(index);
+        Debug.LogError("RageQueueDisplay removeCard is no longer in use");
     }
 
     public void swap(int index1, int index2) {
-        var temp = rageQueue[index1];
-        rageQueue[index1] = rageQueue[index2];
-        rageQueue[index2] = temp;
+        Debug.LogError("RageQueueDisplay swap is no longer in use");
     }
 
     public void deselectAll() {
@@ -107,6 +104,8 @@ public class RageQueueDisplay : MonoBehaviour
     }
 
     void Start() {
+        rageQueue = BattlePlayer.Instance.rageQueue;
+        emptySpaces = new List<GameObject>();
         for (int i = 0; i < 20; i++) {
             GameObject emptySpace = Instantiate(emptyCardPrefab, transform.position, Quaternion.identity, transform);
             emptySpaces.Add(emptySpace);
