@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TestDeck
   cards:
   - {fileID: 11400000, guid: 673ec651766f28a4ca67e13e6aa7eaae, type: 2}
-  - {fileID: 11400000, guid: e4097d577cdb56343a232d47a8c82642, type: 2}
-  - {fileID: 11400000, guid: 00a9faa5950f054459c2d7cd2a42dfb8, type: 2}
-  - {fileID: 11400000, guid: e4097d577cdb56343a232d47a8c82642, type: 2}
+  - {fileID: 11400000, guid: c88bfba5ad67ba6468afa5da37656137, type: 2}
+  - {fileID: 11400000, guid: c88bfba5ad67ba6468afa5da37656137, type: 2}
+  - {fileID: 11400000, guid: c88bfba5ad67ba6468afa5da37656137, type: 2}
   - {fileID: 11400000, guid: 458cdf8d20f317c479581b02c812527b, type: 2}
   - {fileID: 11400000, guid: 673ec651766f28a4ca67e13e6aa7eaae, type: 2}
-  - {fileID: 11400000, guid: 0120e0721d49140498c45f7746259233, type: 2}
-  - {fileID: 11400000, guid: 16047568f95672b4f888bc1b4341d1c2, type: 2}
-  - {fileID: 11400000, guid: e4097d577cdb56343a232d47a8c82642, type: 2}
+  - {fileID: 11400000, guid: 78cdd1d297afb594eaa0fb5289fcced4, type: 2}
+  - {fileID: 11400000, guid: 78cdd1d297afb594eaa0fb5289fcced4, type: 2}
+  - {fileID: 11400000, guid: 78cdd1d297afb594eaa0fb5289fcced4, type: 2}
   - {fileID: 11400000, guid: e307c0e9a5d91634da38fc076b142547, type: 2}
   - {fileID: 11400000, guid: 61b1ceb517fc3f7458fdf18d73438acf, type: 2}
   - {fileID: 11400000, guid: 61b1ceb517fc3f7458fdf18d73438acf, type: 2}

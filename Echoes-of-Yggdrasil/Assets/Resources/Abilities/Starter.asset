@@ -12,4 +12,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 248ab1a37beaef644bf39a5a2f59f817, type: 3}
   m_Name: Starter
   m_EditorClassIdentifier: Assembly-CSharp::Ability
-  keywords: []
+  keywords:
+  - keyword: 14
+    damage: 0
+    block: 0
+    draw: 0
+    target: 0
+    invoke: 0
+    duplicate: 0
+    angrier: 0
+    calm_down: 0
+    skip: 0
+    retain: 0
+    swap: 0
+    starter: 2
+    finisher: 0
+  - keyword: 2
+    damage: 10
+    block: 0
+    draw: 0
+    target: 2
+    invoke: 0
+    duplicate: 0
+    angrier: 0
+    calm_down: 0
+    skip: 0
+    retain: 0
+    swap: 0
+    starter: 2
+    finisher: 0
+  - keyword: 0
+    damage: 10
+    block: 0
+    draw: 0
+    target: 2
+    invoke: 0
+    duplicate: 0
+    angrier: 0
+    calm_down: 0
+    skip: 0
+    retain: 0
+    swap: 0
+    starter: 2
+    finisher: 0

@@ -16,5 +16,5 @@ MonoBehaviour:
   cardRarity: 0
   energy: 0
   rage: 0
-  playAbility: {fileID: 0}
-  rageAbility: {fileID: 0}
+  playAbility: {fileID: 11400000, guid: 5ba9e498f1b10594d8672d09fac3d369, type: 2}
+  rageAbility: {fileID: 11400000, guid: ca882d9580696b04f94a1538e027990b, type: 2}
