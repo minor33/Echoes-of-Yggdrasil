@@ -11,6 +11,7 @@ public class CampaignManager : MonoBehaviour
     private int act;
 
     [SerializeField] private GameObject yggdrasilUI;
+    [SerializeField] private GameObject worldPrefab;
 
     private World[] worldList;
 
@@ -23,7 +24,15 @@ public class CampaignManager : MonoBehaviour
         }
         actWorlds.RemoveAt(UnityEngine.Random.Range(0,3));
 
-
+        float xPos = -0.9f;
+        float yPos = -1.35f;
+        yPos += (act-1)*0.5f;
+        for(int i = 0; i < 2; i++){
+            GameObject worldDisplay = Instantiate(worldPrefab, yggdrasilUI.transform.position, Quaternion.identity, yggdrasilUI.transform);
+            worldDisplay.GetComponent<WorldDisplay>().world = actWorlds[i];
+            worldDisplay.transform.localPosition = new Vector3(xPos,yPos,0);
+            xPos += xPos*-2;
+        }
     }
 
     void Start() {

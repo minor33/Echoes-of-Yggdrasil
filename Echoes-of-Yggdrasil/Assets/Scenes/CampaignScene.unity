@@ -345,6 +345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e238e668a0a40694c892093dd54ff156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CampaignManager
+  yggdrasilUI: {fileID: 736597692}
+  worldPrefab: {fileID: 6092415883608943416, guid: d9323c5a3239e364c97c2b84fc1162c5, type: 3}
 --- !u!1 &736597692
 GameObject:
   m_ObjectHideFlags: 0

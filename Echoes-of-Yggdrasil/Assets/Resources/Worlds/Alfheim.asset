@@ -19,4 +19,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e440d3629f1d2ab439f61d529b8fbe1d, type: 2}
   worldCards: []
   bossEncounter: {fileID: 11400000, guid: 7e22b294ce99025489de408e36ddd25c, type: 2}
-  color: {r: 0.72066563, g: 0.754717, b: 0.5055179, a: 0}
+  color: {r: 0.72066563, g: 0.754717, b: 0.5055179, a: 1}
