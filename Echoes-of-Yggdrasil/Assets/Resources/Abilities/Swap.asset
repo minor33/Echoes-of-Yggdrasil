@@ -24,4 +24,4 @@ MonoBehaviour:
     calm_down: 0
     skip: 0
     retain: 0
-    swap: 1
+    swap: 2

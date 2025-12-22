@@ -309,6 +309,11 @@ public class BattlePlayer : Unit {
     }
 
     public async void swapRageCard(int swaps) {
+        if (rageQueue.Count < 2) {
+            Debug.Log("Not Swapping Cards: Too Few in Rage Queue");
+            return;
+        }
+
         playerTurn = false;
         var display = RageQueueDisplay.Instance;
         display.selecting = true;
