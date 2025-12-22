@@ -20,7 +20,7 @@ public class RageCardInteraction : MonoBehaviour, IPointerDownHandler, IPointerU
     }
 
     public void OnPointerDown(PointerEventData eventData) {
-        if (RageQueueDisplay.Instance.selecting) {
+        if (BattlePlayer.Instance.selectingRageCards) {
             if (selected) {
                 deselect();
             } else {
@@ -32,13 +32,13 @@ public class RageCardInteraction : MonoBehaviour, IPointerDownHandler, IPointerU
     public void select() {
         selected = true;
         cardGlow.enabled = selected;
-        RageQueueDisplay.Instance.selectedCards.Add(this);
+        BattlePlayer.Instance.selectedCards.Add(this);
     }
 
     public void deselect() {
         selected = false;
         cardGlow.enabled = selected;
-        RageQueueDisplay.Instance.selectedCards.Remove(this);
+        BattlePlayer.Instance.selectedCards.Remove(this);
     }
 
     public void OnPointerEnter(PointerEventData eventData){

@@ -9,10 +9,8 @@ public class RageQueueDisplay : MonoBehaviour
     public GameObject emptyCardPrefab;
     private List<GameObject> rageQueue; // Direct copy of rageQueue from BattlePlayer, this is not real
     private List<GameObject> emptySpaces;
-    public List<RageCardInteraction> selectedCards; // This is also going to move?
 
     public float baseScale;
-    public bool selecting;
 
     public GameObject rageCardPrefab;
 
@@ -68,7 +66,8 @@ public class RageQueueDisplay : MonoBehaviour
     public GameObject createCard() {
         return Instantiate(rageCardPrefab, transform.position, Quaternion.identity, transform);
     }
-
+    
+    // These can be removed later once we're sure they're not being accidentally used
     public void removeCard(int index){
         Debug.LogError("RageQueueDisplay removeCard is no longer in use");
     }
@@ -78,9 +77,7 @@ public class RageQueueDisplay : MonoBehaviour
     }
 
     public void deselectAll() {
-        while (selectedCards.Count > 0) {
-            selectedCards[0].deselect();
-        }
+        Debug.LogError("RageQueueDisplay deselectAll is no longer in use");
     }
 
     public void clear() {

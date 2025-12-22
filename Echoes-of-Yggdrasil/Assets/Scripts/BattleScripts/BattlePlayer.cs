@@ -33,7 +33,9 @@ public class BattlePlayer : Unit {
     public List<Card> deck;
     public List<Card> discard;
     public List<GameObject> rageQueue;
-    public List<int>  rageQueueRetain;  // Retain could be moved into CardDisplay. Would be convient when working on the retain HUD
+    public List<int> rageQueueRetain;  // Retain could be moved into CardDisplay. Would be convient when working on the retain HUD
+    public List<RageCardInteraction> selectedCards;
+    public bool selectingRageCards;
 
     [Button]
     public void GoCrazyGoWild(){
@@ -104,6 +106,12 @@ public class BattlePlayer : Unit {
     // IMPORTANT INTERACTION: Invoke 5 Skip 1 gives the next cards 5 total triggers, and the card after its normal 1
     public void addSkip(int s) {
         skip += s;
+    }
+
+    public void deselectAll() {
+        while (selectedCards.Count > 0) {
+            selectedCards[0].deselect();
+        }
     }
 
     public void shuffleDeck()
@@ -346,19 +354,19 @@ public class BattlePlayer : Unit {
 
         playerTurn = false;
         var display = RageQueueDisplay.Instance;
-        display.selecting = true;
+        selectingRageCards = true;
 
         for (int _ = 0; _ < swaps; _++) {
             Debug.Log("Swapping");
             
             while (true) {
-                if (display.selectedCards.Count >= 2) {
+                if (selectedCards.Count >= 2) {
                     var indices = (Index1: -1, Index2: -1);
                     var oneFound = false;
                     for (int i = 0; i < rageQueue.Count; i++) {
                         RageCardInteraction card = rageQueue[i].GetComponent<RageCardInteraction>();
-                        if (card == display.selectedCards[0].GetComponent<RageCardInteraction>() ||
-                            card == display.selectedCards[1].GetComponent<RageCardInteraction>()) {
+                        if (card == selectedCards[0].GetComponent<RageCardInteraction>() ||
+                            card == selectedCards[1].GetComponent<RageCardInteraction>()) {
                             if (!oneFound) {
                                 indices.Index1 = i;
                                 oneFound = true;
@@ -368,7 +376,7 @@ public class BattlePlayer : Unit {
                         }
                     }
                     swap(indices.Index1, indices.Index2);
-                    display.deselectAll();
+                    deselectAll();
                     break;
                 }
                 await Awaitable.WaitForSecondsAsync(.1f);
@@ -377,7 +385,7 @@ public class BattlePlayer : Unit {
             Debug.Log("Done Swapping");
         }
         
-        display.selecting = false;
+        selectingRageCards = false;
         playerTurn = true;
     }
 
