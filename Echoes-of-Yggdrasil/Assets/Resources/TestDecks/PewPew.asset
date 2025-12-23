@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PewPew
   m_EditorClassIdentifier: Assembly-CSharp::TestDeck
   cards:
-  - {fileID: 11400000, guid: 673ec651766f28a4ca67e13e6aa7eaae, type: 2}
-  - {fileID: 11400000, guid: e324731bac5e9954b8ec39d0b6403e28, type: 2}
+  - {fileID: 11400000, guid: 5fd239a38fb9cd94bb5d4fdd6cc4bbc1, type: 2}
+  - {fileID: 11400000, guid: 5fd239a38fb9cd94bb5d4fdd6cc4bbc1, type: 2}
   - {fileID: 11400000, guid: c88bfba5ad67ba6468afa5da37656137, type: 2}
   - {fileID: 11400000, guid: 90b453fa053a1394d9d343b6fe14288c, type: 2}
   - {fileID: 11400000, guid: b3c3f87285ac552448e8b7b38802c596, type: 2}
@@ -22,6 +22,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 90b453fa053a1394d9d343b6fe14288c, type: 2}
   - {fileID: 11400000, guid: 78cdd1d297afb594eaa0fb5289fcced4, type: 2}
   - {fileID: 11400000, guid: 90b453fa053a1394d9d343b6fe14288c, type: 2}
-  - {fileID: 11400000, guid: b3c3f87285ac552448e8b7b38802c596, type: 2}
-  - {fileID: 11400000, guid: e324731bac5e9954b8ec39d0b6403e28, type: 2}
+  - {fileID: 11400000, guid: 16047568f95672b4f888bc1b4341d1c2, type: 2}
+  - {fileID: 11400000, guid: 16047568f95672b4f888bc1b4341d1c2, type: 2}
   - {fileID: 11400000, guid: 61b1ceb517fc3f7458fdf18d73438acf, type: 2}

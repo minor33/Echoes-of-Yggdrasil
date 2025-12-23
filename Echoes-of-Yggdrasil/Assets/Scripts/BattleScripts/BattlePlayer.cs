@@ -252,7 +252,7 @@ public class BattlePlayer : Unit {
             cardDisplay.GetComponent<CardDisplay>().card = playedCard;
             // cardDisplay.transform.localScale = Vector3.zero;
             rageQueue.Add(cardDisplay);
-            rageQueueRetain.Add(playedCard.getRageAbility().getRetain());
+            rageQueueRetain.Add(playedCard.getRageAbility().getKeywordValue(RETAIN));
             RageQueueDisplay.Instance.updateDisplay();
         }
     }
@@ -305,6 +305,7 @@ public class BattlePlayer : Unit {
             float speedMultipler = 1.0f;
             int triggerCard = 0;
             int totalCardTriggers = 0;
+            int totalTriggers = 0;
             // Invoke will overflow into the next rage queue without this
             invoke = 0;
             
@@ -321,15 +322,23 @@ public class BattlePlayer : Unit {
                 if (skip > 0) {
                     triggers -= 1;
                 }
+                // So if we're being so real, REPEAT, STARTER, FINISHER and other forms of repeat should be in the abilities trigger and not here
+                // That would make them work in play effects, although that only applies to repeat. Maybe repeat should just be moved into Ability?
+                // The multiplication would still work properly. We can cross that bridge when we want a play effect to have repeat I guess. I just feel
+                // bad about splitting the repeat effects across multiple places. 
+                // REPEAT
+                int repeat = card.getRageAbility().getKeywordValue(REPEAT);
+                triggers += repeat*triggers;
+
                 // STARTER
                 if (totalCardTriggers == 0) {
-                    starter = card.getRageAbility().getStarter();
+                    starter = card.getRageAbility().getKeywordValue(STARTER);
                     triggers += starter*triggers;
                 }
 
                 // FINISHER: Should only ever be equal, and never less than
                 if (rageQueue.Count <= triggerCard+1) {
-                    finisher = card.getRageAbility().getFinisher();
+                    finisher = card.getRageAbility().getKeywordValue(FINISHER);
                     triggers += finisher*triggers;
                 }
 
@@ -369,6 +378,7 @@ public class BattlePlayer : Unit {
                     await Awaitable.WaitForSecondsAsync(0.2f);
                 } else {
                     totalCardTriggers ++;
+                    totalTriggers += triggers;
                 }
                 
                 if (rageQueueRetain[triggerCard] > 0) {

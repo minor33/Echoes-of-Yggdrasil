@@ -57,6 +57,9 @@ public struct KeywordPair
 
     [ShowField(nameof(keyword), REMOVE)]
     public int remove;
+
+    [ShowField(nameof(keyword), REPEAT)]
+    public int repeat;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -86,35 +89,37 @@ public class Ability : ScriptableObject {
         return false;
     }
 
-    // I really wish there was a way to generalize these getters, I should look into it because there might
-    public int getRetain() {
-        foreach (var keywordPair in keywords){
-            if(keywordPair.keyword == RETAIN) {
-                return keywordPair.retain;
+    // Handles all int keywords (everything but TARGET)
+    public int getKeywordValue(Keyword keyword) {
+        foreach (var keywordPair in keywords) {
+            if (keywordPair.keyword == keyword) {
+                return getValueByKeyword(keywordPair, keyword);
             }
         }
-        // Keyword RETAIN does not exist
         return 0;
     }
 
-    public int getStarter() {
-        foreach (var keywordPair in keywords){
-            if(keywordPair.keyword == STARTER) {
-                return keywordPair.starter;
-            }
+    // Every keyword pair SHOULD be added to this list. 
+    // But technically it only needs to be added if it needs to be accessed outside of this file.
+    private int getValueByKeyword(KeywordPair pair, Keyword keyword) {
+        switch (keyword) {
+            case RETAIN: return pair.retain;
+            case STARTER: return pair.starter;
+            case FINISHER: return pair.finisher;
+            case DAMAGE: return pair.damage;
+            case BLOCK: return pair.block;
+            case DRAW: return pair.draw;
+            case INVOKE: return pair.invoke;
+            case DUPLICATE: return pair.duplicate;
+            case ANGRIER: return pair.angrier;
+            case CALM_DOWN: return pair.calm_down;
+            case SKIP: return pair.skip;
+            case SWAP: return pair.swap;
+            case EXPAND: return pair.expand;
+            case REMOVE: return pair.remove;
+            case REPEAT: return pair.repeat;
+            default: return 0;
         }
-        // Keyword STARTER does not exist
-        return 0;
-    }
-
-    public int getFinisher() {
-        foreach (var keywordPair in keywords){
-            if(keywordPair.keyword == FINISHER) {
-                return keywordPair.finisher;
-            }
-        }
-        // Keyword FINISHER does not exist
-        return 0;
     }
 
     public string getDescription() {
@@ -223,7 +228,12 @@ public class Ability : ScriptableObject {
 
                 case REVERSE:
                     description += "Reverse the rage queue.";
-                    break;  
+                    break;
+
+                case REPEAT:
+                    int repeat = keywordPair.repeat;
+                    description += $"Repeat {repeat}.";
+                    break;
 
                 default:
                     description += $"ERROR: {keyword} not defined";
@@ -318,6 +328,7 @@ public class Ability : ScriptableObject {
                 case TACTICAL:
                 case STARTER:
                 case FINISHER:
+                case REPEAT:
                     if (DEBUG) {
                         Debug.Log($"{keyword} intentionally has no function in trigger");
                     }
