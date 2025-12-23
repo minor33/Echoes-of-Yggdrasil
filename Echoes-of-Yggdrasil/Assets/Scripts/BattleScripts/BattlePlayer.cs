@@ -281,6 +281,12 @@ public class BattlePlayer : Unit {
         rageQueueRetain.RemoveAt(index);
     }
 
+    public void reverseRageQueue() {
+        rageQueue.Reverse();
+        rageQueueRetain.Reverse();
+        RageQueueDisplay.Instance.updateDisplay();
+    }
+
     public override void die() {
         Debug.Log("You died");
     }

@@ -33,6 +33,7 @@ public enum Keyword {
     FINISHER,   // Intended for rage abilities, will probably do nothing in play abilities
     EXPAND,     // Intended for play abilities, will appear to do nothing in the rage ability and then immediately lose the expand
     REMOVE,     // Intended for play abilities, FOR THE LOVE OF GOD DON'T USE THIS IN A RAGE ABILITY EVERYTHING WILL EXPLODE (probably)
+    REVERSE,    // Intended for play abilities, FOR THE LOVE OF GOD DON'T USE THIS IN A RAGE ABILITY EVERYTHING WILL EXPLODE (probably)
 }
 
 public enum EnemyAction {

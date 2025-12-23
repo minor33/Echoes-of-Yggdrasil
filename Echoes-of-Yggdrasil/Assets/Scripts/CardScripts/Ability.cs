@@ -221,6 +221,10 @@ public class Ability : ScriptableObject {
                     description += $"Remove {remove}.";
                     break;
 
+                case REVERSE:
+                    description += "Reverse the rage queue.";
+                    break;  
+
                 default:
                     description += $"ERROR: {keyword} not defined";
                     break;
@@ -302,6 +306,10 @@ public class Ability : ScriptableObject {
 
                 case REMOVE:
                     player.removeRageCardSelection(keywordPair.remove);
+                    break;
+
+                case REVERSE:
+                    player.reverseRageQueue();
                     break;
 
                 // To be filled in with keywords which have no effect on play/trigger
