@@ -146,7 +146,7 @@ public class BattlePlayer : Unit {
         }
 
         while (true) {
-            if (selectedCards.Count >= 2) {
+            if (selectedCards.Count >= num_cards) {
                 List<int> indices = new List<int>();
                 for (int i = 0; i < rageQueue.Count; i++) {
                     RageCardInteraction card = rageQueue[i].GetComponent<RageCardInteraction>();
@@ -265,7 +265,7 @@ public class BattlePlayer : Unit {
     public bool removeFrontRageQueue() {
         for (int i = 0; i < rageQueue.Count; i++) {
             if (!getRageCard(i).getRageAbility().hasKeyword(STABLE)) {
-                removeRageQueue(i);
+                removeRageCard(i);
                 return true;
             }   
         }
@@ -275,7 +275,7 @@ public class BattlePlayer : Unit {
         return false;
     }
 
-    public void removeRageQueue(int index) {
+    public void removeRageCard(int index) {
         Destroy(rageQueue[index]);
         rageQueue.RemoveAt(index);
         rageQueueRetain.RemoveAt(index);
@@ -373,7 +373,7 @@ public class BattlePlayer : Unit {
                     rageQueueRetain[triggerCard] --;
                     triggerCard += 1;
                 } else {
-                    removeRageQueue(triggerCard);
+                    removeRageCard(triggerCard);
                 }
             }
             rage = 0;
@@ -387,7 +387,7 @@ public class BattlePlayer : Unit {
 
     }
 
-    public void swap(int index1, int index2) {
+    public void swapRageCard(int index1, int index2) {
         if (index1 <= -1 || index2 <= -1 || index1 >= rageQueue.Count || index2 >= rageQueue.Count) {
             Debug.LogError($"Indicies given to swap invalid: {index1} and {index2}");
             return;
@@ -401,7 +401,7 @@ public class BattlePlayer : Unit {
         rageQueueRetain[index2] = tempRetain;
     }
 
-    public async void swapRageCard(int swaps) {
+    public async void swapRageCardSelection(int swaps) {
         if (rageQueue.Count < 2) {
             Debug.Log("Not Swapping Cards: Too Few in Rage Queue");
             return;
@@ -414,11 +414,36 @@ public class BattlePlayer : Unit {
 
             List<int> selection = await getSelection(2);
             
-            swap(selection[0], selection[1]);
+            swapRageCard(selection[0], selection[1]);
             deselectAll();
+            RageQueueDisplay.Instance.updateDisplay();
         }
 
         Debug.Log("Done Swapping");
+        endSelection();
+    }
+    
+    public async void removeRageCardSelection(int removals) {
+        if (rageQueue.Count < 1) {
+            Debug.Log("Not Swapping Cards: Too Few in Rage Queue");
+            return;
+        }
+
+        removals = Math.Min(removals, rageQueue.Count);
+
+        startSelection();
+
+        for (int _ = 0; _ < removals; _++) {
+            Debug.Log("Removing");
+
+            List<int> selection = await getSelection(1);
+            
+            removeRageCard(selection[0]);
+            deselectAll();
+            RageQueueDisplay.Instance.updateDisplay();
+        }
+
+        Debug.Log("Done Removing");
         endSelection();
     }
 

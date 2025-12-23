@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 248ab1a37beaef644bf39a5a2f59f817, type: 3}
-  m_Name: Expand
+  m_Name: Remove2
   m_EditorClassIdentifier: Assembly-CSharp::Ability
   keywords:
-  - keyword: 16
+  - keyword: 17
     damage: 0
     block: 0
     draw: 0
@@ -27,21 +27,5 @@ MonoBehaviour:
     swap: 0
     starter: 0
     finisher: 0
-    expand: 4
-    remove: 0
-  - keyword: 4
-    damage: 0
-    block: 0
-    draw: 0
-    target: 0
-    invoke: 0
-    duplicate: 4
-    angrier: 0
-    calm_down: 0
-    skip: 0
-    retain: 0
-    swap: 0
-    starter: 0
-    finisher: 0
     expand: 0
-    remove: 0
+    remove: 2

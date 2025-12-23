@@ -54,6 +54,9 @@ public struct KeywordPair
 
     [ShowField(nameof(keyword), EXPAND)]
     public int expand;
+
+    [ShowField(nameof(keyword), REMOVE)]
+    public int remove;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -213,6 +216,11 @@ public class Ability : ScriptableObject {
                     description += $"Expand {expand}.";
                     break;
 
+                case REMOVE:
+                    int remove = keywordPair.remove;
+                    description += $"Remove {remove}.";
+                    break;
+
                 default:
                     description += $"ERROR: {keyword} not defined";
                     break;
@@ -285,11 +293,15 @@ public class Ability : ScriptableObject {
                     break;
 
                 case SWAP:
-                    player.swapRageCard(keywordPair.swap);
+                    player.swapRageCardSelection(keywordPair.swap);
                     break;
 
                 case EXPAND:
                     player.addExpand(keywordPair.expand);
+                    break;
+
+                case REMOVE:
+                    player.removeRageCardSelection(keywordPair.remove);
                     break;
 
                 // To be filled in with keywords which have no effect on play/trigger
