@@ -19,7 +19,7 @@ public class BattlePlayer : Unit {
 
     public int rage;
     private int maxRage;
-    private int energy;
+    public int energy;
     private int maxEnergy;
     private int maxRageQueue;
 
@@ -221,7 +221,6 @@ public class BattlePlayer : Unit {
 
     public async void playCard(int index, Enemy targetEnemy = null) {
         Card playedCard = hand[index];
-        energy -= playedCard.getEnergy();
         removeCard(index);
         playedCard.play(targetEnemy);
 

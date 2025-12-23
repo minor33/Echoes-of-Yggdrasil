@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 069ce8a578ace254ba3d457c9e26bbbd, type: 3}
+  m_Name: Deep Breath
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardType: 0
+  cardRarity: 1
+  energy: 0
+  rage: 2
+  playAbility: {fileID: 11400000, guid: d42881c6c980dfa489503e0974dda36c, type: 2}
+  rageAbility: {fileID: 11400000, guid: 4895e3f254d5ec6459324669981e9a51, type: 2}
