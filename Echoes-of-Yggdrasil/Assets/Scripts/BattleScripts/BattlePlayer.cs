@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine.UI;
 using TMPro;
 using EditorAttributes;
@@ -124,14 +125,48 @@ public class BattlePlayer : Unit {
         skip += s;
     }
 
+    // Selection Helpers
+
+    public void startSelection() {
+        playerTurn = false;
+        selectingRageCards = true;
+    }
+
+    public void endSelection() {
+        var display = RageQueueDisplay.Instance;
+        display.updateDisplay();
+        selectingRageCards = false;
+        playerTurn = true;
+    }
+
+    public async Task<List<int>> getSelection(int num_cards) {
+        if (rageQueue.Count < num_cards) {
+            Debug.LogError("Too few cards in rage queue for GetSelection(): Do non erroneous checking before using this function");
+            return new List<int>();
+        }
+
+        while (true) {
+            if (selectedCards.Count >= 2) {
+                List<int> indices = new List<int>();
+                for (int i = 0; i < rageQueue.Count; i++) {
+                    RageCardInteraction card = rageQueue[i].GetComponent<RageCardInteraction>();
+                    if (selectedCards.Contains(card)) {
+                        indices.Add(i);
+                    }
+                }
+                return indices;
+            }
+            await Awaitable.WaitForSecondsAsync(.1f);
+        }
+    }
+
     public void deselectAll() {
         while (selectedCards.Count > 0) {
             selectedCards[0].deselect();
         }
     }
 
-    public void shuffleDeck()
-    {
+    public void shuffleDeck() {
         int n = deck.Count;
         while (n > 1)
         {
@@ -372,41 +407,19 @@ public class BattlePlayer : Unit {
             return;
         }
 
-        playerTurn = false;
-        var display = RageQueueDisplay.Instance;
-        selectingRageCards = true;
+        startSelection();
 
         for (int _ = 0; _ < swaps; _++) {
             Debug.Log("Swapping");
+
+            List<int> selection = await getSelection(2);
             
-            while (true) {
-                if (selectedCards.Count >= 2) {
-                    var indices = (Index1: -1, Index2: -1);
-                    var oneFound = false;
-                    for (int i = 0; i < rageQueue.Count; i++) {
-                        RageCardInteraction card = rageQueue[i].GetComponent<RageCardInteraction>();
-                        if (card == selectedCards[0].GetComponent<RageCardInteraction>() ||
-                            card == selectedCards[1].GetComponent<RageCardInteraction>()) {
-                            if (!oneFound) {
-                                indices.Index1 = i;
-                                oneFound = true;
-                            } else {
-                                indices.Index2 = i;
-                            }
-                        }
-                    }
-                    swap(indices.Index1, indices.Index2);
-                    deselectAll();
-                    break;
-                }
-                await Awaitable.WaitForSecondsAsync(.1f);
-            }
-            display.updateDisplay();
-            Debug.Log("Done Swapping");
+            swap(selection[0], selection[1]);
+            deselectAll();
         }
-        
-        selectingRageCards = false;
-        playerTurn = true;
+
+        Debug.Log("Done Swapping");
+        endSelection();
     }
 
     public void startTurn(){
