@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: Nidavellir
   m_EditorClassIdentifier: Assembly-CSharp::World
   worldTier: 1
-  encounters:
-  - {fileID: 11400000, guid: 7e22b294ce99025489de408e36ddd25c, type: 2}
-  events:
-  - {fileID: 11400000, guid: e440d3629f1d2ab439f61d529b8fbe1d, type: 2}
+  events: []
   worldCards: []
-  bossEncounter: {fileID: 11400000, guid: 7e22b294ce99025489de408e36ddd25c, type: 2}
+  bossEvent: {fileID: 0}
   color: {r: 0.59119487, g: 0.3550887, b: 0.56269914, a: 1}

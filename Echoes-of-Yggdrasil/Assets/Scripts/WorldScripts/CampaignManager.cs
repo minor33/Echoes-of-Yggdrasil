@@ -9,13 +9,20 @@ public class CampaignManager : MonoBehaviour
     public static CampaignManager Instance { get; private set; }
 
     private int act;
+    private World world;
+
+    private List<Event> events;
+    private Event[] activeEvents;
+    [SerializeField] private GameObject eventPrefab;
+    [SerializeField] private List<GameObject> eventSlots;
 
     [SerializeField] private GameObject yggdrasilUI;
-    [SerializeField] private GameObject worldPrefab;
+    [SerializeField] private GameObject worldUI;
 
+    [SerializeField] private GameObject worldPrefab;
     private World[] worldList;
 
-    private void displayNextWorlds(){
+    public void displayNextWorlds(){
         List<World> actWorlds = new List<World>();
         foreach(World world in worldList){
             if(world.worldTier == act){
@@ -35,8 +42,45 @@ public class CampaignManager : MonoBehaviour
         }
     }
 
+    public void enterWorld(World world){
+        this.world = world;
+        events = new List<Event>();
+        foreach(Event ev in world.events){
+            events.Add(ev);
+        }
+        activeEvents = new Event[3];
+        
+        // Shuffle events
+        int n = events.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = UnityEngine.Random.Range(0, n + 1);
+            Event value = events[k];
+            events[k] = events[n];
+            events[n] = value;
+        }
+
+        yggdrasilUI.SetActive(false);
+        worldUI.SetActive(true);
+
+        for(int i = 0; i < 3; i++){
+            nextEvent(i);
+        }
+    }
+
+    public void nextEvent(int index){
+        Event newEvent = events[0];
+        events.RemoveAt(0);
+        activeEvents[index] = newEvent;
+        
+        GameObject eventDisplay = Instantiate(eventPrefab, eventSlots[index].transform.position, Quaternion.identity, eventSlots[index].transform);
+        eventDisplay.GetComponent<EventDisplay>().ev = newEvent;
+    }
+
     void Start() {
         act = 1;
+        world = null;
         yggdrasilUI.SetActive(true);
         worldList = Resources.LoadAll<World>("Worlds");
         displayNextWorlds();
