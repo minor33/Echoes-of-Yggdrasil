@@ -17,7 +17,12 @@ public class CardDisplay : MonoBehaviour
     public void updateDisplay() {
         nameText.text = card.getName();
         energyText.text = $"{card.getEnergy()}";
-        rageText.text = $"{card.getRage()}";
+        int rage = card.getRage();
+        rageText.text = $"{rage}";
+        if (rage == 99) { // 99 Represents instant trigger
+            rageText.text = "!";
+        }
+        
         if (playAbilityDescriptionText != null) {
             playAbilityDescriptionText.text = card.getPlayAbilityDescription();
         }

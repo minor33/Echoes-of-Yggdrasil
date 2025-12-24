@@ -235,6 +235,10 @@ public class Ability : ScriptableObject {
                     description += $"Repeat {repeat}.";
                     break;
 
+                case PATIENT:
+                    description += "Patient.";
+                    break;
+
                 default:
                     description += $"ERROR: {keyword} not defined";
                     break;
@@ -329,6 +333,7 @@ public class Ability : ScriptableObject {
                 case STARTER:
                 case FINISHER:
                 case REPEAT:
+                case PATIENT:
                     if (DEBUG) {
                         Debug.Log($"{keyword} intentionally has no function in trigger");
                     }

@@ -19,7 +19,7 @@ public class BattlePlayer : Unit {
 
     public int rage;
     private int maxRage;
-    private int energy;
+    public int energy;
     private int maxEnergy;
     private int maxRageQueue;
 
@@ -221,7 +221,6 @@ public class BattlePlayer : Unit {
 
     public async void playCard(int index, Enemy targetEnemy = null) {
         Card playedCard = hand[index];
-        energy -= playedCard.getEnergy();
         removeCard(index);
         playedCard.play(targetEnemy);
 
@@ -315,8 +314,11 @@ public class BattlePlayer : Unit {
                 Card card = getRageCard(triggerCard);
                 // INVOKE
                 int triggers = invoke+1;
+                int repeat = 0;
                 int starter = 0;
                 int finisher = 0;
+                int patient = 0;
+                
 
                 // SKIP
                 if (skip > 0) {
@@ -327,7 +329,7 @@ public class BattlePlayer : Unit {
                 // The multiplication would still work properly. We can cross that bridge when we want a play effect to have repeat I guess. I just feel
                 // bad about splitting the repeat effects across multiple places. 
                 // REPEAT
-                int repeat = card.getRageAbility().getKeywordValue(REPEAT);
+                repeat = card.getRageAbility().getKeywordValue(REPEAT);
                 triggers += repeat*triggers;
 
                 // STARTER
@@ -342,8 +344,14 @@ public class BattlePlayer : Unit {
                     triggers += finisher*triggers;
                 }
 
+                // PATIENT
+                if (card.getRageAbility().hasKeyword(PATIENT)) {
+                    patient = totalTriggers;
+                    triggers += triggers*patient; // Yeah, this is going to be a problem. Triggers go brrrrr
+                }
+
                 if (DEBUG) {
-                    Debug.Log($"{card} is triggering {triggers} time(s) in the rage queue with: {invoke} - invoke | {skip} - skip | {starter} - starter | {finisher} - finisher");
+                    Debug.Log($"{card} is triggering {triggers} time(s) in the rage queue with: {invoke} - invoke | {skip} - skip | {repeat} - repeat | {starter} - starter | {finisher} - finisher | {patient} - patient");
                 }
 
                 if (skip > 0) {

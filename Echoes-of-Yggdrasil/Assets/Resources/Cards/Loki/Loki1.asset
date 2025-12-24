@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 069ce8a578ace254ba3d457c9e26bbbd, type: 3}
+  m_Name: Loki1
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardType: 0
+  cardRarity: 2
+  energy: 1
+  rage: 1
+  playAbility: {fileID: 11400000, guid: 9d07484f78fdb9b46bd20e1a42f530f0, type: 2}
+  rageAbility: {fileID: 11400000, guid: 15707b8d3a95ea34f82eb88c2b815c35, type: 2}

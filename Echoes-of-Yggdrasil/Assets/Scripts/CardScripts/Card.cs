@@ -9,8 +9,11 @@ public class Card
     }
 
     public void play(Enemy targetEnemy = null) {
-        // Energy
+        BattlePlayer.Instance.energy -= this.getEnergy();
         BattlePlayer.Instance.rage += this.getRage();
+        if (this.getRage() == 99) { // 99 Represents instant trigger
+            BattlePlayer.Instance.rage = BattlePlayer.Instance.getMaxRageQueue();
+        }
         getPlayAbility().trigger(targetEnemy);
     }
 

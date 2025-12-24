@@ -35,6 +35,7 @@ public enum Keyword {
     REMOVE,     // Intended for play abilities, FOR THE LOVE OF GOD DON'T USE THIS IN A RAGE ABILITY EVERYTHING WILL EXPLODE (probably)
     REVERSE,    // Intended for play abilities, FOR THE LOVE OF GOD DON'T USE THIS IN A RAGE ABILITY EVERYTHING WILL EXPLODE (probably)
     REPEAT,     // Intended for rage abiliites, will probably do nothing in play abilities
+    PATIENT,    // Intended for rage abiliites, will probably do nothing in play abilities
 }
 
 public enum EnemyAction {
