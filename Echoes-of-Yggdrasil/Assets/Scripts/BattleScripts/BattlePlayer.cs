@@ -36,7 +36,6 @@ public class BattlePlayer : Unit {
     public List<Card> deck;
     public List<Card> discard;
     public List<GameObject> rageQueue;
-    public List<int> rageQueueRetain;  // Retain could be moved into CardDisplay. Would be convient when working on the retain HUD
     public List<RageCardInteraction> selectedCards;
     public bool selectingRageCards;
     public GameObject rageCardPrefab;
@@ -247,11 +246,13 @@ public class BattlePlayer : Unit {
         if (space) {
             // CardDisplay needs to be created in RageQueueDisplay but then stored in BattlePlayer
             RageQueueDisplay display = RageQueueDisplay.Instance;
-            GameObject cardDisplay = Instantiate(rageCardPrefab, display.transform.position, Quaternion.identity, display.transform);
-            cardDisplay.GetComponent<CardDisplay>().card = playedCard;
+            GameObject cardDisplayPrefab = Instantiate(rageCardPrefab, display.transform.position, Quaternion.identity, display.transform);
+            CardDisplay cardDisplay = cardDisplayPrefab.GetComponent<CardDisplay>();
+            cardDisplay.card = playedCard;
+            cardDisplay.retain = playedCard.getRageAbility().getKeywordValue(RETAIN);
+            Debug.Log(cardDisplay.retain);
             // cardDisplay.transform.localScale = Vector3.zero;
-            rageQueue.Add(cardDisplay);
-            rageQueueRetain.Add(playedCard.getRageAbility().getKeywordValue(RETAIN));
+            rageQueue.Add(cardDisplayPrefab);
             RageQueueDisplay.Instance.updateDisplay();
         }
     }
@@ -277,12 +278,10 @@ public class BattlePlayer : Unit {
     public void removeRageCard(int index) {
         Destroy(rageQueue[index]);
         rageQueue.RemoveAt(index);
-        rageQueueRetain.RemoveAt(index);
     }
 
     public void reverseRageQueue() {
         rageQueue.Reverse();
-        rageQueueRetain.Reverse();
         RageQueueDisplay.Instance.updateDisplay();
     }
 
@@ -389,12 +388,14 @@ public class BattlePlayer : Unit {
                     totalTriggers += triggers;
                 }
                 
-                if (rageQueueRetain[triggerCard] > 0) {
+                CardDisplay cardDisplay = rageQueue[triggerCard].GetComponent<CardDisplay>();
+                if (cardDisplay.retain > 0) {
                     if (DEBUG) {
-                        Debug.Log($"Retaining {card} with {rageQueueRetain[triggerCard]} retain");
+                        Debug.Log($"Retaining {card} with {cardDisplay.retain} retain");
                     }
                     RageQueueDisplay.Instance.resetDisplay(triggerCard, speedMultipler);
-                    rageQueueRetain[triggerCard] --;
+                    cardDisplay.retain -= 1;
+                    cardDisplay.retain = Math.Max(cardDisplay.retain, 0); // This will matter later
                     triggerCard += 1;
                 } else {
                     removeRageCard(triggerCard);
@@ -418,11 +419,8 @@ public class BattlePlayer : Unit {
         }
         Debug.Log($"Swapping Cards in Rage Queue: {index1} and {index2}");
         var temp = rageQueue[index1];
-        var tempRetain = rageQueueRetain[index1];
         rageQueue[index1] = rageQueue[index2];
-        rageQueueRetain[index1] = rageQueueRetain[index2];
         rageQueue[index2] = temp;
-        rageQueueRetain[index2] = tempRetain;
     }
 
     public async void swapRageCardSelection(int swaps) {
@@ -507,7 +505,6 @@ public class BattlePlayer : Unit {
         deck = new List<Card>();
         discard = new List<Card>();
         rageQueue = new List<GameObject>();
-        rageQueueRetain = new List<int>();
 
         maxHealth = 100;
         health = maxHealth;

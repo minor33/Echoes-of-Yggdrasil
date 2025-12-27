@@ -35,8 +35,10 @@ public class RageQueueDisplay : MonoBehaviour
     public void updateCard(int i) {
         float spacing = getCardSpacing();
 
-        rageQueue[i].transform.localPosition = new Vector3(i*spacing, 0f, 0f);
-        rageQueue[i].transform.localScale = new Vector3(baseScale, baseScale, baseScale);
+        GameObject card = rageQueue[i];
+        card.GetComponent<CardDisplay>().updateDisplay();
+        card.transform.localPosition = new Vector3(i*spacing, 0f, 0f);
+        card.transform.localScale = new Vector3(baseScale, baseScale, baseScale);
     }
 
     public void updateDisplay() {
