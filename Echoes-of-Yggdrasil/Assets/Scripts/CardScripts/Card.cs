@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Keyword;
 
 public class Card
 {
@@ -14,7 +15,8 @@ public class Card
         if (this.getRage() == 99) { // 99 Represents instant trigger
             BattlePlayer.Instance.rage = BattlePlayer.Instance.getMaxRageQueue();
         }
-        getPlayAbility().trigger(targetEnemy);
+        int repeat = getPlayAbility().getKeywordValue(REPEAT);
+        getPlayAbility().trigger(targetEnemy, 1+repeat);
     }
 
     public void triggerRage() {

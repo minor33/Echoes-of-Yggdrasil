@@ -67,7 +67,7 @@ public static class KeywordDescriptions {
         { Keyword.EXPAND, "Increase the size of the rage queue by X until the next time it is triggered" },
         { Keyword.REMOVE, "Remove X cards in the rage queue" },
         { Keyword.REVERSE, "Reverse the order of the rage queue" }, // Shouldn't be displayed because full text is written in description
-        { Keyword.REPEAT, "This effect gets triggered an additional X times" }, // CURRENTLY DOES NOT WORK IN PLAY EFFECT NEEDS FIXING SHOULD BE EASY
+        { Keyword.REPEAT, "This effect gets triggered an additional X times" }, 
         { Keyword.PATIENT, "This effect get triggered an additional number of times equal to the number of triggers that have already occured in the rage queue" },
         { Keyword.SET_EVOKE, "Sets the effect of Evoke to the listed effect" },
         { Keyword.EVOKE, "Triggers the set Evoke effect X times" },

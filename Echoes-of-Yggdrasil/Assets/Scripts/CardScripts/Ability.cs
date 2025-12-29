@@ -287,7 +287,7 @@ public class Ability : ScriptableObject {
     public void trigger(Enemy chosenEnemy=null, int numTriggers=1, bool first=true) {
         if (numTriggers <= 0) {
             if (DEBUG) {
-                Debug.Log("Ending ability trigger");
+                Debug.Log($"Ending ability trigger with description {getDescription()}");
             }
             return;
         } else if (DEBUG && first) {
