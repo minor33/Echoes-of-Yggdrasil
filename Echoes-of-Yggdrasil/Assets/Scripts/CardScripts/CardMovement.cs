@@ -152,7 +152,7 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         glowPulse = 0;
         siblingIndex = transform.GetSiblingIndex();
         Ability ability = BattlePlayer.Instance.getCard(siblingIndex).getPlayAbility();
-        if(ability.hasChoose()){
+        if(ability.hasChoose()) {
             hasChoose = true;
             cardGlow.color = chooseGlowColor;
         } else {

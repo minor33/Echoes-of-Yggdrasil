@@ -16,6 +16,7 @@ public class BattlePlayer : Unit {
     public TMP_Text discardText;
     public TMP_Text energyText;
     public TMP_Text rageText;
+    public TMP_Text evokeText;
 
     public int rage;
     private int maxRage;
@@ -28,6 +29,7 @@ public class BattlePlayer : Unit {
     private int rageAdjustment;
     private int skip;
     private int expand;
+    public Ability evokeAbility; // Made public so I can read it, change this to private
 
     private bool drawingCards;
     private bool playerTurn;
@@ -89,6 +91,10 @@ public class BattlePlayer : Unit {
         return rageQueue[index].GetComponent<CardDisplay>().card;
     }
 
+    public Ability getEvokeAbility() {
+        return evokeAbility;
+    }
+
     // Additional rage card triggers
     public void addInvoke(int i) {
         invoke += i;
@@ -124,7 +130,14 @@ public class BattlePlayer : Unit {
         skip += s;
     }
 
-    // Selection Helpers
+    public void setEvokeAbility(Ability ability) {
+        evokeAbility = ability;
+        // This is very very placeholder
+        evokeText.text = "Evoke: " + ability.getDescription();
+        evokeText.enabled = true;
+    }
+
+    // Rage Card Selection Helpers
 
     public void startSelection() {
         playerTurn = false;
@@ -250,7 +263,6 @@ public class BattlePlayer : Unit {
             CardDisplay cardDisplay = cardDisplayPrefab.GetComponent<CardDisplay>();
             cardDisplay.card = playedCard;
             cardDisplay.retain = playedCard.getRageAbility().getKeywordValue(RETAIN);
-            Debug.Log(cardDisplay.retain);
             // cardDisplay.transform.localScale = Vector3.zero;
             rageQueue.Add(cardDisplayPrefab);
             RageQueueDisplay.Instance.updateDisplay();
@@ -395,7 +407,7 @@ public class BattlePlayer : Unit {
                     }
                     RageQueueDisplay.Instance.resetDisplay(triggerCard, speedMultipler);
                     cardDisplay.retain -= 1;
-                    cardDisplay.retain = Math.Max(cardDisplay.retain, 0); // This will matter later
+                    cardDisplay.retain = Math.Max(cardDisplay.retain, 0); // This does nothing right now but doesn't hurt to have for later
                     triggerCard += 1;
                 } else {
                     removeRageCard(triggerCard);
@@ -520,5 +532,6 @@ public class BattlePlayer : Unit {
         invoke = 0;
         duplicate = 0;
         rageAdjustment = 0;
+        evokeAbility = null;
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 public static class GameConstants {
-    public const bool DEBUG = true; // For nice debugs that don't make that console unreadable
+    public const bool DEBUG = true; // For nice debugs that don't make the console unreadable (but maybe print very often)
     public const bool XCESSIVEDEBUG = false; // For debugs that print every frame cause fuck those
 }
 
@@ -34,8 +34,10 @@ public enum Keyword {
     EXPAND,     // Intended for play abilities, will appear to do nothing in the rage ability and then immediately lose the expand
     REMOVE,     // Intended for play abilities, FOR THE LOVE OF GOD DON'T USE THIS IN A RAGE ABILITY EVERYTHING WILL EXPLODE (probably)
     REVERSE,    // Intended for play abilities, FOR THE LOVE OF GOD DON'T USE THIS IN A RAGE ABILITY EVERYTHING WILL EXPLODE (probably)
-    REPEAT,     // Intended for rage abiliites, will probably do nothing in play abilities
+    REPEAT,     // Intended for rage abiliites, will probably do nothing in play abilities (but probably should?)
     PATIENT,    // Intended for rage abiliites, will probably do nothing in play abilities
+    SET_EVOKE,  // Should work in both ability types, DO NOT: Set Evoke to an Evoke ability, or set evoke to a choose ability. Light error handling in the form of description edits is included. 
+    EVOKE,      // Should work in both ability types
 }
 
 public enum EnemyAction {

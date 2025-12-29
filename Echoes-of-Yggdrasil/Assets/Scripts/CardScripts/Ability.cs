@@ -60,6 +60,12 @@ public struct KeywordPair
 
     [ShowField(nameof(keyword), REPEAT)]
     public int repeat;
+
+    [ShowField(nameof(keyword), SET_EVOKE)]
+    public Ability setEvoke;
+
+    [ShowField(nameof(keyword), EVOKE)]
+    public int evoke;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -89,7 +95,16 @@ public class Ability : ScriptableObject {
         return false;
     }
 
-    // Handles all int keywords (everything but TARGET)
+    public Ability getEvokeSetter() {
+        foreach (var keywordPair in keywords){
+            if(keywordPair.keyword == SET_EVOKE) {
+                return keywordPair.setEvoke;
+            }
+        }
+        return null;
+    }
+
+    // Handles all int keywords (everything but TARGET and SET_EVOKE)
     public int getKeywordValue(Keyword keyword) {
         foreach (var keywordPair in keywords) {
             if (keywordPair.keyword == keyword) {
@@ -118,10 +133,12 @@ public class Ability : ScriptableObject {
             case EXPAND: return pair.expand;
             case REMOVE: return pair.remove;
             case REPEAT: return pair.repeat;
+            case EVOKE: return pair.evoke;
             default: return 0;
         }
     }
-
+    
+    // Description should probably be set when created, and then gotten from here, since getDescription is called in multiple places
     public string getDescription() {
         if (keywords == null) {
             return "Does Nothing";
@@ -239,18 +256,48 @@ public class Ability : ScriptableObject {
                     description += "Patient.";
                     break;
 
+                case SET_EVOKE:
+                    Ability ability = keywordPair.setEvoke;
+                    description += $"Set Evoke: {ability.getDescription()}";
+                    break;
+                
+                case EVOKE:
+                    int evoke = keywordPair.evoke;
+                    description += $"Evoke {evoke}.";
+                    break;
+
                 default:
                     description += $"ERROR: {keyword} not defined";
                     break;
             }
         }
+        // Perform no no checks for easy to forget interactions here:
+        if (hasKeyword(SET_EVOKE) && getEvokeSetter().hasKeyword(EVOKE)) {
+            description += "ERROR: Card sets evoke to an evoke ability. This will loop forever.";
+        }
+        if (hasKeyword(SET_EVOKE) && getEvokeSetter().hasChoose()) {
+            description += "ERROR: Card sets evoke to an ability with a choose effect. This may cause crashes and unexpected behavior.";
+        }
+
         return description;
     }
 
-    public void trigger(Enemy chosenEnemy=null) {
+    // numTriggers allows an ability to be triggered multiple times. However, a lot of times, it's handled elsewhere for animations,
+    // such as in the rageQueue. It doesn't have to be used but can be helpful. 
+    public void trigger(Enemy chosenEnemy=null, int numTriggers=1, bool first=true) {
+        if (numTriggers <= 0) {
+            if (DEBUG) {
+                Debug.Log("Ending ability trigger");
+            }
+            return;
+        } else if (DEBUG && first) {
+            Debug.Log($"Triggering ability with following description {numTriggers} times: {getDescription()}");
+        }
+
         battleManager = BattleManager.Instance;
         boardManager = BoardManager.Instance;
         player = BattlePlayer.Instance;
+        
         Unit unit = boardManager.getFrontEnemy(); // Should this just be null?  -  No, default is front enemy to not crash everything
         if (unit == null) {
             Debug.LogError("NO ENEMY FOUND AFTER TRIGGERING ABILITY");
@@ -326,6 +373,25 @@ public class Ability : ScriptableObject {
                     player.reverseRageQueue();
                     break;
 
+                case SET_EVOKE:
+                    player.setEvokeAbility(keywordPair.setEvoke);
+                    break;
+
+                case EVOKE:
+                    int evoke = keywordPair.evoke;
+                    Ability ability = player.getEvokeAbility();
+                    if (ability == null) {
+                        if (DEBUG) {
+                            Debug.Log("No ability to evoke");
+                        }
+                        break;
+                    }
+                    if (DEBUG) {
+                        Debug.Log($"Triggering evoke ability with following description {evoke} times: {ability.getDescription()}");
+                    }
+                    ability.trigger(chosenEnemy, evoke);
+                    break;
+
                 // To be filled in with keywords which have no effect on play/trigger
                 case STABLE:
                 case RETAIN:
@@ -344,5 +410,8 @@ public class Ability : ScriptableObject {
                     break;
             }
         }
+        // Recursive looping to prevent too many tabs. Shouldn't ruin anything. 
+        trigger(chosenEnemy, --numTriggers, false);
     }
+
 }
