@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 
 public static class GameConstants {
@@ -38,6 +39,47 @@ public enum Keyword {
     PATIENT,    // Intended for rage abiliites, will probably do nothing in play abilities
     SET_EVOKE,  // Should work in both ability types, DO NOT: Set Evoke to an Evoke ability, or set evoke to a choose ability. Light error handling in the form of description edits is included. 
     EVOKE,      // Should work in both ability types
+}
+
+public static class KeywordDescriptions {
+    // At some point more information may need to be gathered from this (example: should the description be displayed) but this works for now
+    public static readonly Dictionary<Keyword, string> Descriptions = new Dictionary<Keyword, string>() {
+        // Helpers for writing descriptions (as to the terminology I'm using)
+        // Card: The actual card itself. Should be used when dealing with big picture stuff such as removing and playing the card without any care as to what it does
+        // Effect: The effect of the card. Should be used when triggering the ability of the card or referencing its ability. Do not use the word ability in place of effect
+        // Trigger: One single proc of an effect on a card. Includes all forms of repeat, such as REPEAT, PATIENT, STARTER, INVOKE, and more. 
+        { Keyword.DAMAGE, "Does X damage to the target." },
+        { Keyword.BLOCK, "Adds X block to the target" }, // DOES NOT WORK WITH TARGET
+        { Keyword.TARGET, "Specify target for next keywords. Defaults to front enemy." }, 
+        { Keyword.DRAW, "Draw X cards from your deck" },
+        { Keyword.DUPLICATE, "Add X additional copies of this card to the rage queue when played" },
+        { Keyword.INVOKE, "Trigger the next effect in the rage queue X additional times" },
+        { Keyword.STABLE, "This card can not be pushed off the rage queue when overflowing" },
+        { Keyword.NULL, "No effect, this should never be seen anywhere in game" },
+        { Keyword.ANGRIER, "All damage effects deal X additional damage in the current rage queue" },
+        { Keyword.CALM_DOWN, "All damage effects deal X less damage in the current rage queue" },
+        { Keyword.SKIP, "The next X cards in the rage queue trigger one less time" },
+        { Keyword.RETAIN, "This card stays in the rage queue X additional times" }, // Still not in love with this wording
+        { Keyword.TACTICAL, "This card does not get added to the rage queue when played" },
+        { Keyword.SWAP, "Swap 2 cards in the rage queue X times" },
+        { Keyword.STARTER, "This effect triggers an additional X times if it is the first card in the rage queue" },
+        { Keyword.FINISHER, "This effect triggers an additional X times if it is the last card in the rage queue" },
+        { Keyword.EXPAND, "Increase the size of the rage queue by X until the next time it is triggered" },
+        { Keyword.REMOVE, "Remove X cards in the rage queue" },
+        { Keyword.REVERSE, "Reverse the order of the rage queue" }, // Shouldn't be displayed because full text is written in description
+        { Keyword.REPEAT, "This effect gets triggered an additional X times" }, // CURRENTLY DOES NOT WORK IN PLAY EFFECT NEEDS FIXING SHOULD BE EASY
+        { Keyword.PATIENT, "This effect get triggered an additional number of times equal to the number of triggers that have already occured in the rage queue" },
+        { Keyword.SET_EVOKE, "Sets the effect of Evoke to the listed effect" },
+        { Keyword.EVOKE, "Triggers the set Evoke effect X times" },
+    };
+    
+    // Helper method to get a description
+    public static string GetDescription(Keyword keyword) {
+        if (Descriptions.TryGetValue(keyword, out string description)) {
+            return description;
+        }
+        return "No description available";
+    }
 }
 
 public enum EnemyAction {
