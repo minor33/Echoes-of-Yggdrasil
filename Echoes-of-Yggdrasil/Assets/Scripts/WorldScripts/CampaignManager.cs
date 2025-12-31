@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System;
@@ -16,11 +17,23 @@ public class CampaignManager : MonoBehaviour
     [SerializeField] private GameObject eventPrefab;
     [SerializeField] private List<GameObject> eventSlots;
 
+    private bool inEvent;
+    [SerializeField] private GameObject eventPopup;
+    [SerializeField] private TMP_Text eventPopupText;
+    [SerializeField] private TMP_Text eventPopupTitle;
+
+    [SerializeField] private Transform eventPopupChoices;
+    [SerializeField] private GameObject choicePrefab;
+
     [SerializeField] private GameObject yggdrasilUI;
     [SerializeField] private GameObject worldUI;
 
     [SerializeField] private GameObject worldPrefab;
     private World[] worldList;
+
+    public bool isInEvent(){
+        return inEvent;
+    }
 
     public void displayNextWorlds(){
         List<World> actWorlds = new List<World>();
@@ -69,6 +82,21 @@ public class CampaignManager : MonoBehaviour
         }
     }
 
+    public void enterEvent(Event ev){
+        inEvent = true;
+        eventPopup.SetActive(true);
+        eventPopupText.text = ev.text;
+        eventPopupTitle.text = ev.name;
+ 
+        float yPos = 0f;
+        foreach(Choice choice in ev.choices){
+            GameObject choiceDisplay = Instantiate(choicePrefab,eventPopupChoices.position, Quaternion.identity, eventPopupChoices.transform);
+            choiceDisplay.GetComponent<ChoiceDisplay>().choice = choice;
+            choiceDisplay.transform.localPosition = new Vector3(0,yPos,0);
+            yPos -= 0.25f;
+        }
+    }
+
     public void nextEvent(int index){
         Event newEvent = events[0];
         events.RemoveAt(0);
@@ -79,9 +107,14 @@ public class CampaignManager : MonoBehaviour
     }
 
     void Start() {
+        inEvent = false;
         act = 1;
         world = null;
+
         yggdrasilUI.SetActive(true);
+        worldUI.SetActive(false);
+        eventPopup.SetActive(false);
+        
         worldList = Resources.LoadAll<World>("Worlds");
         displayNextWorlds();
     }

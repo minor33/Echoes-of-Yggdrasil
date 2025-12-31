@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: Shop
   m_EditorClassIdentifier: Assembly-CSharp::Event
   color: {r: 0.5137255, g: 0.56084764, b: 0.77254903, a: 1}
-  text: 
-  options: []
+  text: Friendly shop keeper approaches with wares
+  choices:
+  - text: View his wares
+    description: enter shop
+  - text: Rob and kill him
+    description: -5 karma

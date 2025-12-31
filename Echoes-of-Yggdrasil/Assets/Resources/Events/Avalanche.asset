@@ -13,5 +13,10 @@ MonoBehaviour:
   m_Name: Avalanche
   m_EditorClassIdentifier: Assembly-CSharp::Event
   color: {r: 0.7735849, g: 0.621558, b: 0.5132906, a: 1}
-  text: 
-  options: []
+  text: Big snowball coming down the hill! It's coming right for you man oh god oh
+    no
+  choices:
+  - text: Face it head on like a man
+    description: Kills you
+  - text: Run away
+    description: -10 gold -5 aura

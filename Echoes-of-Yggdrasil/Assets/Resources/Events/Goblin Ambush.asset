@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Goblin Ambush
   m_EditorClassIdentifier: Assembly-CSharp::Event
   color: {r: 0.5639004, g: 0.77254903, b: 0.5137255, a: 1}
-  text: 
-  options: []
+  text: Some goblins leap out at you from a side road! Oh no, they're gonna you kill
+    you real dead
+  choices:
+  - text: FIGHT FIGHT FIGHT
+    description: Enter combat

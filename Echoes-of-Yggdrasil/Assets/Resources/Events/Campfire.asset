@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Campfire
   m_EditorClassIdentifier: Assembly-CSharp::Event
   color: {r: 0.77254903, g: 0.5137255, b: 0.5867831, a: 1}
-  text: 
-  options: []
+  text: Gather round the warm campfire folks
+  choices:
+  - text: Make smores
+    description: +5 comfort
