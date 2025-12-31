@@ -87,6 +87,13 @@ public class BattlePlayer : Unit {
         return maxRageQueue;
     }
 
+    public Card getTopDiscard() {
+        if (discard.Count <= 0) {
+            return null;
+        }
+        return discard[discard.Count-1];
+    }
+
     public Card getRageCard(int index) {
         return rageQueue[index].GetComponent<CardDisplay>().card;
     }

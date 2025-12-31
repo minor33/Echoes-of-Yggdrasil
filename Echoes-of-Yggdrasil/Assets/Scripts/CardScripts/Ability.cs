@@ -66,6 +66,9 @@ public struct KeywordPair
 
     [ShowField(nameof(keyword), EVOKE)]
     public int evoke;
+
+    [ShowField(nameof(keyword), RECALL)]
+    public int recall;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -134,6 +137,7 @@ public class Ability : ScriptableObject {
             case REMOVE: return pair.remove;
             case REPEAT: return pair.repeat;
             case EVOKE: return pair.evoke;
+            case RECALL: return pair.recall;
             default: return 0;
         }
     }
@@ -215,55 +219,60 @@ public class Ability : ScriptableObject {
                     break;
 
                 case TACTICAL:
-                    description += "Tactical.";
+                    description += "Tactical. ";
                     break;
 
                 case SWAP: 
                     int swap = keywordPair.swap;
-                    description += $"Swap {swap}.";
+                    description += $"Swap {swap}. ";
                     break;
 
                 case STARTER:
                     int starter = keywordPair.starter;
-                    description += $"Starter {starter}.";
+                    description += $"Starter {starter}. ";
                     break;
 
                 case FINISHER:
                     int finisher = keywordPair.finisher;
-                    description += $"Starter {finisher}.";
+                    description += $"Starter {finisher}. ";
                     break;
 
                 case EXPAND:
                     int expand = keywordPair.expand;
-                    description += $"Expand {expand}.";
+                    description += $"Expand {expand}. ";
                     break;
 
                 case REMOVE:
                     int remove = keywordPair.remove;
-                    description += $"Remove {remove}.";
+                    description += $"Remove {remove}. ";
                     break;
 
                 case REVERSE:
-                    description += "Reverse the rage queue.";
+                    description += "Reverse the rage queue. ";
                     break;
 
                 case REPEAT:
                     int repeat = keywordPair.repeat;
-                    description += $"Repeat {repeat}.";
+                    description += $"Repeat {repeat}. ";
                     break;
 
                 case PATIENT:
-                    description += "Patient.";
+                    description += "Patient. ";
                     break;
 
                 case SET_EVOKE:
                     Ability ability = keywordPair.setEvoke;
-                    description += $"Set Evoke: {ability.getDescription()}";
+                    description += $"Set Evoke: {ability.getDescription()} ";
                     break;
                 
                 case EVOKE:
                     int evoke = keywordPair.evoke;
-                    description += $"Evoke {evoke}.";
+                    description += $"Evoke {evoke}. ";
+                    break;
+
+                case RECALL:
+                    int recall = keywordPair.recall;
+                    description += $"Recall {recall}. ";
                     break;
 
                 default:
@@ -284,7 +293,7 @@ public class Ability : ScriptableObject {
 
     // numTriggers allows an ability to be triggered multiple times. However, a lot of times, it's handled elsewhere for animations,
     // such as in the rageQueue. It doesn't have to be used but can be helpful. 
-    public void trigger(Enemy chosenEnemy=null, int numTriggers=1, bool first=true) {
+    public void trigger(Enemy chosenEnemy=null, int numTriggers=1, bool first=true, bool fromRecall=false) {
         if (numTriggers <= 0) {
             if (DEBUG) {
                 Debug.Log($"Ending ability trigger with description {getDescription()}");
@@ -306,7 +315,7 @@ public class Ability : ScriptableObject {
 
         foreach (var keywordPair in keywords) {
             Keyword keyword = keywordPair.keyword;
-            
+            Ability ability;
             switch(keyword) {
                 case TARGET:
                     Target targetType = keywordPair.target;
@@ -379,7 +388,7 @@ public class Ability : ScriptableObject {
 
                 case EVOKE:
                     int evoke = keywordPair.evoke;
-                    Ability ability = player.getEvokeAbility();
+                    ability = player.getEvokeAbility();
                     if (ability == null) {
                         if (DEBUG) {
                             Debug.Log("No ability to evoke");
@@ -390,6 +399,27 @@ public class Ability : ScriptableObject {
                         Debug.Log($"Triggering evoke ability with following description {evoke} times: {ability.getDescription()}");
                     }
                     ability.trigger(chosenEnemy, evoke);
+                    break;
+
+                case RECALL:
+                    int recall = keywordPair.recall;
+                    if (player.discard.Count <= 0) {
+                        if (DEBUG) {
+                            Debug.Log("Nothing to Recall, doing nothing");
+                        }
+                        break;
+                    }
+                    if (fromRecall) {
+                        if (DEBUG) {
+                            Debug.Log("Recall trigger is from a recall, doing nothing");
+                        }
+                        break;
+                    }
+                    ability = player.getTopDiscard().getRageAbility();
+                    if (DEBUG) {
+                        Debug.Log($"Triggering recall ability with following description {recall} times: {ability.getDescription()}");
+                    }
+                    ability.trigger(chosenEnemy, recall, fromRecall: true);
                     break;
 
                 // To be filled in with keywords which have no effect on play/trigger
@@ -411,7 +441,7 @@ public class Ability : ScriptableObject {
             }
         }
         // Recursive looping to prevent too many tabs. Shouldn't ruin anything. 
-        trigger(chosenEnemy, --numTriggers, false);
+        trigger(chosenEnemy, --numTriggers, false, fromRecall);
     }
 
 }
