@@ -20,3 +20,5 @@ MonoBehaviour:
     description: Kills you
   - text: Run away
     description: -10 gold -5 aura
+  - text: Duck and roll
+    description: +5 dodge

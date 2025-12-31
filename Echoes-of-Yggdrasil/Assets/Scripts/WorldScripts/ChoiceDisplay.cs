@@ -8,18 +8,22 @@ public class ChoiceDisplay : MonoBehaviour, IPointerDownHandler, IPointerEnterHa
     public Choice choice;
 
     [SerializeField] private TMP_Text choiceText;
+    [SerializeField] private GameObject choiceDescription;
+    [SerializeField] private TMP_Text choiceDescriptionText;
 
     void Start()
     {
         choiceText.text = choice.text;
+        choiceDescriptionText.text = choice.description;
+        choiceDescription.SetActive(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData){
-
+        choiceDescription.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData){
-
+        choiceDescription.SetActive(false);
     }
 
     public void OnPointerDown(PointerEventData eventData){

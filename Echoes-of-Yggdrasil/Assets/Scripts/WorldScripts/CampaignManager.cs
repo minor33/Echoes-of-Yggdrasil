@@ -90,7 +90,7 @@ public class CampaignManager : MonoBehaviour
  
         float yPos = 0f;
         foreach(Choice choice in ev.choices){
-            GameObject choiceDisplay = Instantiate(choicePrefab,eventPopupChoices.position, Quaternion.identity, eventPopupChoices.transform);
+            GameObject choiceDisplay = Instantiate(choicePrefab,eventPopupChoices.position, Quaternion.identity, eventPopupChoices);
             choiceDisplay.GetComponent<ChoiceDisplay>().choice = choice;
             choiceDisplay.transform.localPosition = new Vector3(0,yPos,0);
             yPos -= 0.25f;
