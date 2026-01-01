@@ -509,7 +509,8 @@ public class BattlePlayer : Unit {
         updateDisplay();
     }
 
-    void Awake() {
+    protected override void Awake() {
+        base.Awake();
         if (Instance == null)
         {
             Instance = this;

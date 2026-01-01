@@ -30,16 +30,17 @@ public enum Keyword {
     RETAIN,     // Intended for rage abilities, will probably do nothing in play abilities
     TACTICAL,   // Intended for play abillites, will probably do nothing in rage abilities
     SWAP,       // Intended for play abilities, FOR THE LOVE OF GOD DON'T USE THIS IN A RAGE ABILITY EVERYTHING WILL EXPLODE (probably)
-    STARTER,    // Intended for rage abiliites, will probably do nothing in play abilities
+    STARTER,    // Intended for rage abilities, will probably do nothing in play abilities
     FINISHER,   // Intended for rage abilities, will probably do nothing in play abilities
     EXPAND,     // Intended for play abilities, will appear to do nothing in the rage ability and then immediately lose the expand
     REMOVE,     // Intended for play abilities, FOR THE LOVE OF GOD DON'T USE THIS IN A RAGE ABILITY EVERYTHING WILL EXPLODE (probably)
     REVERSE,    // Intended for play abilities, FOR THE LOVE OF GOD DON'T USE THIS IN A RAGE ABILITY EVERYTHING WILL EXPLODE (probably)
-    REPEAT,     // Intended for rage abiliites, will probably do nothing in play abilities (but probably should?)
-    PATIENT,    // Intended for rage abiliites, will probably do nothing in play abilities
+    REPEAT,     // Intended for rage abilities, will probably do nothing in play abilities (but probably should?)
+    PATIENT,    // Intended for rage abilities, will probably do nothing in play abilities
     SET_EVOKE,  // Should work in both ability types, DO NOT: Set Evoke to an Evoke ability, or set evoke to a choose ability. Light error handling in the form of description edits is included. 
     EVOKE,      // Should work in both ability types
-    RECALL,     // Should work in both abillity types
+    RECALL,     // Should work in both ability types
+    FOCUS,      // Should work in both ability types
 }
 
 public static class KeywordDescriptions {
@@ -72,7 +73,8 @@ public static class KeywordDescriptions {
         { Keyword.PATIENT, "This effect get triggered an additional number of times equal to the number of triggers that have already occured in the rage queue" },
         { Keyword.SET_EVOKE, "Sets the effect of Evoke to the listed effect" },
         { Keyword.EVOKE, "Triggers the set Evoke effect X times" },
-        { Keyword.RECALL, "Triggers the rage effect of the top card of your discard pile X times. Ignores Recall on triggered card."}
+        { Keyword.RECALL, "Triggers the rage effect of the top card of your discard pile X times. Ignores Recall on triggered card."},
+        { Keyword.FOCUS, "Increases the effectiveness of some cards by X."}
     };
     
     // Helper method to get a description
@@ -88,4 +90,18 @@ public enum EnemyAction {
     ATTACK,
     DEFEND,
     PAUSE
+}
+
+public enum StatusKeyword {
+    SFOCUS, //S(tatus)FOCUS, helps with ambiguity
+}
+
+public class StatusEffect { // Class so it's modifiable
+    public StatusKeyword keyword;
+    public int value;
+
+    public StatusEffect(StatusKeyword keyword, int value) {
+        this.keyword = keyword;
+        this.value = value;
+    }
 }

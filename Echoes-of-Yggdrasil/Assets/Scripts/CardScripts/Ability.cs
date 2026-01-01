@@ -6,6 +6,7 @@ using EditorAttributes;
 using static GameConstants;
 using static Keyword;
 using static Target;
+using static StatusKeyword;
 
 
 [Serializable]
@@ -69,6 +70,9 @@ public struct KeywordPair
 
     [ShowField(nameof(keyword), RECALL)]
     public int recall;
+
+    [ShowField(nameof(keyword), FOCUS)]
+    public int focus;
 }
 
 [CreateAssetMenu(menuName = "Ability")]
@@ -138,6 +142,7 @@ public class Ability : ScriptableObject {
             case REPEAT: return pair.repeat;
             case EVOKE: return pair.evoke;
             case RECALL: return pair.recall;
+            case FOCUS: return pair.focus;
             default: return 0;
         }
     }
@@ -273,6 +278,11 @@ public class Ability : ScriptableObject {
                 case RECALL:
                     int recall = keywordPair.recall;
                     description += $"Recall {recall}. ";
+                    break;
+
+                case FOCUS:
+                    int focus = keywordPair.focus;
+                    description += $"Focus {focus}. ";
                     break;
 
                 default:
@@ -420,6 +430,12 @@ public class Ability : ScriptableObject {
                         Debug.Log($"Triggering recall ability with following description {recall} times: {ability.getDescription()}");
                     }
                     ability.trigger(chosenEnemy, recall, fromRecall: true);
+                    break;
+
+                case FOCUS:
+                    int focus = keywordPair.focus;
+                    player.addStatusEffect(SFOCUS, focus);
+                    Debug.Log(player.getStatusEffect(SFOCUS));
                     break;
 
                 // To be filled in with keywords which have no effect on play/trigger

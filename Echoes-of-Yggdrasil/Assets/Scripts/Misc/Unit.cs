@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 using static GameConstants;
+using static StatusKeyword;
+using static StatusEffect;
+
 
 public abstract class Unit : MonoBehaviour {
     protected int maxHealth;
     protected int health;
     protected int block;
+
+    protected List<StatusEffect> statusEffects;
 
     public TMP_Text healthbarText;
     public Image healthbarFill;
@@ -36,6 +41,29 @@ public abstract class Unit : MonoBehaviour {
         this.block += block;
     }
 
+    // Adds a new status effect to a unit, or adds the existing value to the current value
+    public void addStatusEffect(StatusKeyword keyword, int value=1) {
+        if (DEBUG) {
+            Debug.Log($"Adding {keyword} effect of value {value} to {this}");
+        }
+        for (int i = 0; i < statusEffects.Count; i++) {
+            if (statusEffects[i].keyword == keyword) {
+                statusEffects[i].value += value;
+                return;
+            }
+        }
+        statusEffects.Add(new StatusEffect(keyword, value));
+    }
+
+    public int getStatusEffect(StatusKeyword keyword) {
+        foreach (StatusEffect se in statusEffects) {
+            if (se.keyword == keyword) {
+                return se.value;
+            }
+        }
+        return 0;
+    }
+
     public void updateHealthbar() {
         healthbarText.text = $"{health}/{maxHealth}";
         healthbarFill.fillAmount = (float)health / (float)maxHealth;
@@ -50,4 +78,8 @@ public abstract class Unit : MonoBehaviour {
     }
 
     public abstract void die();
+
+    protected virtual void Awake() {
+        statusEffects = new List<StatusEffect>();
+    }
 }
