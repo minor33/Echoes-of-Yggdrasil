@@ -12,27 +12,42 @@ public class CampaignManager : MonoBehaviour
     private int act;
     private World world;
 
+    [SerializeField] private GameObject worldPrefab;
+    private World[] worldList;
+
     private List<Event> events;
     private Event[] activeEvents;
+    private GameObject[] activeEventDisplays;
     [SerializeField] private GameObject eventPrefab;
     [SerializeField] private List<GameObject> eventSlots;
-
-    private bool inEvent;
+    private Event currentEvent;
     [SerializeField] private GameObject eventPopup;
+    [SerializeField] private GameObject eventManager;
     [SerializeField] private TMP_Text eventPopupText;
     [SerializeField] private TMP_Text eventPopupTitle;
-
     [SerializeField] private Transform eventPopupChoices;
     [SerializeField] private GameObject choicePrefab;
+    private List<GameObject> choiceDisplayList;
 
     [SerializeField] private GameObject yggdrasilUI;
     [SerializeField] private GameObject worldUI;
 
-    [SerializeField] private GameObject worldPrefab;
-    private World[] worldList;
+    private int silver;    
 
-    public bool isInEvent(){
-        return inEvent;
+    public void adjustSilver(int adjustment){
+        silver += adjustment;
+    }
+
+    public bool inEvent(){
+        if(currentEvent == null){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public Event getCurrentEvent(){
+        return currentEvent;
     }
 
     public void displayNextWorlds(){
@@ -62,6 +77,7 @@ public class CampaignManager : MonoBehaviour
             events.Add(ev);
         }
         activeEvents = new Event[3];
+        activeEventDisplays = new GameObject[3];
         
         // Shuffle events
         int n = events.Count;
@@ -83,8 +99,9 @@ public class CampaignManager : MonoBehaviour
     }
 
     public void enterEvent(Event ev){
-        inEvent = true;
         eventPopup.SetActive(true);
+        eventManager.SetActive(false);
+        currentEvent = ev;
         eventPopupText.text = ev.text;
         eventPopupTitle.text = ev.name;
  
@@ -93,27 +110,52 @@ public class CampaignManager : MonoBehaviour
             GameObject choiceDisplay = Instantiate(choicePrefab,eventPopupChoices.position, Quaternion.identity, eventPopupChoices);
             choiceDisplay.GetComponent<ChoiceDisplay>().choice = choice;
             choiceDisplay.transform.localPosition = new Vector3(0,yPos,0);
+            choiceDisplayList.Add(choiceDisplay);
             yPos -= 0.25f;
         }
     }
 
+    public void exitEvent(){
+        foreach(GameObject cd in choiceDisplayList){
+            Destroy(cd);
+        }
+        choiceDisplayList.Clear();
+        currentEvent = null;
+        eventPopup.SetActive(false);
+        eventManager.SetActive(true);
+    }
+
     public void nextEvent(int index){
+        if(activeEvents[index] != null){
+            Destroy(activeEventDisplays[index]);
+            activeEventDisplays[index] = null;
+            activeEvents[index] = null;
+        }
+
+        if(events.Count == 0){
+            return;
+        }
+
         Event newEvent = events[0];
         events.RemoveAt(0);
         activeEvents[index] = newEvent;
-        
+
         GameObject eventDisplay = Instantiate(eventPrefab, eventSlots[index].transform.position, Quaternion.identity, eventSlots[index].transform);
         eventDisplay.GetComponent<EventDisplay>().ev = newEvent;
+        activeEventDisplays[index] = eventDisplay;
     }
 
     void Start() {
-        inEvent = false;
+        currentEvent = null;
         act = 1;
         world = null;
+        silver = 0;
 
         yggdrasilUI.SetActive(true);
         worldUI.SetActive(false);
         eventPopup.SetActive(false);
+
+        choiceDisplayList = new List<GameObject>();
         
         worldList = Resources.LoadAll<World>("Worlds");
         displayNextWorlds();

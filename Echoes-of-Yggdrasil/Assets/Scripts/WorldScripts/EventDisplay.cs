@@ -17,10 +17,10 @@ public class EventDisplay : MonoBehaviour, IPointerDownHandler
     }
 
     public void OnPointerDown(PointerEventData eventData){
-        if(CampaignManager.Instance.isInEvent()){
+        if(CampaignManager.Instance.inEvent()){
             return;
         }
         CampaignManager.Instance.enterEvent(ev);
-        CampaignManager.Instance.nextEvent(transform.GetSiblingIndex());
+        CampaignManager.Instance.nextEvent(transform.parent.GetSiblingIndex());
     }
 }

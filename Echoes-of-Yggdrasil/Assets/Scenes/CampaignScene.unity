@@ -525,19 +525,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac583231d5226b94da8d9b2703254fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CampaignManager
+  worldPrefab: {fileID: 6092415883608943416, guid: d9323c5a3239e364c97c2b84fc1162c5, type: 3}
   eventPrefab: {fileID: 6092415883608943416, guid: cd5e030ca1b83ae46917f2fd8a39c6cf, type: 3}
   eventSlots:
   - {fileID: 385852798}
   - {fileID: 2007264770}
   - {fileID: 1648970979}
   eventPopup: {fileID: 1004263917}
+  eventManager: {fileID: 1281600412}
   eventPopupText: {fileID: 252662121}
   eventPopupTitle: {fileID: 1961936341}
   eventPopupChoices: {fileID: 2034366103}
   choicePrefab: {fileID: 6092415883608943416, guid: 19b19fade7f14fa43b62882a4213650d, type: 3}
   yggdrasilUI: {fileID: 736597692}
   worldUI: {fileID: 1305377098}
-  worldPrefab: {fileID: 6092415883608943416, guid: d9323c5a3239e364c97c2b84fc1162c5, type: 3}
 --- !u!1 &736597692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,11 +1335,56 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -1}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2128646160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2128646162}
+  - component: {fileID: 2128646161}
+  m_Layer: 0
+  m_Name: ChoiceHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2128646161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128646160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b6e32e4b79a0e478be136e0685de7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChoiceHandler
+--- !u!4 &2128646162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128646160}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1508648456}
   - {fileID: 1612262483}
+  - {fileID: 2128646162}
   - {fileID: 660897587}
   - {fileID: 43869550}

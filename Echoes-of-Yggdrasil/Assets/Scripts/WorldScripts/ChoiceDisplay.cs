@@ -27,6 +27,6 @@ public class ChoiceDisplay : MonoBehaviour, IPointerDownHandler, IPointerEnterHa
     }
 
     public void OnPointerDown(PointerEventData eventData){
-
+        ChoiceHandler.Instance.makeChoice(CampaignManager.Instance.getCurrentEvent().name, transform.GetSiblingIndex());
     }
 }
