@@ -27,6 +27,9 @@ public class ChoiceHandler : MonoBehaviour
                         break;
                 }
                 break;
+            case "Goblin Ambush" :
+                cm.enterEncounter("GoblinAmbush");
+                break;
             default :
                 Debug.LogError("CHOICE HANDLER CANNOT FIND EVENT");
                 break;

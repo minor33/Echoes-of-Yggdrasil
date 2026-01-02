@@ -6,6 +6,5 @@ using System.Collections.Generic;
 public class Encounter : ScriptableObject
 {
     public EnemyData[] enemies;
-
     //public Sprite background;
 }

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Alfheim
   m_EditorClassIdentifier: Assembly-CSharp::World
   worldTier: 1
-  events: []
+  events:
+  - {fileID: 11400000, guid: fbf8fd3d86c7e2d46be3d30f51ebe298, type: 2}
   worldCards: []
   bossEvent: {fileID: 0}
   color: {r: 0.72066563, g: 0.754717, b: 0.5055179, a: 1}

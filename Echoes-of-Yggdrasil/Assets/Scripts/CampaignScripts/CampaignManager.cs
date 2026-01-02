@@ -21,6 +21,7 @@ public class CampaignManager : MonoBehaviour
     [SerializeField] private GameObject eventPrefab;
     [SerializeField] private List<GameObject> eventSlots;
     private Event currentEvent;
+
     [SerializeField] private GameObject eventPopup;
     [SerializeField] private GameObject eventManager;
     [SerializeField] private TMP_Text eventPopupText;
@@ -29,11 +30,36 @@ public class CampaignManager : MonoBehaviour
     [SerializeField] private GameObject choicePrefab;
     private List<GameObject> choiceDisplayList;
 
+    private Encounter[] encounterList;
+    private Encounter currentEncounter;
+
     [SerializeField] private GameObject yggdrasilUI;
     [SerializeField] private GameObject worldUI;
 
     private int silver;
     [SerializeField] private TMP_Text silverNumber;    
+
+
+    public void enterEncounter(string encounterName){
+        Encounter encounter = null;
+        foreach(Encounter en in encounterList){
+            if(en.name == encounterName){
+                encounter = en;
+                break;
+            }
+        }
+        if(encounter == null){
+            Debug.Log("ENCOUNTER NOT FOUND");
+            return;
+        }
+        currentEncounter = encounter;
+        SceneManager.LoadScene("BattleScene");
+    }
+
+    // This is a separate function so that it only gets called from BattleManager after it is done loading
+    public void enterBattle(){
+        BattleManager.Instance.startBattle(currentEncounter);
+    }
 
     public void adjustSilver(int adjustment){
         silver += adjustment;
@@ -52,6 +78,7 @@ public class CampaignManager : MonoBehaviour
         return currentEvent;
     }
 
+    // Pull up the next two world options in yggdrasil
     public void displayNextWorlds(){
         List<World> actWorlds = new List<World>();
         foreach(World world in worldList){
@@ -72,6 +99,7 @@ public class CampaignManager : MonoBehaviour
         }
     }
 
+    // Called after selecting a world
     public void enterWorld(World world){
         this.world = world;
         events = new List<Event>();
@@ -100,6 +128,7 @@ public class CampaignManager : MonoBehaviour
         }
     }
 
+    // When an event is chosen within a world. Shows the event text and choices
     public void enterEvent(Event ev){
         eventPopup.SetActive(true);
         eventManager.SetActive(false);
@@ -127,6 +156,7 @@ public class CampaignManager : MonoBehaviour
         eventManager.SetActive(true);
     }
 
+    // Replace an event at a specific slot with the next one. Typically called after completing an event.
     public void nextEvent(int index){
         if(activeEvents[index] != null){
             Destroy(activeEventDisplays[index]);
@@ -151,7 +181,7 @@ public class CampaignManager : MonoBehaviour
         currentEvent = null;
         act = 1;
         world = null;
-        
+
         silver = 0;
         silverNumber.text = $"{silver}";
 
@@ -162,6 +192,7 @@ public class CampaignManager : MonoBehaviour
         choiceDisplayList = new List<GameObject>();
         
         worldList = Resources.LoadAll<World>("Worlds");
+        encounterList = Resources.LoadAll<Encounter>("Encounters");
         displayNextWorlds();
     }
 
@@ -169,6 +200,7 @@ public class CampaignManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {

@@ -6,15 +6,30 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance { get; private set; }
     
-    public TestDeck testDeck;
-    public Encounter encounter;
+    [SerializeField] private TestDeck testDeck;
+    [SerializeField] private Encounter testEncounter;
+    
+
     private HandDisplay handDisplay;
     private BoardManager boardManager;
     private BattlePlayer player;
     //public Image background;
 
-    public Button endTurnButton;
+    [SerializeField] private Button endTurnButton;
     
+    public void startBattle(Encounter encounter){
+        for(int i = 0; i < testDeck.cards.Count; i++){
+            player.deck.Add(new Card(testDeck.cards[i]));
+        }
+        player.shuffleDeck();
+
+        for(int i = 0; i < encounter.enemies.Length; i++){
+            boardManager.setEnemy(encounter.enemies[i], i);
+        }
+
+        delayedStart(); // avoids making Start() async
+    }
+
     private async void delayedStart(){
         await Awaitable.WaitForSecondsAsync(0.01f); // Gives enemies time to load their data
         player.startTurn();
@@ -33,18 +48,11 @@ public class BattleManager : MonoBehaviour
         boardManager = BoardManager.Instance;
         player = BattlePlayer.Instance;
 
-        for(int i = 0; i < testDeck.cards.Count; i++){
-            player.deck.Add(new Card(testDeck.cards[i]));
+        if(CampaignManager.Instance == null){ // For testing, this is only true if game manually started from battle scene
+            startBattle(testEncounter);
+        } else {
+            CampaignManager.Instance.enterBattle();
         }
-        player.shuffleDeck();
-
-        for(int i = 0; i < 3; i++){
-            if(encounter.enemies[i] != null){
-                boardManager.setEnemy(encounter.enemies[i], i);
-            }
-        }
-
-        delayedStart(); // avoids making Start() async
     }
 
     void Awake() {

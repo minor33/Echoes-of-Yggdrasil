@@ -2423,7 +2423,6 @@ MonoBehaviour:
   evokeText: {fileID: 175206239}
   rage: 0
   energy: 0
-  evokeAbility: {fileID: 0}
   rageQueue: []
   selectedCards: []
   selectingRageCards: 0
@@ -2763,7 +2762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleManager
   testDeck: {fileID: 11400000, guid: f4f9f19582d0d394fa41d15dcb5ff716, type: 2}
-  encounter: {fileID: 11400000, guid: 7e22b294ce99025489de408e36ddd25c, type: 2}
+  testEncounter: {fileID: 11400000, guid: 7e22b294ce99025489de408e36ddd25c, type: 2}
   endTurnButton: {fileID: 715517934}
 --- !u!1 &1608781324
 GameObject:
