@@ -41,6 +41,7 @@ public enum Keyword {
     EVOKE,      // Should work in both ability types
     RECALL,     // Should work in both ability types
     FOCUS,      // Should work in both ability types
+    EXHAUST,    // Intended for play abilities, will probably do nothing in rage abilities
 }
 
 public static class KeywordDescriptions {
@@ -74,7 +75,8 @@ public static class KeywordDescriptions {
         { Keyword.SET_EVOKE, "Sets the effect of Evoke to the listed effect" },
         { Keyword.EVOKE, "Triggers the set Evoke effect X times" },
         { Keyword.RECALL, "Triggers the rage effect of the top card of your discard pile X times. Ignores Recall on triggered card."},
-        { Keyword.FOCUS, "Increases the effectiveness of some cards by X."}
+        { Keyword.FOCUS, "Increases the effectiveness of some cards by X."},
+        { Keyword.EXHAUST, "Removes the card from your deck for the rest of the combat when played."},
     };
     
     // Helper method to get a description

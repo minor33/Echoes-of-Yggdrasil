@@ -223,7 +223,8 @@ public class BattlePlayer : Unit {
             if(deck.Count == 0){
                 reshuffleDiscard();
                 if(deck.Count == 0){
-                    Debug.Log("Hand empty");
+                    Debug.Log("Deck empty");
+                    drawingCards = false;
                     return;
                 }
             }
@@ -254,7 +255,10 @@ public class BattlePlayer : Unit {
         }
         duplicate = 0;
         
-        discard.Add(playedCard);
+        if (!playedCard.getPlayAbility().hasKeyword(EXHAUST)) {
+            discard.Add(playedCard);
+        }
+
         BattlePlayer.Instance.checkRage();
     }
 

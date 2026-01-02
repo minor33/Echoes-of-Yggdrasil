@@ -148,6 +148,7 @@ public class Ability : ScriptableObject {
     }
     
     // Description should probably be set when created, and then gotten from here, since getDescription is called in multiple places
+    // This function should be optomized using the above get function
     public string getDescription() {
         if (keywords == null) {
             return "Does Nothing";
@@ -283,6 +284,10 @@ public class Ability : ScriptableObject {
                 case FOCUS:
                     int focus = keywordPair.focus;
                     description += $"Focus {focus}. ";
+                    break;
+
+                case EXHAUST:
+                    description += $"Exhaust. ";
                     break;
 
                 default:
@@ -446,6 +451,7 @@ public class Ability : ScriptableObject {
                 case FINISHER:
                 case REPEAT:
                 case PATIENT:
+                case EXHAUST:
                     if (DEBUG) {
                         Debug.Log($"{keyword} intentionally has no function in trigger");
                     }
