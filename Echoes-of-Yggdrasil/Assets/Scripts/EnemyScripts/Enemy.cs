@@ -100,6 +100,7 @@ public class Enemy : Unit {
     }
 
     public override void die() {
+        BoardManager.Instance.checkForLoss();
         Destroy(gameObject);
     }
 }

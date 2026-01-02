@@ -63,6 +63,11 @@ public class BattlePlayer : Unit {
         RageQueueDisplay.Instance.updateDisplay();
     }
 
+    [Button]
+    public void GiveUp() {
+        BattleManager.Instance.endBattle();
+    }
+
     public bool isPlayerTurn(){
         return playerTurn;
     }

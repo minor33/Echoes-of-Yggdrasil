@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class BattleManager : MonoBehaviour
     //public Image background;
 
     [SerializeField] private Button endTurnButton;
+
+    public void endBattle(){
+        SceneManager.LoadScene("CampaignScene");
+    }
     
     public void startBattle(Encounter encounter){
         for(int i = 0; i < testDeck.cards.Count; i++){

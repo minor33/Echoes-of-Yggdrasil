@@ -9,6 +9,16 @@ public class BoardManager : MonoBehaviour
     private GameObject[] enemies;
     public Transform[] boardSlots;
 
+    public async void checkForLoss(){
+        await Awaitable.WaitForSecondsAsync(0.01f); // Gives enemy object time to destroy
+        for(int i = 0; i < 3; i++){
+            if(enemies[i] != null){
+                return;
+            }
+        }
+        BattleManager.Instance.endBattle();
+    }
+
     public async void executeActions() {
         await Awaitable.WaitForSecondsAsync(0.15f);
         for(int i = 0; i < 3; i++){
