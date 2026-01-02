@@ -29,7 +29,7 @@ public class BattlePlayer : Unit {
     private int rageAdjustment;
     private int skip;
     private int expand;
-    public Ability evokeAbility; // Made public so I can read it, change this to private
+    private Ability evokeAbility;
 
     private bool drawingCards;
     private bool playerTurn;
@@ -200,6 +200,7 @@ public class BattlePlayer : Unit {
     public void reshuffleDiscard(){
         deck.AddRange(discard);
         discard.Clear();
+        shuffleDeck();
     }
 
     public void discardHand(){
