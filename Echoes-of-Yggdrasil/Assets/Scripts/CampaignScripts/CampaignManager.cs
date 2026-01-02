@@ -32,10 +32,12 @@ public class CampaignManager : MonoBehaviour
     [SerializeField] private GameObject yggdrasilUI;
     [SerializeField] private GameObject worldUI;
 
-    private int silver;    
+    private int silver;
+    [SerializeField] private TMP_Text silverNumber;    
 
     public void adjustSilver(int adjustment){
         silver += adjustment;
+        silverNumber.text = $"{silver}";
     }
 
     public bool inEvent(){
@@ -149,7 +151,9 @@ public class CampaignManager : MonoBehaviour
         currentEvent = null;
         act = 1;
         world = null;
+        
         silver = 0;
+        silverNumber.text = $"{silver}";
 
         yggdrasilUI.SetActive(true);
         worldUI.SetActive(false);
