@@ -115,16 +115,15 @@ public class Ability : ScriptableObject {
     public int getKeywordValue(Keyword keyword) {
         foreach (var keywordPair in keywords) {
             if (keywordPair.keyword == keyword) {
-                return getValueByKeyword(keywordPair, keyword);
+                return getValueOfKeywordPair(keywordPair);
             }
         }
         return 0;
     }
 
-    // Every keyword pair SHOULD be added to this list. 
-    // But technically it only needs to be added if it needs to be accessed outside of this file.
-    private int getValueByKeyword(KeywordPair pair, Keyword keyword) {
-        switch (keyword) {
+    // Every keyword pair NEEDS to be added to this list if it's an integer. 
+    public int getValueOfKeywordPair(KeywordPair pair) {
+        switch (pair.keyword) {
             case RETAIN: return pair.retain;
             case STARTER: return pair.starter;
             case FINISHER: return pair.finisher;
@@ -154,6 +153,7 @@ public class Ability : ScriptableObject {
             return "Does Nothing";
         }
         string description = "";
+        string keywordText = "";
         Target target = FRONT;
         foreach (var keywordPair in keywords) {
             Keyword keyword = keywordPair.keyword;
@@ -178,116 +178,49 @@ public class Ability : ScriptableObject {
                     }
                     break;
 
-                case BLOCK:
-                    int block = keywordPair.block;
-                    description += $"Block {block}. ";
-                    break;
-                
+                // Case for when description is "{KEYWORD} {VALUE}."
+                // Requires keyword to be named the same as you want the description
+                case BLOCK: // Block likely will need to be seperated from this later
                 case DRAW:
-                    int draw = keywordPair.draw;
-                    description += $"Draw {draw}. ";
+                case INVOKE:
+                case DUPLICATE:
+                case ANGRIER:
+                case CALM_DOWN:
+                case SKIP:
+                case RETAIN:
+                case SWAP: 
+                case STARTER:
+                case FINISHER:
+                case EXPAND:
+                case REMOVE:
+                case REPEAT:
+                case EVOKE:
+                case RECALL:
+                case FOCUS:
+                    keywordText = $"{keyword}";
+                    keywordText = char.ToUpper(keywordText[0]) + keywordText.Substring(1).ToLower();
+                    description += keywordText + $" {getValueOfKeywordPair(keywordPair)}. ";
                     break;
                 
-                case INVOKE:
-                    int invoke = keywordPair.invoke;
-                    description += $"Invoke {invoke}. ";
-                    break;
-
-                case DUPLICATE:
-                    int duplicate = keywordPair.duplicate;
-                    description += $"Duplicate {duplicate}. ";
-                    break;
-
+                // Case for when description is "{KEYWORD}."
+                // Requires keyword to be named the same as you want the description
                 case STABLE:
-                    description += $"Stable.";
-                    break;
-
-                case ANGRIER:
-                    int angrier = keywordPair.angrier;
-                    description += $"Angrier {angrier}. ";
-                    break;
-
-                case CALM_DOWN:
-                    int calm_down = keywordPair.calm_down;
-                    description += $"Calm Down {calm_down}. ";
-                    break;
-
-                case SKIP:
-                    int skip = keywordPair.skip;
-                    description += $"Skip {skip}. ";
-                    break;
-
-                case RETAIN:
-                    // So, the description doesn't update as the retain gets updated. That def needs to happen. 
-                    // Or a different display that shows it
-                    int retain = keywordPair.retain;
-                    description += $"Retain {retain}. ";
-                    break;
-
                 case TACTICAL:
-                    description += "Tactical. ";
+                case PATIENT:
+                case EXHAUST:
+                    keywordText = $"{keyword}";
+                    keywordText = char.ToUpper(keywordText[0]) + keywordText.Substring(1).ToLower();
+                    description += keywordText + ". ";
                     break;
 
-                case SWAP: 
-                    int swap = keywordPair.swap;
-                    description += $"Swap {swap}. ";
-                    break;
-
-                case STARTER:
-                    int starter = keywordPair.starter;
-                    description += $"Starter {starter}. ";
-                    break;
-
-                case FINISHER:
-                    int finisher = keywordPair.finisher;
-                    description += $"Starter {finisher}. ";
-                    break;
-
-                case EXPAND:
-                    int expand = keywordPair.expand;
-                    description += $"Expand {expand}. ";
-                    break;
-
-                case REMOVE:
-                    int remove = keywordPair.remove;
-                    description += $"Remove {remove}. ";
-                    break;
-
+                // All other cases
                 case REVERSE:
                     description += "Reverse the rage queue. ";
-                    break;
-
-                case REPEAT:
-                    int repeat = keywordPair.repeat;
-                    description += $"Repeat {repeat}. ";
-                    break;
-
-                case PATIENT:
-                    description += "Patient. ";
                     break;
 
                 case SET_EVOKE:
                     Ability ability = keywordPair.setEvoke;
                     description += $"Set Evoke: {ability.getDescription()} ";
-                    break;
-                
-                case EVOKE:
-                    int evoke = keywordPair.evoke;
-                    description += $"Evoke {evoke}. ";
-                    break;
-
-                case RECALL:
-                    int recall = keywordPair.recall;
-                    description += $"Recall {recall}. ";
-                    break;
-
-                case FOCUS:
-                    int focus = keywordPair.focus;
-                    description += $"Focus {focus}. ";
-                    break;
-
-                case EXHAUST:
-                    description += $"Exhaust. ";
                     break;
 
                 default:
